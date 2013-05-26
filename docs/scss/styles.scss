@@ -1,0 +1,165 @@
+body {
+	font-family: 'Open Sans', sans-serif;
+	color: #222;
+	box-sizing: border-box;
+	text-align: center;
+	
+	a {
+		color: #3085d6;
+	}
+	
+	& * {
+		box-sizing: border-box;
+		font-family: 'Open Sans', sans-serif;
+	}
+	
+	.third {
+		display: inline-block;
+		width: 33%;
+	}
+	
+	.half {
+		display: inline-block;
+		width: 50%;
+	}
+	
+	.quarter {
+		display: inline-block;
+		width: 25%;
+	}
+	
+	.align-left {
+		text-align: left;
+	}
+	
+	.align-center {
+		text-align: center;
+	}
+	
+	.align-right {
+		text-align: right;
+	}
+	
+	.button {
+		cursor:pointer;
+		border: 1px #3085d6 solid;
+		background: #3085d6;
+		padding: 7px;
+		text-align: center;
+		color: #fff;
+		font-weight: 100;
+		text-decoration: none;
+				
+		&:hover {
+			background: #5b9ede;
+		}	
+		&.disabled {
+			background: #9ab5ca;
+			cursor: inherit;
+			border: 1px #547797 solid;
+		}
+	}
+	
+	.container {
+		max-width: 680px;
+		margin: auto;
+		border: 1px solid lightgray;
+		display: inline-block;
+			
+		header {
+			width: 100%;
+			
+			h1 {
+				font-size: 4em;
+				margin: 0;
+				font-weight: 100;
+			}
+		}
+		
+		section {
+			width: 100%;
+			text-align: left;
+			margin: auto; 
+			position: relative;
+			padding: 10px;
+			
+			div {
+				width: 100%;
+			}
+			
+			input {
+				padding: 5px;
+				
+				&[type="text"] {
+					width: 100%;
+				}
+			}
+			
+			.good {
+				background-color: lightgreen;
+				color: darkgreen;
+			}
+			
+			.bad {
+				background-color: pink;
+				color: darkred;
+			}
+			
+			.gray {
+				background-color: lightgray;
+				color: gray;
+			}
+			
+			table {
+				width: 100%;
+				
+				tr {
+					width: 50%;
+				
+					td {
+						
+						border-bottom: 1px dotted #ccc;
+						padding: 10px;
+					}
+					
+					&:last-child {
+						td {
+							border: none;
+						}
+					}
+				}
+			}
+		}
+		
+		footer {
+			margin: 5px;
+			padding: 5px;
+			
+			button {
+				@extend .button;
+				display: block;
+				width: 100%;
+				font-size: 30px;
+				
+				[class^="icon-"], [class*=" icon-"] {
+					padding: 0 14px;
+				}
+			}
+			
+			.shelf {
+				.item {
+					padding: 10px 4px;
+					
+					& > * {
+						overflow: hidden;
+						text-overflow: ellipsis;
+						white-space: nowrap;
+					}
+				}
+				.button {
+					display: inline-block;
+				}
+			}
+		}
+	}
+}
