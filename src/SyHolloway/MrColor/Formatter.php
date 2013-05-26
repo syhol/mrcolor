@@ -5,8 +5,8 @@ use Exception;
 use SyHolloway\MrColor;
 
 /**
- * Interprets a wide range of inputs and uses them to build a color instance
- * Also used to convert color objects back to standard user formats
+ * Interprets a wide range of inputs and uses them to build an instance of the color object
+ * Also used to convert color objects back to standard formats
  * 
  * @package MrColor
  * @author Simon Holloway
