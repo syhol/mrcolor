@@ -1,7 +1,8 @@
 <?php
 namespace SyHolloway\MrColor;
 
-use \Exception;
+use Exception;
+use SyHolloway\MrColor;
 
 /**
  * Manipulates the Color object 

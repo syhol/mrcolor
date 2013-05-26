@@ -1,7 +1,8 @@
 <?php
 namespace SyHolloway\MrColor;
 
-use \Exception;
+use Exception;
+use SyHolloway\MrColor;
 
 /**
  * Interprets a wide range of inputs and uses them to build a color instance

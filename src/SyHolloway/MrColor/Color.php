@@ -1,7 +1,7 @@
 <?php
 namespace SyHolloway\MrColor;
 
-use \Exception;
+use Exception;
 
 /**
  * A color utility that helps maintain a single color value across multiple color formats

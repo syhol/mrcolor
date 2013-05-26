@@ -2,38 +2,38 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 
-	<head>
+    <head>
 
-		<title>MrColor</title>
+        <title>MrColor</title>
 
-		<link href="css/styles.css" rel="stylesheet" type="text/css" media="all" />
+        <link href="css/styles.css" rel="stylesheet" type="text/css" media="all" />
 
-		<link href="css/font-awesome.min.css" rel="stylesheet" type="text/css" media="all" />
+        <link href="css/font-awesome.min.css" rel="stylesheet" type="text/css" media="all" />
 
-		<link href="http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css" media="all" >
+        <link href="http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css" media="all" >
 
-	</head>
+    </head>
 
-	<body>
+    <body>
 
-		<div class="container">
+        <div class="container">
 
-			<header>
+            <header>
 
-				<h1>MrColor</h1>
+                <h1>MrColor</h1>
 
-			</header>
+            </header>
 
-			<section>
+            <section>
 
-				<?php
+                <?php
 
                 use SyHolloway\MrColor\Color;
                 use SyHolloway\MrColor\Test;
                 use SyHolloway\MrColor\Toolkit;
                 use SyHolloway\MrColor\Formatter;
 
-                $src = dirname(__DIR__) . '/src/MrColor/';
+                $src = dirname(__DIR__) . '/src/';
 
                 include ($src . 'Color.php');
                 include ($src . 'Test.php');
@@ -182,12 +182,13 @@
                 var_dump($color11);
 
                 echo 'RGB: ' . $color11->getRgbString();
-				?>
-				
-			</section>
+                
+                ?>
+                
+            </section>
 
-		</div>
+        </div>
 
-	</body>
+    </body>
 
 </html>

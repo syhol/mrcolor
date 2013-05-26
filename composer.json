@@ -1,10 +1,9 @@
 {
     "name": "syholloway/mrcolor",
-    "minimum-stability": "dev",
+    "type": "library",
     "description": "Color manipulation tools and format conversion for PHP",
     "keywords": [ "color", "manipulation", "format" ],
     "homepage": "https://github.com/syholloway/mrcolor",
-    "type": "library",
     "license": "MIT",
     "authors": [
         {
@@ -17,53 +16,8 @@
         "php": ">=5.3.0"
     },
     "autoload": {
-        "psr-0": { "MrColor": "src/" },
-        "files": [ "src/functions.php" ]
-    },
-    "config": {
-        "bin-dir": "bin"
-    },
-    "extra": {
-        "branch-alias": {
-            "dev-master": "1.1-dev"
+        "psr-0": { 
+        	"SyHolloway\\MrColor\\": "src/" 
         }
-    },
-    "repositories": [
-        {
-            "type": "package",
-            "package": {
-                "name": "cssmin/cssmin",
-                "version": "3.0.1",
-                "dist": { "url": "http://cssmin.googlecode.com/files/cssmin-v3.0.1.php", "type": "file" },
-                "autoload": { "classmap": [ "cssmin-v3.0.1.php" ] }
-            }
-        },
-        {
-            "type": "package",
-            "package": {
-                "name": "mrclay/minify",
-                "version": "2.1.5",
-                "dist": { "url": "http://minify.googlecode.com/files/minify-2.1.5.zip", "type": "zip" },
-                "autoload": { "classmap": [ "min/lib/" ] }
-            }
-        },
-        {
-            "type": "package",
-            "package": {
-                "name": "kamicane/packager",
-                "version": "1.0",
-                "dist": { "url": "https://github.com/kamicane/packager/archive/1.0.zip", "type": "zip" },
-                "autoload": { "classmap": [ "." ] }
-            }
-        },
-        {
-            "type": "package",
-            "package": {
-                "name": "joliclic/javascript-packer",
-                "version": "1.1",
-                "dist": { "url": "http://joliclic.free.fr/php/javascript-packer/telechargement.php?id=2&action=telecharger", "type": "zip" },
-                "autoload": { "classmap": [ "class.JavaScriptPacker.php" ] }
-            }
-        }
-    ]
+	}
 }
