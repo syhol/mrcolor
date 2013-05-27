@@ -2,6 +2,8 @@
 namespace SyHolloway\MrColor;
 
 use Exception;
+use SyHolloway\MrColor\Extension;
+use SyHolloway\MrColor\ExtensionCollection;
 
 /**
  * A color utility that helps maintain a single color value across multiple color formats
@@ -60,24 +62,20 @@ class Color
 	 * @var integer
 	 */
     private $blue = 0;
-	
-	/**
-	 * Holds the alpha as a float
-	 * 
-	 * @var float
-	 */
+    
+    /**
+     * Holds the alpha as a float
+     * 
+     * @var float
+     */
     private $alpha = 1.0;
 	
 	/**
-	 * Holds an array of class names to use in the magic __call method
+	 * Hold object that manages a collection of MrColor extensions
 	 * 
-	 * @var array
+	 * @var object ExtensionCollection
 	 */
-    private static $tools = array(
-    	'\SyHolloway\MrColor\Formatter', 
-    	'\SyHolloway\MrColor\Toolkit',
-    	'\SyHolloway\MrColor\Test'
-	);
+    private $extensions;
 	
     /**
      * Instantiates the class with a value
@@ -94,6 +92,8 @@ class Color
      */
     function __construct($values = array())
     {
+        $this->extensions = new ExtensionCollection();
+        
     	$this->bulk_update($values);
 	}
 	
@@ -141,69 +141,57 @@ class Color
     /**
      * Magic __call method
 	 * 
-	 * Runs the static runTools method to loop through
-	 * other classes associated with the color class and 
-	 * see if the called method exists in any of those classes
-	 * then attempts to use it and returns what it returns
+	 * Passes the current color object, called method and args the the ExtensionCollection 
 	 * 
 	 * @param string $method
 	 * @param array $args
 	 * @return mixed
      */
     public function __call($method, $args)
-    {
-    	//Add this object to the args array
-    	array_unshift($args, $this);
-		
-        return self::runTools($method, $args);
+    {	
+        
+        return $this->extensions->runAll($this, $method, $args);
  	}
 	
     /**
      * Magic __callStatic method
 	 * 
-	 * Runs the static runTools method to loop through
-	 * other classes associated with the color class and 
-	 * see if the called method exists in any of those classes
-	 * then attempts to use it and returns what it returns
-	 * 
+	 * Creates a new color object and passes the it with the 
+     * called method and args the the ExtensionCollection
+     *  
 	 * @param string $method
 	 * @param array $args
 	 * @return mixed
      */
     public static function __callStatic($method, $args)
     {
-    	//Add a new color object to the args array for consistency
-    	array_unshift($args, self::create());
-		
-        return self::runTools($method, $args);
+    	return call_user_func_array(array(self::create(), $method), $args);
  	}
 	
-	/**
-	 * Sync current color with given color
-	 * 
-	 * The current color will receive all property values from given color
-	 * 
-	 * @param object $color Color object
-	 * @return object self
-	 */
-    public function sync(Color $color)
+    /**
+     * Add a new extension object to the current color objects ExtensionCollection. 
+     * 
+     * @param object the extension object to add
+     * @return object self
+     */
+    public function registerExtension(Extension $extension)
     {
-        foreach(array_keys(get_object_vars($this)) as $name)
-		{
-			$this->$name = $color->$name;
-		}
-		
-		return $this;
+        $this->extensions->registerExtension($extension);
+        
+        return $this;
     }
-	
-	/**
-	 * Gets a clone of the current object
-	 * 
-	 * @return object Color clone of this
-	 */
-    public function copy()
+    
+    /**
+     * Remove an extension object from the current Color objects ExtensionCollection
+     * 
+     * @param object the extension object to remove
+     * @return object self
+     */
+    public function deregisterExtension(Extension $extension)
     {
-        return clone $this;
+        $this->extensions->deregisterExtension($extension);
+        
+        return $this;
     }
 	
 	/**
@@ -480,61 +468,6 @@ class Color
 
         return $v1;
     }
-	
-	/**
-	 * Check classes for extra methods
-	 * 
-	 * Loops through other classes associated with the color class and 
-	 * see if the called method exists in any of those classes
-	 * then attempts to use it and returns what it returns
-	 * 
-	 * @param string $method
-	 * @param array $args
-	 * @return mixed
-	 */
-    public static function runTools($method, $args)
-    {
-        foreach(self::$tools as $class)
-		{
-			if(is_callable(array($class, $method)))
-			{
-				return call_user_func_array($class . '::' . $method, $args);
-			}
-		}
-		
-		throw new Exception('Method "' . $method . '" not found in any color tools');
-    }
-	
-    /**
-     * Add a new tool class to the color class. 
-	 * 
-	 * the color class can be extended by looping 
-	 * through a list of classes and there methods 
-	 * when a method call to the color object is not recognised
-	 * and calling any methods that match the called method,
-	 * passing any passed params, including the color object the
-	 * method was called from as the first param.
-	 * 
-	 * @param string $tool namespace + class name of tool
-	 * @return object self
-     */
-    public static function registerTool($tool)
-    {
-        self::$tools[] = $tool;
-		
-		return $this;
-    }
-    /**
-     * Remove a current tool class from the color class
-	 * 
-	 * @return string $tool namespace + class name of tool
-     */
-    public static function deregisterTool($tool)
-    {
-        self::$tools = array_diff(self::$tools, array($tool));
-		
-		return $this;
-	}
 	
 	/**
 	 * static method to create a new color then method chain it

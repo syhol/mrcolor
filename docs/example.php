@@ -27,19 +27,11 @@
             <section>
 
                 <?php
-
+                
                 use SyHolloway\MrColor\Color;
-                use SyHolloway\MrColor\Test;
-                use SyHolloway\MrColor\Toolkit;
-                use SyHolloway\MrColor\Formatter;
 
-                $src = dirname(__DIR__) . '/src/';
-
-                include ($src . 'Color.php');
-                include ($src . 'Test.php');
-                include ($src . 'Toolkit.php');
-                include ($src . 'Formatter.php');
-
+                require_once(dirname(__DIR__) . '/manual-init.php');
+                
                 //Run a test to check the core color syncing works
                 echo '<h2>Test Results</h2>';
 
@@ -52,7 +44,7 @@
                 //Create a default color
                 $color1 = Color::create();
 
-                var_dump($color1);
+                $color1->dump();
 
                 echo '<h2>Create color with RGB values</h2>';
 
@@ -63,7 +55,7 @@
                     'blue' => 100
                 ));
 
-                var_dump($color2);
+                $color2->dump();
 
                 echo '<h2>Manipulating color with properties</h2>';
 
@@ -73,7 +65,7 @@
                     'blue' => 100
                 ));
 
-                var_dump($color3);
+                $color3->dump();
 
                 $color3->hue = 100;
 
@@ -85,7 +77,7 @@
 
                 var_dump($color3->red);
 
-                var_dump($color3);
+                $color3->dump();
 
                 echo '<h2>Copy and syncing colors</h2>';
 
@@ -102,14 +94,14 @@
 
                 $color5->lightness = $color5->saturation = 0.5;
 
-                var_dump($color4);
+                $color4->dump();
 
-                var_dump($color5);
+                $color5->dump();
 
                 //Sync the properties of color5 to color4
                 $color4->sync($color5);
 
-                var_dump($color4);
+                $color4->dump();
 
                 echo '<h2>Bulk update</h2>';
 
@@ -121,7 +113,7 @@
                     'lightness' => 0.2
                 ));
 
-                var_dump($color6);
+                $color6->dump();
 
                 echo '<h2>toString</h2>';
 
@@ -141,7 +133,7 @@
                     'blue' => 20
                 ));
 
-                var_dump($color8);
+                $color8->dump();
 
                 echo '<p>';
                 echo 'color is light: ' . var_export($color8->isLight(), true);
@@ -151,7 +143,7 @@
 
                 $color8->lighten(60);
 
-                var_dump($color8);
+                $color8->dump();
 
                 echo '<p>';
                 echo 'color is light: ' . var_export($color8->isLight(), true);
@@ -163,7 +155,7 @@
 
                 echo '<p>complementary</p>';
 
-                var_dump($color9);
+                $color9->dump();
 
                 echo '<p>CSS Gradient</p>';
 
@@ -173,13 +165,13 @@
 
                 $color10 = Color::load('rgba(20, 40, 200, 0.8);');
 
-                var_dump($color10);
+                $color10->dump();
 
                 echo 'HSL: ' . $color10->getHslaString() . '<br>';
 
                 $color11 = Color::load('#ccc');
 
-                var_dump($color11);
+                $color11->dump();
 
                 echo 'RGB: ' . $color11->getRgbString();
                 

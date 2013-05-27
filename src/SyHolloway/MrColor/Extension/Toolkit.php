@@ -1,8 +1,9 @@
 <?php
-namespace SyHolloway\MrColor;
+namespace SyHolloway\MrColor\Extension;
 
 use Exception;
-use SyHolloway\MrColor;
+use SyHolloway\MrColor\Color;
+use SyHolloway\MrColor\Extension;
 
 /**
  * Manipulates the Color object 
@@ -10,7 +11,7 @@ use SyHolloway\MrColor;
  * @package MrColor
  * @author Simon Holloway
  */
-class Toolkit
+class Toolkit extends Extension
 {
 
     /**
@@ -19,7 +20,17 @@ class Toolkit
      * and black (for darken) or white (for lighten)
      */
     const DEFAULT_ADJUST = 10;
-
+    
+    private $colorprops = array(
+        'hex',
+        'red',
+        'green',
+        'blue',
+        'hue',
+        'saturation',
+        'lightness',
+        'alpha'
+    );
 
     /**
      * Returns whether or not given color is considered light
@@ -29,11 +40,55 @@ class Toolkit
      * @param object $color Color object
      * @return boolean
      */
-    public static function isLight(Color $color)
+    public function isLight(Color $color)
 	{
         return ($color->lightness > 0.5);
     }
-
+    
+    
+    
+    /**
+     * Sync first color with second color
+     * 
+     * The first color will receive all property values from the second color
+     * 
+     * @param object $firstcolor first Color object to receive the values
+     * @param object $secondcolor second Color object to give the values
+     * @return object self
+     */
+    public function sync(Color $firstcolor, Color $secondcolor)
+    {
+        foreach($this->colorprops as $name)
+        {
+            $firstcolor->$name = $secondcolor->$name;
+        }
+        
+        return $firstcolor;
+    }
+    
+    public function dump(Color $color)
+    {
+        $props = array();
+        
+        foreach($this->colorprops as $name)
+        {
+            $props[$name] = $color->$name;
+        }
+        
+        var_dump($props);
+    }
+    
+    /**
+     * Gets a clone of the color object
+     * 
+     * @param object $color Color object
+     * @return object Color clone of this
+     */
+    public function copy(Color $color)
+    {
+        return clone $color;
+    }
+    
     /**
      * Returns whether or not given color is considered dark
 	 * 
@@ -42,7 +97,7 @@ class Toolkit
      * @param object $color Color object
      * @return boolean
      */
-    public static function isDark(Color $color)
+    public function isDark(Color $color)
 	{
         return ($color->lightness <= 0.5);
     }
@@ -53,7 +108,7 @@ class Toolkit
      * @param object $color Color object
      * @return object Color object
      */
-    public static function getComplementary(Color $color)
+    public function getComplementary(Color $color)
     {
 		$color->hue += $color->hue > 180 ? -180 : 180 ;
 
@@ -67,7 +122,7 @@ class Toolkit
      * @param integer $amount Optional: percentage amount to light/darken the gradient
      * @return string CSS3 gradient for chrome, safari, firefox, opera and IE10 with fallbacks
      */
-    public static function getCssGradient(Color $color, $amount = null) {
+    public function getCssGradient(Color $color, $amount = null) {
 
         // Get gradient colors
         if(self::isLight($color))
@@ -113,7 +168,7 @@ class Toolkit
      * @param integer
      * @return object Color
      */
-    public static function darken(Color $color, $amount = null, $ref = false)
+    public function darken(Color $color, $amount = null, $ref = false)
 	{
 		$current = $color->lightness;
 		
@@ -139,7 +194,7 @@ class Toolkit
      * @param integer
      * @return object Color
      */
-    public static function lighten(Color $color, $amount = null)
+    public function lighten(Color $color, $amount = null)
 	{
 		$current = $color->lightness;
 		

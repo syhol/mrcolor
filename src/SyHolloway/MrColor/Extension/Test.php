@@ -1,8 +1,9 @@
 <?php
-namespace SyHolloway\MrColor;
+namespace SyHolloway\MrColor\Extension;
 
 use Exception;
-use SyHolloway\MrColor;
+use SyHolloway\MrColor\Color;
+use SyHolloway\MrColor\Extension;
 
 /**
  * Tests the Color object
@@ -10,7 +11,7 @@ use SyHolloway\MrColor;
  * @package MrColor
  * @author Simon Holloway
  */
-class Test
+class Test extends Extension
 {			
 	/**
 	 * Stores each of the the given colors properties then updates each one.
@@ -21,7 +22,7 @@ class Test
      * @param boolean $test_order run the test a second time in a random order
 	 * @return mixed boolean true if its a pass or array of the diffrences if its a fail
 	 */			
-	private static function text_color(Color $color, $test_order = false)
+	private function text_color(Color $color, $test_order = false)
 	{
 		$props = array('red', 'saturation', 'hex', 'green', 'lightness', 'blue', 'hue');
 		
@@ -55,17 +56,17 @@ class Test
 	}
 	
 	/**
-	 * Run a test, send multiple generated colors through the self::text_color() method
+	 * Run a test, send multiple generated colors through the $this->text_color() method
 	 * 
 	 * Tests the integrety of the property update system in the color class
 	 * 
      * @param object $color Color object
 	 * @param integer $strength lower the number, the more colors generated thus more powerful test
-	 * @param boolean $test_order see self::text_color()
-	 * @see self::text_color()
+	 * @param boolean $test_order see $this->text_color()
+	 * @see $this->text_color()
 	 * @return array test results
 	 */
-	public static function test(Color $color, $strength = 20, $test_order = false)
+	public function test(Color $color, $strength = 20, $test_order = false)
 	{
 		set_time_limit(600);
 		
@@ -81,7 +82,7 @@ class Test
 				{
 					$color = Color::create(array('red' => $r, 'green' => $g, 'blue' => $b));
 					
-					$result = self::text_color($color, $test_order);
+					$result = $this->text_color($color, $test_order);
 					
 					if(true === $result)
 					{
@@ -98,4 +99,5 @@ class Test
 		
 		return array('passes' => $pass, 'fails' => $fail, 'errors' => $errors);
 	}
+
 }

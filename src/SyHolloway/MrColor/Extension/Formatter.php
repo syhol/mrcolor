@@ -1,8 +1,9 @@
 <?php
-namespace SyHolloway\MrColor;
+namespace SyHolloway\MrColor\Extension;
 
 use Exception;
-use SyHolloway\MrColor;
+use SyHolloway\MrColor\Color;
+use SyHolloway\MrColor\Extension;
 
 /**
  * Interprets a wide range of inputs and uses them to build an instance of the color object
@@ -11,7 +12,7 @@ use SyHolloway\MrColor;
  * @package MrColor
  * @author Simon Holloway
  */
-class Formatter
+class Formatter extends Extension
 {
 	
 	/**
@@ -20,7 +21,7 @@ class Formatter
      * @param object $color Color object
      * @return string
      */
-    public static function getHexString(Color $color)
+    public function getHexString(Color $color)
     {
 		return '#' . $color->hex;
     }
@@ -31,7 +32,7 @@ class Formatter
      * @param object $color Color object
      * @return string
      */
-    public static function getRgbString(Color $color)
+    public function getRgbString(Color $color)
     {
     	return 'rgb('. $color->red . ', ' . $color->green . ', ' . $color->blue . ')';
     }
@@ -42,7 +43,7 @@ class Formatter
      * @param object $color Color object
      * @return string
      */
-    public static function getRgbaString(Color $color)
+    public function getRgbaString(Color $color)
     {
     	return 'rgb('. $color->red . ', ' . $color->green . ', ' . $color->blue . ', ' . $color->alpha . ')';
     }
@@ -53,7 +54,7 @@ class Formatter
      * @param object $color Color object
      * @return string
      */
-    public static function getHslString(Color $color)
+    public function getHslString(Color $color)
     {
     	return 'hsl('. round($color->hue) . ', ' . round($color->saturation * 100) . '%, ' . round($color->lightness * 100) . '%)';
     }
@@ -64,7 +65,7 @@ class Formatter
      * @param object $color Color object
      * @return string
      */
-    public static function getHslaString(Color $color)
+    public function getHslaString(Color $color)
     {
     	return 'hsla('. round($color->hue) . ', ' . round($color->saturation * 100) . '%, ' . round($color->lightness * 100) . '%, ' . $color->alpha . ')';
     }
@@ -78,15 +79,15 @@ class Formatter
      * @param mixed $subject
      * @return object Color object
      */
-    public static function load(Color $color, $value)
+    public function load(Color $color, $value)
     {
     	$value = strtolower(trim($value));
 			
-    	$format = self::guess($value);
+    	$format = $this->guess($value);
 		
     	if(is_callable(__CLASS__ . '::' . $format))
 		{
-			self::$format($color, $value);
+			$this->$format($color, $value);
 		}
 		
 		return $color;
@@ -99,7 +100,7 @@ class Formatter
      * @param mixed
      * @return string|boolean string if found, boolean false if not found
      */
-    private static function guess($value)
+    private function guess($value)
     {
 		if(is_string($value))
 		{
@@ -138,7 +139,7 @@ class Formatter
      * @param mixed
      * @return void
      */
-    private static function loadHexString(Color $color, $subject)
+    private function loadHexString(Color $color, $subject)
     {
 		$subject = trim($subject);
 		
@@ -168,7 +169,7 @@ class Formatter
      * @param mixed
      * @return void
      */
-    private static function loadRgbString(Color $color, $subject)
+    private function loadRgbString(Color $color, $subject)
     {
 		$subject = trim($subject);
 		
@@ -209,7 +210,7 @@ class Formatter
      * @param mixed
      * @return void
      */
-    private static function loadHslString(Color $color, $subject)
+    private function loadHslString(Color $color, $subject)
     {
 		$subject = trim($subject);
 		
