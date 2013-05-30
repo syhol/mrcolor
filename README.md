@@ -4,6 +4,8 @@ MrColor is a color manipulation library for PHP.
 
 The library will soon be available on packagist/composer
 
+Check the docs/example.php file and the wiki here (https://github.com/syholloway/mrcolor/wiki)[https://github.com/syholloway/mrcolor/wiki]
+
 Basic Functionality
 -------------------
 
