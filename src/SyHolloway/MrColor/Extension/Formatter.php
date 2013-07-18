@@ -1,7 +1,6 @@
 <?php
 namespace SyHolloway\MrColor\Extension;
 
-use Exception;
 use SyHolloway\MrColor\Color;
 use SyHolloway\MrColor\Extension;
 

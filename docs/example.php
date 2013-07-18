@@ -69,6 +69,8 @@
 
                 $color3->hue = 100;
 
+                $color3->hex = '333333';
+
                 $color3->lightness = $color3->lightness - 0.1;
 
                 $color3->alpha -= 1.2;

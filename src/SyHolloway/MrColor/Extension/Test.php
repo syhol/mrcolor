@@ -1,7 +1,6 @@
 <?php
 namespace SyHolloway\MrColor\Extension;
 
-use Exception;
 use SyHolloway\MrColor\Color;
 use SyHolloway\MrColor\Extension;
 
@@ -48,7 +47,7 @@ class Test extends Extension
 		{
 			if($orignal[$prop] !== $color->$prop)
 			{
-				return array('orignal' => $orignal, 'new' => $color);
+				return array('orignal' => $orignal[$prop], 'new' => $color->$prop);
 			}
 	    }
 		

@@ -1,11 +1,10 @@
 <?php
 namespace SyHolloway\MrColor;
 
-use Exception;
 use SyHolloway\MrColor\Color;
 
 /**
- * Provides a parent class for MrColor extensions and 
+ * Provides a parent class for MrColor extensions 
  *
  * @package MrColor
  * @author Simon Holloway

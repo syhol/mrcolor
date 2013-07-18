@@ -1,7 +1,6 @@
 <?php
 namespace SyHolloway\MrColor;
 
-use Exception;
 use SyHolloway\MrColor\Color;
 use SyHolloway\MrColor\Extension;
 use SyHolloway\MrColor\Extension\Test;
@@ -9,7 +8,7 @@ use SyHolloway\MrColor\Extension\Toolkit;
 use SyHolloway\MrColor\Extension\Formatter;
 
 /**
- * Provides a parent class for MrColor extensions and 
+ * Provides a collection manager for MrColor extensions
  *
  * @package MrColor
  * @author Simon Holloway
@@ -88,8 +87,8 @@ class ExtensionCollection
     {
         self::$init = true;
         
-        self::$defaults[] = new Test();
-        self::$defaults[] = new Toolkit();
-        self::$defaults[] = new Formatter();
+        self::registerDefaultExtension(new Test());
+        self::registerDefaultExtension(new Toolkit());
+        self::registerDefaultExtension(new Formatter());
     }
 }
