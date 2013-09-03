@@ -5,20 +5,20 @@ use SyHolloway\MrColor\Extension;
 use SyHolloway\MrColor\ExtensionCollection;
 
 /**
- * A color utility that helps maintain a single color value across multiple color formats
+ * A color utility that helps maintain a single color value across formats
  * 
  * @package MrColor
  * @version 0.2.0
  * @author Simon Holloway
- * @author Orignal Creators <http://mexitek.github.io/phpColors/>
+ * @author Original Creators <http://mexitek.github.io/phpColors/>
  */
 class Color
 {
-	/**
-	 * Holds the hex as a string with no hash
-	 * 
-	 * @var string
-	 */
+    /**
+     * Holds the hex as a string with no hash
+     * 
+     * @var string
+     */
     private $hex = '000000';
     
     /**
@@ -41,47 +41,47 @@ class Color
      * @var object ExtensionCollection
      */
     private $extensions;
-	
+    
     /**
      * Instantiates the class with a value
-	 * 
-	 * key value pairs in an array of properties and values, i.e.
-	 * 
-	 * array(
-	 * 	'red' => 22,
-	 * 	'green => 44
-	 * )
-	 * 
+     * 
+     * key value pairs in an array of properties and values, i.e.
+     * 
+     * array(
+     *  'red' => 22,
+     *  'green => 44
+     * )
+     * 
      * @param array $values
-	 * @return object self
+     * @return object self
      */
-    function __construct($values = array())
+    public function __construct($values = array())
     {
         $this->extensions = new ExtensionCollection();
         
         $this->formats = new FormatCollection();
         
-    	$this->bulk_update($values);
-	}
-	
-	/**
-	 * When setting the colors, run it through the update function but allow access
-	 * 
-	 * @param string $name property name
-	 * @param mixed $value property value
-	 * @return mixed $this->$name property
-	 */
-	public function __set($name, $value)
-    {
-    	return $this->update($name, $value);
+        $this->bulkUpdate($values);
     }
-	
-	/**
-	 * When getting the colors and alpah, allow even though they are private
-	 * 
-	 * @param string $name property name
-	 * @return mixed $this->$name property value
-	 */
+    
+    /**
+     * When setting the colors, run it through the update function but allow access
+     * 
+     * @param string $name property name
+     * @param mixed $value property value
+     * @return mixed $this->$name property
+     */
+    public function __set($name, $value)
+    {
+        return $this->update($name, $value);
+    }
+    
+    /**
+     * When getting the colors and alpah, allow even though they are private
+     * 
+     * @param string $name property name
+     * @return mixed $this->$name property value
+     */
     public function __get($name)
     {
         return ('hex' == $name || 'alpha' == $name) ? $this->$name : $this->formats->get($name) ;
@@ -101,10 +101,9 @@ class Color
      * @param array $values
      * @return object self
      */
-    public function bulk_update($values)
+    public function bulkUpdate($values)
     {
-        foreach($values as $property => $value)
-        {
+        foreach ($values as $property => $value) {
             $this->update($property, $value);
         }
         
@@ -125,8 +124,7 @@ class Color
      */
     public function update($using = 'hex', $value = false)
     {
-        if('hex' == $using || 'alpha' == $using)
-        {
+        if ('hex' == $using || 'alpha' == $using) {
             $this->$using = $value;
         }
         
@@ -134,46 +132,46 @@ class Color
         
         return $this;
     }
-	
+    
     /**
      * Returns your color hex string and adds a hash so can be used in css
-	 * 
-	 * @return string
+     * 
+     * @return string
      */
     public function __toString()
     {
         return '#' . $this->hex;
     }
-	
+    
     /**
      * Magic __call method
-	 * 
-	 * Passes the current color object, called method and args the the ExtensionCollection 
-	 * 
-	 * @param string $method
-	 * @param array $args
-	 * @return mixed
+     * 
+     * Passes the current color object, called method and args the the ExtensionCollection 
+     * 
+     * @param string $method
+     * @param array $args
+     * @return mixed
      */
     public function __call($method, $args)
-    {	
+    {
         
         return $this->extensions->runAll($this, $method, $args);
- 	}
-	
+    }
+    
     /**
      * Magic __callStatic method
-	 * 
-	 * Creates a new color object and passes the it with the 
+     * 
+     * Creates a new color object and passes the it with the 
      * called method and args the the ExtensionCollection
      *  
-	 * @param string $method
-	 * @param array $args
-	 * @return mixed
+     * @param string $method
+     * @param array $args
+     * @return mixed
      */
     public static function __callStatic($method, $args)
     {
-    	return call_user_func_array(array(self::create(), $method), $args);
- 	}
+        return call_user_func_array(array(self::create(), $method), $args);
+    }
     
     /**
      * Add a new extension object to the current color objects ExtensionCollection. 
@@ -213,7 +211,7 @@ class Color
         
         return $this;
     }
-    
+
     /**
      * Remove an format object from the current Color objects FormatCollection
      * 
@@ -226,23 +224,22 @@ class Color
         
         return $this;
     }
-	
-	/**
-	 * static method to create a new color then method chain it
-	 * 
-	 * key value pairs in an array of properties and values, i.e.
-	 * 
-	 * array(
-	 * 	'red' => 22,
-	 * 	'green => 44
-	 * )
-	 * 
+    
+    /**
+     * static method to create a new color then method chain it
+     * 
+     * key value pairs in an array of properties and values, i.e.
+     * 
+     * array(
+     *  'red' => 22,
+     *  'green => 44
+     * )
+     * 
      * @param array $values
-	 * @return object Color
-	 */
-	public static function create($values = array())
-	{
-		return new self($values);
-	}
-
+     * @return object Color
+     */
+    public static function create($values = array())
+    {
+        return new self($values);
+    }
 }
