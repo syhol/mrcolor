@@ -28,10 +28,6 @@
 
                 <?php
 
-                /**
-                 * Test
-                 */
-
                 use SyHolloway\MrColor\Color;
 
                 require_once(dirname(__DIR__) . '/manual-init.php');
