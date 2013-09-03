@@ -27,11 +27,11 @@
             <section>
 
                 <?php
-                
+
                 use SyHolloway\MrColor\Color;
 
                 require_once(dirname(__DIR__) . '/manual-init.php');
-                
+
                 //Run a test to check the core color syncing works
                 echo '<h2>Test Results</h2>';
 
@@ -49,21 +49,25 @@
                 echo '<h2>Create color with RGB values</h2>';
 
                 //Create a color with RGB values
-                $color2 = Color::create(array(
-                    'red' => 200,
-                    'green' => 200,
-                    'blue' => 100
-                ));
+                $color2 = Color::create(
+                    array(
+                        'red' => 200,
+                        'green' => 200,
+                        'blue' => 100
+                    )
+                );
 
                 $color2->dump();
 
                 echo '<h2>Manipulating color with properties</h2>';
 
-                $color3 = Color::create(array(
-                    'red' => 200,
-                    'green' => 200,
-                    'blue' => 100
-                ));
+                $color3 = Color::create(
+                    array(
+                        'red' => 200,
+                        'green' => 200,
+                        'blue' => 100
+                    )
+                );
 
                 $color3->dump();
 
@@ -81,11 +85,13 @@
 
                 echo '<h2>Copy and syncing colors</h2>';
 
-                $color4 = Color::create(array(
-                    'red' => 200,
-                    'green' => 200,
-                    'blue' => 100
-                ));
+                $color4 = Color::create(
+                    array(
+                        'red' => 200,
+                        'green' => 200,
+                        'blue' => 100
+                    )
+                );
 
                 //Grab a copy of color4 and save it to color5
                 $color5 = $color4->copy();
@@ -107,31 +113,37 @@
 
                 $color6 = Color::create();
 
-                $color6->bulk_update(array(
-                    'hue' => 40,
-                    'saturation' => 0.7,
-                    'lightness' => 0.2
-                ));
+                $color6->bulkUpdate(
+                    array(
+                        'hue' => 40,
+                        'saturation' => 0.7,
+                        'lightness' => 0.2
+                    )
+                );
 
                 $color6->dump();
 
                 echo '<h2>toString</h2>';
 
-                $color7 = Color::create(array(
-                    'hue' => 40,
-                    'saturation' => 0.7,
-                    'lightness' => 0.2
-                ));
+                $color7 = Color::create(
+                    array(
+                        'hue' => 40,
+                        'saturation' => 0.7,
+                        'lightness' => 0.2
+                    )
+                );
 
                 echo $color7;
 
                 echo '<h2>Using color tools</h2>';
 
-                $color8 = Color::create(array(
-                    'red' => 90,
-                    'green' => 50,
-                    'blue' => 20
-                ));
+                $color8 = Color::create(
+                    array(
+                        'red' => 90,
+                        'green' => 50,
+                        'blue' => 20
+                    )
+                );
 
                 $color8->dump();
 
@@ -174,9 +186,9 @@
                 $color11->dump();
 
                 echo 'RGB: ' . $color11->getRgbString();
-                
+
                 ?>
-                
+
             </section>
 
         </div>
