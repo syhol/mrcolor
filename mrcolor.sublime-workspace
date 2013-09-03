@@ -1,0 +1,456 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"inc",
+				"incl	include …"
+			],
+			[
+				"array_un",
+				"array_unshift"
+			],
+			[
+				"call_",
+				"call_user_func_array"
+			],
+			[
+				"call",
+				"call_user_func"
+			],
+			[
+				"ba",
+				"baseurl"
+			],
+			[
+				"th",
+				"this"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"file": "src/SyHolloway/MrColor/Color.php",
+			"settings":
+			{
+				"buffer_size": 5910,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "src/SyHolloway/MrColor/Format.php",
+			"settings":
+			{
+				"buffer_size": 1347,
+				"line_ending": "Unix"
+			}
+		}
+	],
+	"build_system": "",
+	"command_palette":
+	{
+		"height": 197.0,
+		"selected_items":
+		[
+			[
+				"git com",
+				"Git: Commit"
+			],
+			[
+				"git",
+				"Git: Push"
+			],
+			[
+				"git ",
+				"Git: Commit"
+			],
+			[
+				"list",
+				"Package Control: List Packages"
+			],
+			[
+				"ins",
+				"Package Control: Install Package"
+			],
+			[
+				"",
+				"Indentation: Convert to Spaces"
+			],
+			[
+				"inst",
+				"Package Control: Install Package"
+			],
+			[
+				"in",
+				"Package Control: Install Package"
+			],
+			[
+				"Package Control: lis",
+				"Package Control: List Packages"
+			],
+			[
+				"Package Control: ",
+				"Package Control: List Packages"
+			],
+			[
+				"remove",
+				"Package Control: Remove Package"
+			],
+			[
+				"packa",
+				"Package Control: Remove Package"
+			],
+			[
+				"PHP Code Sniffer: ",
+				"PHP Code Sniffer: Sniff this file"
+			],
+			[
+				"instal",
+				"Package Control: Install Package"
+			],
+			[
+				"insta",
+				"Package Control: Install Package"
+			],
+			[
+				"la",
+				"Laravel Artisan: List"
+			],
+			[
+				"l",
+				"Laravel Artisan: List"
+			],
+			[
+				"Laravel ",
+				"Laravel Artisan: Changes"
+			],
+			[
+				"req",
+				"Snippet: REQUEST['…']"
+			],
+			[
+				"lara",
+				"Laravel Artisan: Help"
+			],
+			[
+				"lar",
+				"Laravel Artisan: Routes"
+			],
+			[
+				"lare",
+				"Laravel Artisan: Routes"
+			]
+		],
+		"width": 400.0
+	},
+	"console":
+	{
+		"height": 153.0,
+		"history":
+		[
+			"1+1",
+			"import urllib.request,os; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); open(os.path.join(ipp, pf), 'wb').write(urllib.request.urlopen( 'http://sublime.wbond.net/' + pf.replace(' ','%20')).read())",
+			"cd",
+			"cs ",
+			"1 + 1"
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"file_history":
+	[
+		"/C/Users/Simon/AppData/Roaming/Sublime Text 3/Packages/Git/Git.sublime-settings",
+		"/C/wamp/www/projects/aquaticmanagement/wp-content/themes/foundation-core/js/foundation/foundation.orbit.js",
+		"/C/wamp/www/projects/mrcolor/src/SyHolloway/MrColor/Extension.php",
+		"/C/Users/Simon/AppData/Roaming/Sublime Text 3/Packages/User/Preferences.sublime-settings",
+		"/C/Users/Simon/AppData/Roaming/Sublime Text 3/Packages/Default/Preferences.sublime-settings",
+		"/C/wamp/www/projects/mrcolor/src/SyHolloway/MrColor/Format/Rgb.php",
+		"/C/wamp/www/projects/mrcolor/docs/example.php",
+		"/C/Users/Simon/AppData/Roaming/Sublime Text 3/Packages/User/LaravelArtisan.sublime-settings",
+		"/C/Users/Simon/AppData/Roaming/Sublime Text 3/Packages/User/phpcs.sublime-settings",
+		"/C/wamp/www/projects/mrcolor/src/SyHolloway/MrColor/FormatCollection.php",
+		"/C/wamp/www/projects/mrcolor/src/SyHolloway/MrColor/Format.php",
+		"/C/wamp/www/projects/mrcolor/src/SyHolloway/MrColor/Extension/Test.php",
+		"/C/wamp/www/projects/mrcolor/src/SyHolloway/MrColor/Extension/Toolkit.php",
+		"/C/wamp/www/projects/mrcolor/src/SyHolloway/MrColor/Extension/Formatter.php",
+		"/C/wamp/www/projects/mrcolor/src/SyHolloway/MrColor/Format/Hsl.php",
+		"/C/wamp/www/projects/mrcolor/src/SyHolloway/MrColor/Color.php",
+		"/C/wamp/www/projects/mrcolor/src/SyHolloway/MrColor/ExtensionCollection.php",
+		"/C/wamp/bin/php/php5.4.3/pear/PEAR/Downloader.php",
+		"/C/wamp/bin/php/php5.4.3/pear/PEAR/Validate.php",
+		"/C/Users/Simon/AppData/Roaming/Sublime Text 3/Packages/Phpcs/phpcs.sublime-settings",
+		"/C/Users/Simon/AppData/Roaming/Sublime Text 3/Packages/DocBlockr/Base File.sublime-settings",
+		"/C/wamp/www/sandbox/php-frameworks/laravel/artisan",
+		"/C/Users/Simon/AppData/Roaming/Sublime Text 3/Packages/LaravelArtisan/LaravelArtisan.sublime-settings",
+		"/C/wamp/www/projects/mrcolor/docs/css/styles.css",
+		"/C/wamp/www/projects/mrcolor/docs/font/fontawesome-webfont.ttf",
+		"/C/wamp/www/projects/primal/example/index.php",
+		"/C/wamp/www/projects/primal/src/SyHolloway/Primal/ExtensionCollection.php",
+		"/C/wamp/www/projects/primal/src/SyHolloway/Primal/Extension.php",
+		"/C/wamp/www/projects/primal/src/SyHolloway/Primal/Extendable.php",
+		"/C/wamp/www/projects/primal/src/SyHolloway/Primal/String.php",
+		"/C/wamp/www/projects/primal/src/SyHolloway/Primal/Extension/String.php",
+		"/C/wamp/www/projects/primal/src/SyHolloway/Primal/Extensions/String.php",
+		"/C/wamp/www/projects/primal/src/SyHolloway/Primal/Extensions/string.php",
+		"/C/wamp/www/projects/primal/composer.json",
+		"/C/wamp/www/projects/savy/composer.json",
+		"/C/wamp/www/projects/savy/example/index.php",
+		"/C/wamp/www/projects/savy/README.md",
+		"/C/wamp/www/projects/savy/LICENSE",
+		"/C/wamp/www/projects/savy/src/SyHolloway/Savy/Register.php",
+		"/C/wamp/www/projects/savy/.project.sublime-workspace",
+		"/C/wamp/www/projects/savy/.project"
+	],
+	"find":
+	{
+		"height": 48.0
+	},
+	"find_in_files":
+	{
+		"height": 90.0,
+		"where_history":
+		[
+			"C:\\wamp\\www\\projects\\mrcolor"
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			");\n",
+			"ruler",
+			"text_color",
+			"bulk_update",
+			"public",
+			"object",
+			"extensions"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"selected": 1,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "src/SyHolloway/MrColor/Color.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 5910,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								4874,
+								4874
+							]
+						],
+						"settings":
+						{
+							"rulers":
+							[
+								80
+							],
+							"spell_check": false,
+							"syntax": "Packages/PHP/PHP.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 2931.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "src/SyHolloway/MrColor/Format.php",
+					"semi_transient": true,
+					"settings":
+					{
+						"buffer_size": 1347,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/PHP/PHP.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 24.0
+	},
+	"input":
+	{
+		"height": 31.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.git":
+	{
+		"height": 106.0
+	},
+	"project": "mrcolor.sublime-project",
+	"replace":
+	{
+		"height": 44.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+			[
+				"docs/ex",
+				"docs\\example.php"
+			],
+			[
+				"rgb",
+				"src\\SyHolloway\\MrColor\\Format\\Rgb.php"
+			],
+			[
+				"extension",
+				"src\\SyHolloway\\MrColor\\Extension\\Formatter.php"
+			],
+			[
+				"hsl",
+				"src\\SyHolloway\\MrColor\\Format\\Hsl.php"
+			],
+			[
+				"exten",
+				"mrcolor\\src\\SyHolloway\\MrColor\\Extension.php"
+			],
+			[
+				"arti",
+				"laravel\\artisan"
+			],
+			[
+				"exa",
+				"example\\index.php"
+			],
+			[
+				"reg",
+				"src\\SyHolloway\\Savy\\Register.php"
+			]
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 500.0,
+		"selected_items":
+		[
+			[
+				"",
+				"C:\\wamp\\www\\projects\\savy\\.project.sublime-workspace"
+			]
+		],
+		"width": 380.0
+	},
+	"select_symbol":
+	{
+		"height": 392.0,
+		"selected_items":
+		[
+			[
+				"RGB",
+				"Rgb"
+			],
+			[
+				"Exten",
+				"SyHolloway\\MrColor\\Extension"
+			],
+			[
+				"tool",
+				"Toolkit"
+			],
+			[
+				"hsl",
+				"Hsl"
+			],
+			[
+				"",
+				"SyHolloway\\MrColor"
+			]
+		],
+		"width": 392.0
+	},
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 208.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}

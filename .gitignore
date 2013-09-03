@@ -164,3 +164,6 @@ pip-log.txt
 
 #sass
 .sass-cache/
+
+#sublimetext
+*.sublime-project
