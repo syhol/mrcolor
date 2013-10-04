@@ -1,5 +1,7 @@
 # MrColor #
 
+![MrColor](http://hollowaydesign.com/mrcolor/MrColor.jpg)
+
 MrColor is a color manipulation library for PHP.
 
 Check the docs/example.php file and the wiki here https://github.com/syholloway/mrcolor/wiki to get some good knowledge  
