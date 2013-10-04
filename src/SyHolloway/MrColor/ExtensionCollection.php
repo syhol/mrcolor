@@ -59,12 +59,12 @@ class ExtensionCollection
         return $result;
     }
 
-    public static function registerExtension(Extension $extension)
+    public function registerExtension(Extension $extension)
     {
         $this->extensions[] = $extension;
     }
 
-    public static function deregisterExtension(Extension $extension)
+    public function deregisterExtension(Extension $extension)
     {
         foreach ($this->extensions as $key => $posext) {
             //If objects of same class
