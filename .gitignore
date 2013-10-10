@@ -167,3 +167,4 @@ pip-log.txt
 
 #sublimetext
 *.sublime-project
+*.sublime-workspace
