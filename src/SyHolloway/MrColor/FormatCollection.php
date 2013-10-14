@@ -58,12 +58,12 @@ class FormatCollection
         return false;
     }
 
-    public static function registerExtension(Format $format)
+    public function registerExtension(Format $format)
     {
         $this->formats[] = $format;
     }
 
-    public static function deregisterExtension(Format $format)
+    public function deregisterExtension(Format $format)
     {
         foreach ($this->formats as $key => $posform) {
             //If objects of same class
