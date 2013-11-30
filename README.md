@@ -4,9 +4,9 @@
 
 MrColor is a color manipulation library for PHP.
 
-Check the docs/example.php file and the wiki here https://github.com/syholloway/mrcolor/wiki to get some good knowledge  
+Check the docs/example.php file and the wiki here https://github.com/syholloway/mrcolor/wiki to get some good knowledge proper good like.
 
-The library will soon be available on packagist/composer
+The package requires PHP 5.3 and is PSR-0 and PSR-1 compliant, I have tried to stick to PSR-2, but can not guarantee it throughout.
 
 Basic Functionality
 -------------------
@@ -27,10 +27,23 @@ $color2 = Color::create(array(
 			));
 ```
 
-Using outside composer and a PSR-0 autoloader
+Using with composer
 ---------------------------------------------
 
-if you want to use this package without composer and a PSR-0 autoloader you can use the following 2 lines of code to set up the classes ready to be used
+If you want to use this package via composer you can add it to your applications composer.json file like this
+
+``` json
+"require" {
+	"syholloway/mrcolor" : "0.*"
+}
+```
+
+Now run a composer update command at the location of your applications composer.json file
+
+Using without composer
+---------------------------------------------
+
+If you want to use this package without composer you can use the following 2 lines to start an autoloader thats has been configured for this package
 
 ``` php
 <?php
