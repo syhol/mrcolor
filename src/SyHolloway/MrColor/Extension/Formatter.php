@@ -25,11 +25,28 @@ class Formatter extends Extension
         return '#' . $color->hex;
     }
 
-
+    /**
+     * Given a Color object, returns a formatted argb hex string
+     *
+     * @param  object $color Color object
+     * @return string
+     */
     public function getArgbHexString(Color $color)
     {
-        $alpha = dechex(255*$color->alpha);
-        return "#{$alpha}{$color->hex}";
+        $alpha = dechex(255 * $color->alpha);
+        return '#' . $alpha . $color->hex;
+    }
+
+    /**
+     * Given a Color object, returns a formatted rgba hex string
+     *
+     * @param  object $color Color object
+     * @return string
+     */
+    public function getRgbaHexString(Color $color)
+    {
+        $alpha = dechex(255 * $color->alpha);
+        return '#' . $color->hex . $alpha;
     }
 
     /**
@@ -117,7 +134,11 @@ class Formatter extends Extension
                 }
             } elseif (substr($value, 0, 3) === 'rgb') {
                 return 'loadRgbString';
+            } elseif (substr($value, 0, 4) === 'rgba') {
+                return 'loadRgbString';
             } elseif (substr($value, 0, 3) === 'hsl') {
+                return 'loadHslString';
+            } elseif (substr($value, 0, 4) === 'hsla') {
                 return 'loadHslString';
             }
 
@@ -133,9 +154,9 @@ class Formatter extends Extension
      *
      * @param object $color Color object
      * @param mixed
-     * @return void
+     * @return object Color object
      */
-    private function loadHexString(Color $color, $subject)
+    public function loadHexString(Color $color, $subject)
     {
         $subject = trim($subject);
 
@@ -151,6 +172,8 @@ class Formatter extends Extension
         }
 
         $color->hex = $subject;
+
+        return $color;
     }
 
     /**
@@ -158,9 +181,9 @@ class Formatter extends Extension
      *
      * @param object $color Color object
      * @param mixed
-     * @return void
+     * @return object Color object
      */
-    private function loadRgbString(Color $color, $subject)
+    public function loadRgbString(Color $color, $subject)
     {
         $subject = trim($subject);
 
@@ -187,6 +210,8 @@ class Formatter extends Extension
         }
 
         $color->bulkUpdate($rgb);
+
+        return $color;
     }
 
     /**
@@ -194,9 +219,9 @@ class Formatter extends Extension
      *
      * @param object $color Color object
      * @param mixed
-     * @return void
+     * @return object Color object
      */
-    private function loadHslString(Color $color, $subject)
+    public function loadHslString(Color $color, $subject)
     {
         $subject = trim($subject);
 
@@ -218,10 +243,12 @@ class Formatter extends Extension
             'lightness' => $hslnum[2]
         );
 
-        if (isset($rgbnum[3])) {
-            $hsl['alpha'] = $rgbnum[3];
+        if (isset($hslnum[3])) {
+            $hsl['alpha'] = $hslnum[3];
         }
 
         $color->bulkUpdate($hsl);
+
+        return $color;
     }
 }
