@@ -25,6 +25,13 @@ class Formatter extends Extension
         return '#' . $color->hex;
     }
 
+
+    public function getArgbHexString(Color $color)
+    {
+        $alpha = dechex(255*$color->alpha);
+        return "#{$alpha}{$color->hex}";
+    }
+
     /**
      * Given a Color object, returns a formatted rgb string
      *
@@ -44,7 +51,7 @@ class Formatter extends Extension
      */
     public function getRgbaString(Color $color)
     {
-        return 'rgb('. $color->red . ', ' . $color->green . ', ' . $color->blue . ', ' . $color->alpha . ')';
+        return 'rgba('. $color->red . ', ' . $color->green . ', ' . $color->blue . ', ' . $color->alpha . ')';
     }
 
     /**
