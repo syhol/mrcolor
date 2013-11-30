@@ -14,6 +14,8 @@ Basic Functionality
 ``` php
 <?php
 
+use SyHolloway\MrColor\Color;
+
 //Create a new color object with the default value of black
 $color = Color::create();
 

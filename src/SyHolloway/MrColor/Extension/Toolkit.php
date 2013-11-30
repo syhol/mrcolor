@@ -160,7 +160,7 @@ class Toolkit extends Extension
      * @param integer
      * @return object Color
      */
-    public function darken(Color $color, $amount = null, $ref = false)
+    public function darken(Color $color, $amount = null)
     {
         $current = $color->lightness;
 
@@ -203,5 +203,36 @@ class Toolkit extends Extension
         $color->lightness = floatval($new);
 
         return $color;
+    }
+    
+    /**
+     * Merges the current color with a second color with an optional percentage
+     *
+     * @param object $color1 Color object
+     * @param object $color2 Color object
+     * @param integer $percentage 
+     * @return object Color
+     */
+    public function merge(Color $color1, Color $color2, $percentage = 50)
+    {
+        return new Color(array(
+            'red' => $this->getMergedColorPart('red', $color1, $color2, $percentage),
+            'green' => $this->getMergedColorPart('green', $color1, $color2, $percentage),
+            'blue' => $this->getMergedColorPart('blue', $color1, $color2, $percentage)
+        ));
+    }
+    
+    /**
+     * Get a new r/g/b value between color1 and color2 bases on percentage
+     * 
+     * @param string $type 
+     * @param object $color1 Color object
+     * @param object $color2 Color object
+     * @param integer $percentage 
+     * @return integer
+     */
+    private function getMergedColorPart($type, $color1, $color2, $percentage)
+    {
+        return $color1->$type - ( ($percentage / 100) * ( $color1->$type - $color2->$type ) );
     }
 }
