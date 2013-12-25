@@ -86,14 +86,21 @@ $blue->darken(12);
 	$copyOfBlue->merge($red);
 	$purple = $copyOfBlue;
 
-// This could all be alot tidier if we do some method chaining, because merge() both alters the object and returns it
+// This could all be alot tidier if we do some method chaining,
+// because merge() both alters the object and returns it we can do this:
 $purple = $blue->copy()->merge($red);
 
-// Now if we want to get the complementry color to purple we can do so using the getComplementary() method.
+// Now if we want to get the complementry color to purple we can do so 
+// using the getComplementary() method.
 $yellowyGreen = $purple->getComplementary();
 ```
 
 Just remember if you are using an extension that alters and returns a color object, and you want the object you are useing to remain unchanged, use the copy() method like I did on the example above to create a clone of the object first. If I didnt copy() $blue before I merged it, then ($blue === $purple).
+
+Advanced Functionality
+---------------------------------------------
+
+Check the [Wiki](https://github.com/syholloway/mrcolor/wiki) to see how to extend MrColor without editing the source files.
 
 Using with composer
 ---------------------------------------------
