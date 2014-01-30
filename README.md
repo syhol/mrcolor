@@ -1,5 +1,7 @@
 # MrColor #
 
+[![Latest Stable Version](https://poser.pugx.org/syholloway/mrcolor/v/stable.png)](https://packagist.org/packages/syholloway/mrcolor) [![Total Downloads](https://poser.pugx.org/syholloway/mrcolor/downloads.png)](https://packagist.org/packages/syholloway/mrcolor) [![Latest Unstable Version](https://poser.pugx.org/syholloway/mrcolor/v/unstable.png)](https://packagist.org/packages/syholloway/mrcolor) [![License](https://poser.pugx.org/syholloway/mrcolor/license.png)](https://packagist.org/packages/syholloway/mrcolor)
+
 ![MrColor](https://raw.github.com/syholloway/mrcolor/7b9c9de839453581f9707752076cd3e4cd63a962/docs/logo.png)
 
 MrColor is a color manipulation library for PHP.
