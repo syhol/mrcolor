@@ -42,6 +42,17 @@ class ExtensionCollection
         $this->extensions = self::$defaults;
     }
 
+    public function __clone()
+    {
+        $tmp = $this->extensions;
+
+        $this->extensions = array();
+
+        foreach ($tmp as $extension) {
+            $this->extensions[] = clone $extension;
+        }
+    }
+
     public function runAll(Color $color, $method, $args)
     {
         $result = null;

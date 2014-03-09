@@ -64,6 +64,13 @@ class Color
         $this->bulkUpdate($values);
     }
     
+    public function __clone()
+    {
+        $this->extensions = clone $this->extensions;
+        
+        $this->formats = clone $this->formats;
+    }
+    
     /**
      * When setting the colors, run it through the update function but allow access
      * 

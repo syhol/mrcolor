@@ -30,6 +30,17 @@ class FormatCollection
             $this->formats[] = clone $format;
         }
     }
+    
+    public function __clone()
+    {
+        $tmp = $this->formats;
+
+        $this->formats = array();
+
+        foreach ($tmp as $format) {
+            $this->formats[] = clone $format;
+        }
+    }
 
     public function update($key, $value, $currentHex)
     {
