@@ -2,7 +2,7 @@
     "name": "syholloway/mrcolor",
     "type": "library",
     "description": "Color manipulation tools and format conversion for PHP",
-    "keywords": [ "color", "manipulation", "format" ],
+    "keywords": ["color", "manipulation", "format"],
     "homepage": "https://github.com/syholloway/mrcolor",
     "license": "MIT",
     "authors": [
@@ -16,8 +16,8 @@
         "php": ">=5.3.0"
     },
     "autoload": {
-        "psr-0": { 
-        	"SyHolloway": "src/" 
+        "psr-0": {
+            "SyHolloway": "src/"
         }
-	}
+    }
 }

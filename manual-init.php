@@ -16,3 +16,4 @@ include($ex . 'Toolkit.php');
 include($ex . 'Formatter.php');
 include($fm . 'Rgb.php');
 include($fm . 'Hsl.php');
+include($fm . 'Hex.php');
