@@ -68,6 +68,12 @@
                         'lightness' => 0.59
                     )
                 );
+                $color12->dump();
+                
+                echo '<h2>Update previous color with HSL values</h2>';
+                $color12->saturation = 0.7;
+                $color12->lightness += 0.2;
+                $color12->hue -= 20;
                 /*
                 $color12 = $color12->bulkUpdate(
                     array(
