@@ -1,23 +1,28 @@
 {
-    "name": "syholloway/mrcolor",
+    "name": "dobby007/mrcolor",
     "type": "library",
-    "description": "Color manipulation tools and format conversion for PHP",
-    "keywords": [ "color", "manipulation", "format" ],
-    "homepage": "https://github.com/syholloway/mrcolor",
+    "description": "Color manipulation tools and format conversion for PHP. This is the fork of https://github.com/syholloway/mrcolor . The package name of the original library is 'syholloway/mrcolor'",
+    "keywords": ["color", "manipulation", "format"],
+    "homepage": "https://github.com/Dobby007/mrcolor",
     "license": "MIT",
     "authors": [
         {
             "name": "Simon Holloway",
             "email": "holloway.sy@gmail.com",
             "homepage": "http://hollowaydesign.com/"
+        },
+        {
+            "name": "Alexander Gilevich",
+            "email": "alegil91@gmail.com",
+            "homepage": "http://flydigo.com"
         }
     ],
     "require": {
         "php": ">=5.3.0"
     },
     "autoload": {
-        "psr-0": { 
-        	"SyHolloway": "src/" 
+        "psr-0": {
+            "SyHolloway": "src/"
         }
-	}
+    }
 }

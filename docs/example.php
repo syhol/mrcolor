@@ -58,6 +58,42 @@
                 );
 
                 $color2->dump();
+                
+                echo '<h2>Create color with HSL values</h2>';
+                //Create a color with HSL values
+                $color12 = Color::create(
+                    array(
+                        'hue' => 60,
+                        'saturation' => 0.48,
+                        'lightness' => 0.59
+                    )
+                );
+                $color12->dump();
+                
+                echo '<h2>Update previous color with HSL values</h2>';
+                $color12->saturation = 0.7;
+                $color12->lightness += 0.2;
+                $color12->hue -= 20;
+                /*
+                $color12 = $color12->bulkUpdate(
+                    array(
+                        'hue' => 60,
+                        'saturation' => 0.48,
+                        'lightness' => 0.59
+                    )
+                );
+                */
+                $color12->dump();
+                
+                echo '<h2>Create color with HEX value</h2>';
+                //Create a color with HSL values
+                $color13 = Color::create(
+                    array(
+                        'hex' => 'c8c864'
+                    )
+                );
+                
+                $color13->dump();
 
                 echo '<h2>Manipulating color with properties</h2>';
 
@@ -79,6 +115,8 @@
 
                 $color3->alpha++;
 
+                
+                
                 var_dump($color3->red);
 
                 $color3->dump();

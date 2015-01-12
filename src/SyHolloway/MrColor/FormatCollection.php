@@ -4,6 +4,7 @@ namespace SyHolloway\MrColor;
 use SyHolloway\MrColor\Format;
 use SyHolloway\MrColor\Format\Rgb;
 use SyHolloway\MrColor\Format\Hsl;
+use SyHolloway\MrColor\Format\Hex;
 
 /**
  * Provides a collection manager for MrColor formats
@@ -44,15 +45,22 @@ class FormatCollection
 
     public function update($key, $value, $currentHex)
     {
+        $oldHex = $currentHex;
+        $foundFormat = false;
         foreach ($this->formats as $format) {
             if ($format->hasValue($key)) {
+                $foundFormat = $format;
                 $currentHex = $format->set($key, $value)->toHex();
                 break;
             }
         }
-
-        foreach ($this->formats as $format) {
-            $format->fromHex($currentHex);
+        
+        if ($foundFormat) {
+            foreach ($this->formats as $format) {
+                if ($format !== $foundFormat) {
+                    $format->fromHex($currentHex);
+                }
+            }
         }
 
         return $currentHex;
@@ -105,5 +113,6 @@ class FormatCollection
 
         self::registerDefaultFormat(new Rgb());
         self::registerDefaultFormat(new Hsl());
+        self::registerDefaultFormat(new Hex());
     }
 }

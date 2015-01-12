@@ -53,7 +53,7 @@ class Hsl extends Format
             dechex($g),
             dechex($b)
         );
-
+        
         //Make sure the hex is 6 digit
         foreach ($hex as $key => $value) {
             $hex[$key] = strlen($value) === 1 ? '0' . $value : $value ;
