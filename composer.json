@@ -1,23 +1,37 @@
 {
-    "name": "syholloway/mrcolor",
-    "type": "library",
-    "description": "Color manipulation tools and format conversion for PHP",
-    "keywords": [ "color", "manipulation", "format" ],
-    "homepage": "https://github.com/syholloway/mrcolor",
-    "license": "MIT",
-    "authors": [
-        {
-            "name": "Simon Holloway",
-            "email": "holloway.sy@gmail.com",
-            "homepage": "http://hollowaydesign.com/"
-        }
-    ],
-    "require": {
-        "php": ">=5.3.0"
-    },
-    "autoload": {
-        "psr-0": { 
-        	"SyHolloway": "src/" 
-        }
-	}
+  "name": "syholloway/mrcolor",
+  "type": "library",
+  "version": "2.0.1",
+  "description": "Color manipulation tools and format conversion for PHP",
+  "keywords": [ "color", "manipulation", "format" ],
+  "homepage": "https://github.com/syholloway/mrcolor",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Simon Holloway",
+      "email": "holloway.sy@gmail.com",
+      "homepage": "http://hollowaydesign.com/"
+    }, {
+      "name": "David Barker",
+      "email": "david.aw.barker@gmail.com"
+    }
+  ],
+  "require": {
+    "php": ">=5.4.0",
+    "leafo/scssphp": "^0.1.8",
+    "mockery/mockery": "^0.9.4"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "^4.7"
+  },
+  "autoload": {
+    "psr-4": {
+      "MrColor//": "src/"
+    }
+  },
+  "autoload-dev": {
+    "classmap": [
+      "tests/TestCase.php"
+    ]
+  }
 }
