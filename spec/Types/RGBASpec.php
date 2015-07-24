@@ -29,10 +29,10 @@ class RGBASpec extends ObjectBehavior
         $this->toHex()->shouldHaveType(Hex::class);
     }
 
-    /*function it_should_return_rgba_when_converted()
+    function it_should_return_rgba_when_converted()
     {
         $this->toRgb()->shouldHaveType(RGBA::class);
-    }*/
+    }
 
     function it_should_convert_to_string()
     {
