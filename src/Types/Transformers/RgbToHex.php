@@ -18,8 +18,6 @@ class RgbToHex implements TransformerInterface
         $green = round(255 * $type->getAttribute('green'));
         $blue = round(255 * $type->getAttribute('blue'));
 
-        var_dump($red, $green, $blue);
-
         return ["#".sprintf("%02X",$red).sprintf("%02X",$green).sprintf("%02X",$blue)];
     }
 }
