@@ -14,10 +14,11 @@ class RgbToHex implements TransformerInterface
      */
     public function convert(ColorType $type)
     {
-        $red = round(255 * $type->getAttribute('red'));
-        $green = round(255 * $type->getAttribute('green'));
-        $blue = round(255 * $type->getAttribute('blue'));
-
-        return ["#".sprintf("%02X",$red).sprintf("%02X",$green).sprintf("%02X",$blue)];
+        return [join('', [
+            '#',
+            sprintf("%02X", round(255 * $type->getAttribute('red'))),
+            sprintf("%02X", round(255 * $type->getAttribute('green'))),
+            sprintf("%02X", round(255 * $type->getAttribute('blue')))
+        ])];
     }
 }

@@ -18,19 +18,16 @@ class HslToRgb implements TransformerInterface
         $s = $type->getAttribute('saturation');
         $l = $type->getAttribute('lightness');
 
-        if($s == 0){
-            $r = $g = $b = $l; // achromatic
-        }
-        else
-        {
-            $q = $l < 0.5 ? ($l * (1 + $s)) : ($l + $s - $l * $s);
-            $p = 2 * $l - $q;
-            $r = $this->hueToRgb($p, $q, $h + 1/3);
-            $g = $this->hueToRgb($p, $q, $h);
-            $b = $this->hueToRgb($p, $q, $h - 1/3);
-        }
+        if ($s == 0) return array_fill(0, 3, $l); // achromatic
+        
+        $q = $l < 0.5 ? ($l * (1 + $s)) : ($l + $s - $l * $s);
+        $p = 2 * $l - $q;
 
-        return [$r, $g, $b];
+        return [
+            $this->hueToRgb($p, $q, $h + 1/3),
+            $this->hueToRgb($p, $q, $h),
+            $this->hueToRgb($p, $q, $h - 1/3)
+        ];
     }
 
     /**
