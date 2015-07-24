@@ -5,6 +5,7 @@ use Behat\Behat\Context\SnippetAcceptingContext;
 use Behat\Gherkin\Node\PyStringNode;
 use Behat\Gherkin\Node\TableNode;
 use MrColor\Types\Hex;
+use MrColor\Types\HSLA;
 
 /**
  * Defines application features from the specific context.
@@ -37,6 +38,14 @@ class FeatureContext implements Context, SnippetAcceptingContext
     }
 
     /**
+     * @Given /^I have a HSLA object with values hue (.*), saturation (.*) and lightness (.*)$/
+     */
+    public function iHaveAHSLAObjectWithValuesHueSaturationAndLightness($hue, $saturation, $lightness)
+    {
+        $this->colorType = new HSLA($hue, $saturation, $lightness);
+    }
+
+    /**
      * @Given /^I convert it to HSLA$/
      */
     public function iConvertItToHSLA()
@@ -50,6 +59,14 @@ class FeatureContext implements Context, SnippetAcceptingContext
     public function iConvertItToRGBA()
     {
         $this->colorType = $this->colorType->toRgb();
+    }
+
+    /**
+     * @Given /^I convert it to Hex$/
+     */
+    public function iConvertItToHex()
+    {
+        $this->colorType = $this->colorType->toHex();
     }
 
     /**
@@ -69,6 +86,16 @@ class FeatureContext implements Context, SnippetAcceptingContext
     {
         if ( (string) $this->colorType !== "rgba({$red}, {$green}, {$blue}, 1)" )
             throw new Exception("Expecting rgba({$red}, {$green}, {$blue}, 1)\n
+                Received {$this->colorType}\n");
+    }
+
+    /**
+     * @Then /^it should have hexcode (.*)$/
+     */
+    public function itShouldHaveHexcode($hex)
+    {
+        if ( (string) $this->colorType !== $hex )
+            throw new Exception("Expecting $hex\n
                 Received {$this->colorType}\n");
     }
 }

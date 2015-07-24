@@ -1,4 +1,6 @@
 <?php namespace MrColor\Types;
+use MrColor\Types\Transformers\HslToHex;
+use MrColor\Types\Transformers\HslToRgb;
 
 /**
  * Class HSLA
@@ -7,34 +9,19 @@
 class HSLA extends ColorType
 {
     /**
-     * @var
-     */
-    private $hue;
-    /**
-     * @var
-     */
-    private $saturation;
-    /**
-     * @var
-     */
-    private $lightness;
-    /**
-     * @var
-     */
-    private $alpha;
-
-    /**
      * @param $hue
      * @param $saturation
      * @param $lightness
      * @param $alpha
      */
-    public function __construct($hue, $saturation, $lightness, $alpha)
+    public function __construct($hue, $saturation, $lightness, $alpha = 1)
     {
-        $this->hue = $hue;
-        $this->saturation = $saturation;
-        $this->lightness = $lightness;
-        $this->alpha = $alpha;
+        $this->setAttributes([
+            'hue' => $hue / 360,
+            'saturation' => $saturation > 1 ? $saturation / 100 : $saturation,
+            'lightness' => $lightness > 1 ? $lightness / 100: $lightness,
+            'alpha' => $alpha
+        ]);
     }
 
     /**
@@ -42,32 +29,7 @@ class HSLA extends ColorType
      */
     public function toHex()
     {
-        $hue = $this->hue / 360;
-        $saturation = $this->saturation;
-        $lightness = $this->lightness;
-
-        if ($saturation == 0) {
-            $r = $lightness * 255;
-            $g = $lightness * 255;
-            $b = $lightness * 255;
-        } else {
-            $var_2 = ($lightness < 0.5) ?  $lightness * (1 + $saturation) : ($lightness + $saturation) - ($saturation * $lightness);
-            $var_1 = 2 * $lightness - $var_2;
-            $r = round(255 * $this->hueToRgb($var_1, $var_2, $hue + (1 / 3)));
-            $g = round(255 * $this->hueToRgb($var_1, $var_2, $hue));
-            $b = round(255 * $this->hueToRgb($var_1, $var_2, $hue - (1 / 3)));
-        }
-        $hex = array(
-            dechex($r),
-            dechex($g),
-            dechex($b)
-        );
-        //Make sure the hex is 6 digit
-        foreach ($hex as $key => $value) {
-            $hex[$key] = strlen($value) === 1 ? '0' . $value : $value ;
-        }
-
-        return new Hex(implode('', $hex));
+        return $this->transform(new HslToHex(), Hex::class);
     }
 
     /**
@@ -83,7 +45,7 @@ class HSLA extends ColorType
      */
     public function toRgb()
     {
-        return $this->toHex()->toRgb();
+        return $this->transform(new HslToRgb(), RGBA::class);
     }
 
     /**
@@ -91,34 +53,9 @@ class HSLA extends ColorType
      */
     public function __toString()
     {
-        return "hsla({$this->hue}, {$this->saturation}%, {$this->lightness}%, {$this->alpha})";
-    }
-
-    /**
-     * Given a Hue, returns corresponding RGB value
-     *
-     * @param  float $v1
-     * @param  float $v2
-     * @param  float $vH
-     * @return float
-     */
-    private function hueToRgb($v1, $v2, $vH)
-    {
-        if ($vH < 0) {
-            $vH += 1;
-        }
-        if ($vH > 1) {
-            $vH -= 1;
-        }
-        if ((6 * $vH) < 1) {
-            return ($v1 + ($v2 - $v1) * 6 * $vH);
-        }
-        if ((2 * $vH) < 1) {
-            return $v2;
-        }
-        if ((3 * $vH) < 2) {
-            return ($v1 + ($v2-$v1) * ( (2/3)-$vH ) * 6);
-        }
-        return $v1;
+        $saturation = round($this->getAttribute('saturation') * 100);
+        $lightness  = round($this->getAttribute('lightness')  * 100);
+        $hue        = $this->getAttribute('hue') * 360;
+        return "hsla({$hue}, {$saturation}%, {$lightness}%, {$this->getAttribute('alpha')})";
     }
 }
