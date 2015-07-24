@@ -83,7 +83,7 @@ class HSLA extends ColorType
      */
     public function toRgb()
     {
-        // TODO: Implement toRgb() method.
+        return $this->toHex()->toRgb();
     }
 
     /**
