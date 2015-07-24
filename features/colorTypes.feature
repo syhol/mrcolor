@@ -33,5 +33,5 @@ Feature: Hex objects can be converted to HSLA or RGBA
       | #eeeeee | 0   | 0          | 0.933     |
       | #cccccc | 0   | 0          | 80        |
       | #005daa | 207 | 100        | 0.333     |
-      | #1fda4e | 135 | 75         | 0.49      |
+      | #1fda4e | 135 | 0.75       | 0.49      |
       | #ff00ae | 319 | 100        | 50        |
