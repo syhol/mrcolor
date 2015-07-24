@@ -1,52 +1,49 @@
-<?php
-
-namespace MrColor\Types\Transformers;
+<?php namespace MrColor\Types\Transformers;
 
 use MrColor\Types\ColorType;
 
+/**
+ * Class HslToRgb
+ * @package MrColor\Types\Transformers
+ */
 class HslToRgb implements TransformerInterface
 {
+    /**
+     * @param ColorType $type
+     * @return array
+     */
     public function convert(ColorType $type)
     {
-        extract($type->getAttributes());
+        $h = $type->getAttribute('hue');
+        $s = $type->getAttribute('saturation');
+        $l = $type->getAttribute('lightness');
 
-        if ($saturation == 0)
-        {
-            $rgb = array($lightness, $lightness, $lightness);
+        if($s == 0){
+            $r = $g = $b = $l; // achromatic
         }
         else
         {
-            $chroma = (1 - abs(2 * $lightness - 1)) * $saturation;
-            $h_ = $hue * 6;
-            $x = $chroma * (1 - abs((fmod($h_, 2)) - 1));
-            $m = $lightness - round($chroma / 2, 10);
-
-            if ($h_ >= 0 && $h_ < 1)
-            {
-                $rgb = [($chroma + $m), ($x + $m), $m];
-            }
-            else if ($h_ >= 1 && $h_ < 2)
-            {
-                $rgb = [($x + $m), ($chroma + $m), $m];
-            }
-            else if ($h_ >= 2 && $h_ < 3)
-            {
-                $rgb = [$m, ($chroma + $m), ($x + $m)];
-            }
-            else if ($h_ >= 3 && $h_ < 4)
-            {
-                $rgb = [$m, ($x + $m), ($chroma + $m)];
-            }
-            else if ($h_ >= 4 && $h_ < 5)
-            {
-                $rgb = [($x + $m), $m, ($chroma + $m)];
-            }
-            else if ($h_ >= 5 && $h_ < 6)
-            {
-                $rgb = [($chroma + $m), $m, ($x + $m)];
-            }
+            $q = $l < 0.5 ? ($l * (1 + $s)) : ($l + $s - $l * $s);
+            $p = 2 * $l - $q;
+            $r = $this->hueToRgb($p, $q, $h + 1/3);
+            $g = $this->hueToRgb($p, $q, $h);
+            $b = $this->hueToRgb($p, $q, $h - 1/3);
         }
 
-        return $rgb;
+        return [$r, $g, $b];
+    }
+
+    /**
+     * @return \Closure
+     */
+    private function hueToRgb($p, $q, $t)
+    {
+        if ($t < 0) $t += 1;
+        if ($t > 1) $t -= 1;
+        if ($t < 1 / 6) return $p + ($q - $p) * 6 * $t;
+        if ($t < 1 / 2) return $q;
+        if ($t < 2 / 3) return $p + ($q - $p) * (2 / 3 - $t) * 6;
+
+        return $p;
     }
 }

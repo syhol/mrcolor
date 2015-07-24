@@ -30,7 +30,7 @@ Feature: Hex objects can be converted to HSLA or RGBA
     Then it should have hexcode <hex>
     Examples:
       | hex     | hue | saturation | lightness |
-      | #eeeeee | 0   | 0          | 93        |
+      | #eeeeee | 0   | 0          | 0.93      |
       | #cccccc | 0   | 0          | 80        |
       | #005daa | 207 | 100        | 33        |
       | #1fda4e | 135 | 75         | 49        |
