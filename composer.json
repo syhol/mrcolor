@@ -18,15 +18,16 @@
   ],
   "require": {
     "php": ">=5.4.0",
-    "leafo/scssphp": "^0.1.8",
-    "mockery/mockery": "^0.9.4"
+    "leafo/scssphp": "^0.1.8"
   },
   "require-dev": {
-    "phpunit/phpunit": "^4.7"
+    "phpspec/phpspec": "^2.2",
+    "phpspec/nyan-formatters": "^1.0",
+    "behat/behat": "^3.0"
   },
   "autoload": {
     "psr-4": {
-      "MrColor//": "src/"
+      "MrColor\\": "src/"
     }
   },
   "autoload-dev": {

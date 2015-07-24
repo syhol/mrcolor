@@ -1,0 +1,4 @@
+suites:
+  mrcolor_suite:
+    namespace: MrColor
+    psr4_prefix: MrColor
