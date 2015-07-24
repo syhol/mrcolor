@@ -7,6 +7,7 @@
 class CSS
 {
     /**
+     * Full array of CSS named colors, their hex, RGB and HSL values
      * @var array
      */
     public static $colors = [
@@ -156,11 +157,38 @@ class CSS
     ];
 
     /**
-     * @param $name
-     * @return mixed
+     * @param string $name
+     * @return array
      */
     public static function color($name)
     {
         return static::$colors[$name];
+    }
+
+    /**
+     * @param string $name
+     * @return string
+     */
+    public static function hex($name)
+    {
+        return static::$colors[$name]['hex'];
+    }
+
+    /**
+     * @param string $name
+     * @return array
+     */
+    public static function rgb($name)
+    {
+        return static::$colors[$name]['rgb'];
+    }
+
+    /**
+     * @param string $name
+     * @return array mixed
+     */
+    public static function hsl($name)
+    {
+        return static::$colors[$name]['hsl'];
     }
 }
