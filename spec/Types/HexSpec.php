@@ -17,7 +17,7 @@ class HexSpec extends ObjectBehavior
 
     function let()
     {
-        $this->beConstructedWith('#eeeeee');
+        $this->beConstructedWith('#EEEEEE');
     }
 
     function it_should_return_itself_when_converted_to_itself()
@@ -37,6 +37,6 @@ class HexSpec extends ObjectBehavior
 
     function it_should_convert_to_string()
     {
-        $this->__toString()->shouldBe('#eeeeee');
+        $this->__toString()->shouldBe('#EEEEEE');
     }
 }
