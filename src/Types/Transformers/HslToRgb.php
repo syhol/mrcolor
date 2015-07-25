@@ -1,5 +1,6 @@
 <?php namespace MrColor\Types\Transformers;
 
+use MrColor\ColorDictionary;
 use MrColor\Types\ColorType;
 
 /**
@@ -18,15 +19,23 @@ class HslToRgb implements TransformerInterface
         $s = $type->getAttribute('saturation');
         $l = $type->getAttribute('lightness');
 
-        if ($s == 0) return array_fill(0, 3, $l); // achromatic
+        /**
+         * Lookup the value in the dictionary first
+         */
+        if ($lookup = ColorDictionary::hsl(round($h * 360), round($s * 100), round($l * 100)))
+        {
+            return $lookup[1]['rgb'];
+        }
+
+        if ($s == 0) return array_fill(0, 3, $l);
         
         $q = $l < 0.5 ? ($l * (1 + $s)) : ($l + $s - $l * $s);
         $p = 2 * $l - $q;
 
         return [
-            $this->hueToRgb($p, $q, $h + 1/3),
-            $this->hueToRgb($p, $q, $h),
-            $this->hueToRgb($p, $q, $h - 1/3)
+            round($this->hueToRgb($p, $q, $h + 1/3) * 255),
+            round($this->hueToRgb($p, $q, $h) * 255),
+            round($this->hueToRgb($p, $q, $h - 1/3) * 255)
         ];
     }
 

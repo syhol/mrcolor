@@ -1,4 +1,5 @@
 <?php namespace MrColor\Types;
+
 use MrColor\Types\Transformers\TransformerInterface;
 use ReflectionClass;
 
@@ -6,7 +7,7 @@ use ReflectionClass;
  * Class ColorType
  * @package MrColor\Types
  */
-abstract class ColorType
+abstract class ColorType implements TypeInterface
 {
     /**
      * @var array
@@ -14,40 +15,9 @@ abstract class ColorType
     protected $attributes = [];
 
     /**
-     * @return Hex
-     */
-    abstract public function toHex();
-
-    /**
-     * @return HSLA
-     */
-    abstract public function toHsl();
-
-    /**
-     * @return RGBA
-     */
-    abstract public function toRgb();
-
-    /**
      * @return string
      */
     abstract public function __toString();
-
-    /**
-     * @return HSLA
-     */
-    public function toHsla()
-    {
-        return $this->toHsl();
-    }
-
-    /**
-     * @return RGBA
-     */
-    public function toRgba()
-    {
-        return $this->toRgb();
-    }
 
     /**
      * @param TransformerInterface $transformer
@@ -75,11 +45,12 @@ abstract class ColorType
     /**
      * Retrieve type attributes
      *
+     * @param bool $keyed
      * @return array
      */
-    public function getAttributes()
+    public function getAttributes($keyed = true)
     {
-        return $this->attributes;
+        return $keyed ? $this->attributes : array_values($this->attributes);
     }
 
     /**

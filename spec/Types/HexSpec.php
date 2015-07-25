@@ -22,17 +22,17 @@ class HexSpec extends ObjectBehavior
 
     function it_should_return_itself_when_converted_to_itself()
     {
-        $this->toHex()->shouldHaveType(Hex::class);
+        $this->hex()->shouldHaveType(Hex::class);
     }
 
     function it_should_return_hsla_when_converted()
     {
-        $this->toHsla()->shouldHaveType(HSLA::class);
+        $this->hsl()->shouldHaveType(HSLA::class);
     }
 
     function it_should_return_rgba_when_converted()
     {
-        $this->toRgb()->shouldHaveType(RGBA::class);
+        $this->rgb()->shouldHaveType(RGBA::class);
     }
 
     function it_should_convert_to_string()

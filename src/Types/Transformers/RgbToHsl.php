@@ -2,6 +2,7 @@
 
 namespace MrColor\Types\Transformers;
 
+use MrColor\ColorDictionary;
 use MrColor\Types\ColorType;
 
 class RgbToHsl implements TransformerInterface
@@ -13,23 +14,48 @@ class RgbToHsl implements TransformerInterface
         $blue = $type->getAttribute('blue');
         $alpha = $type->getAttribute('alpha');
 
-        $max = max($red, $green, $blue);
-        $min = min($red, $green, $blue);
-        $chroma = $max - $min;
-
-        $lightness = ($max + $min) / 2;
-
-        $hue = 0;
-        $saturation = 0;
-
-        if ($chroma != 0)
+        /**
+         * Lookup the value in the dictionary first
+         */
+        if ($lookup = ColorDictionary::rgb($red, $green, $blue))
         {
-            $hue = $this->calculateHue($max, $red, $green, $blue, $chroma);
-            $saturation = $this->calculateSaturation($lightness, $chroma, $max, $min);
+            return $lookup[1]['hsl'];
         }
 
-        // Return HSLA Color as array
-        return array($hue, $saturation, $lightness, $alpha);
+        $red /= 255;
+        $green /= 255;
+        $blue /= 255;
+
+        $max = max( $red, $green, $blue );
+        $min = min( $red, $green, $blue );
+
+        $l = ( $max + $min ) / 2;
+        $d = $max - $min;
+
+        if( $d == 0 ){
+            $h = $s = 0; // achromatic
+        } else {
+            $s = $d / ( 1 - abs( 2 * $l - 1 ) );
+
+            switch( $max ){
+                case $red:
+                    $h = 60 * fmod( ( ( $green - $blue ) / $d ), 6 );
+                    if ($blue > $green) {
+                        $h += 360;
+                    }
+                    break;
+
+                case $green:
+                    $h = 60 * ( ( $blue - $red ) / $d + 2 );
+                    break;
+
+                case $blue:
+                    $h = 60 * ( ( $red - $green ) / $d + 4 );
+                    break;
+            }
+        }
+
+        return [round( $h, 2 ), round( $s, 2 ), round( $l, 2 )];
     }
 
     /**
@@ -68,6 +94,6 @@ class RgbToHsl implements TransformerInterface
      */
     private function calculateSaturation($lightness, $chroma, $max, $min)
     {
-        return $chroma / ($lightness < 0.5 ? $max + $min : 2 - $max - $min);
+        return $lightness < 0.5 ? $chroma / $max + $min : $chroma / (2 - $max - $min);
     }
 }

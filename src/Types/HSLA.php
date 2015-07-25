@@ -1,6 +1,7 @@
 <?php namespace MrColor\Types;
 use MrColor\Types\Transformers\HslToHex;
 use MrColor\Types\Transformers\HslToRgb;
+use MrColor\Types\Transformers\RgbToHex;
 
 /**
  * Class HSLA
@@ -27,15 +28,15 @@ class HSLA extends ColorType
     /**
      * @return Hex
      */
-    public function toHex()
+    public function hex()
     {
-        return $this->transform(new HslToHex(), Hex::class);
+        return $this->rgb()->transform(new RgbToHex(), Hex::class);
     }
 
     /**
      * @return HSLA
      */
-    public function toHsl()
+    public function hsl()
     {
         return $this;
     }
@@ -43,7 +44,7 @@ class HSLA extends ColorType
     /**
      * @return RGBA
      */
-    public function toRgb()
+    public function rgb()
     {
         return $this->transform(new HslToRgb(), RGBA::class);
     }
@@ -55,7 +56,7 @@ class HSLA extends ColorType
     {
         $saturation = round($this->getAttribute('saturation') * 100);
         $lightness  = round($this->getAttribute('lightness')  * 100);
-        $hue        = $this->getAttribute('hue') * 360;
+        $hue        = round($this->getAttribute('hue') * 360);
         return "hsla({$hue}, {$saturation}%, {$lightness}%, {$this->getAttribute('alpha')})";
     }
 }

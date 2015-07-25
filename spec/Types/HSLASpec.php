@@ -22,17 +22,18 @@ class HSLASpec extends ObjectBehavior
 
     function it_should_return_itself_when_converted_to_itself()
     {
-        $this->toHsl()->shouldHaveType(HSLA::class);
+        $this->hsl()->shouldHaveType(HSLA::class);
+        $this->hsl()->shouldBe($this);
     }
 
     function it_should_return_hex_when_converted()
     {
-        $this->toHex()->shouldHaveType(Hex::class);
+        $this->hex()->shouldHaveType(Hex::class);
     }
 
     function it_should_return_rgba_when_converted()
     {
-        $this->toRgb()->shouldHaveType(RGBA::class);
+        $this->rgb()->shouldHaveType(RGBA::class);
     }
 
     function it_should_convert_to_string()

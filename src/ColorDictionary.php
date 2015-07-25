@@ -1,13 +1,13 @@
 <?php namespace MrColor;
 
 /**
- * Class CSS
+ * Class ColorDictionary
  * @package MrColor
  */
-class CSS
+class ColorDictionary
 {
     /**
-     * Full array of CSS named colors, their hex, RGB and HSL values
+     * Full array of named colors, their hex, RGB and HSL values
      * @var array
      */
     public static $colors = [
@@ -30,7 +30,7 @@ class CSS
         "coral" => ["hex" => "#FF7F50", "rgb" => [255, 127, 80], "hsl" => [16, 100, 66]],
         "cornflowerblue" => ["hex" => "#6495ED", "rgb" => [100, 149, 237], "hsl" => [219, 79, 66]],
         "cornsilk" => ["hex" => "#FFF8DC", "rgb" => [255, 248, 220], "hsl" => [48, 100, 93]],
-        "crimson" => ["hex" => "#DC143C", "rgb" => [220, 20, 60], "hsl" => [348, 83, 58]],
+        "crimson" => ["hex" => "#DC143C", "rgb" => [220, 20, 60], "hsl" => [348, 83, 47]],
         "cyan" => ["hex" => "#00FFFF", "rgb" => [0, 255, 255], "hsl" => [180, 100, 50]],
         "darkblue" => ["hex" => "#00008B", "rgb" => [0, 0, 139], "hsl" => [240, 100, 27]],
         "darkcyan" => ["hex" => "#008B8B", "rgb" => [0, 139, 139], "hsl" => [180, 100, 27]],
@@ -150,7 +150,7 @@ class CSS
         "turquoise" => ["hex" => "#40E0D0", "rgb" => [64, 224, 208], "hsl" => [174, 72, 56]],
         "violet" => ["hex" => "#EE82EE", "rgb" => [238, 130, 238], "hsl" => [300, 76, 72]],
         "wheat" => ["hex" => "#F5DEB3", "rgb" => [245, 222, 179], "hsl" => [39, 77, 83]],
-        "white" => ["hex" => "#FFFFFF", "rgb" => [255, 255, 255], "hsl" => [0, 100, 100]],
+        "white" => ["hex" => "#FFFFFF", "rgb" => [255, 255, 255], "hsl" => [0, 0, 100]],
         "whitesmoke" => ["hex" => "#F5F5F5", "rgb" => [245, 245, 245], "hsl" => [0, 0, 96]],
         "yellow" => ["hex" => "#FFFF00", "rgb" => [255, 255, 0], "hsl" => [60, 100, 50]],
         "yellowgreen" => ["hex" => "#9ACD32", "rgb" => [154, 205, 50], "hsl" => [80, 61, 50]]
@@ -166,29 +166,62 @@ class CSS
     }
 
     /**
-     * @param string $name
+     * Lookup a hex value
+     *
+     * @param string $hex
      * @return string
      */
-    public static function hex($name)
+    public static function hex($hex)
     {
-        return static::$colors[$name]['hex'];
+        return static::getColorField($hex, 'hex');
     }
 
     /**
-     * @param string $name
+     * Lookup an RGB value
+     *
+     * @param $red
+     * @param $green
+     * @param $blue
      * @return array
      */
-    public static function rgb($name)
+    public static function rgb($red, $green, $blue)
     {
-        return static::$colors[$name]['rgb'];
+        return static::getColorField([$red, $green, $blue], 'rgb');
     }
 
     /**
-     * @param string $name
+     * Lookup an HSL value
+     *
+     * @param $hue
+     * @param $saturation
+     * @param $lightness
      * @return array mixed
      */
-    public static function hsl($name)
+    public static function hsl($hue, $saturation, $lightness)
     {
-        return static::$colors[$name]['hsl'];
+        return static::getColorField([$hue, $saturation, $lightness], 'hsl');
+    }
+
+    /**
+     * Search for a given subset (by type) in the dictionary
+     *
+     * @param $needle
+     * @param string $type
+     * @return bool
+     */
+    private static function getColorField($needle, $type)
+    {
+        $found = false;
+
+        foreach (static::$colors as $name => $colors)
+        {
+            if ($colors[$type] == $needle)
+            {
+                $found = [$name, $colors];
+                break;
+            }
+        }
+
+        return $found;
     }
 }

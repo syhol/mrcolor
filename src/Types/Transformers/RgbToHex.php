@@ -16,9 +16,9 @@ class RgbToHex implements TransformerInterface
     {
         return [join('', [
             '#',
-            sprintf("%02X", round(255 * $type->getAttribute('red'))),
-            sprintf("%02X", round(255 * $type->getAttribute('green'))),
-            sprintf("%02X", round(255 * $type->getAttribute('blue')))
+            sprintf("%02X", round($type->getAttribute('red'))),
+            sprintf("%02X", round($type->getAttribute('green'))),
+            sprintf("%02X", round($type->getAttribute('blue')))
         ])];
     }
 }

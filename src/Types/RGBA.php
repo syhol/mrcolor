@@ -27,7 +27,7 @@ class RGBA extends ColorType
     /**
      * @return Hex
      */
-    public function toHex()
+    public function hex()
     {
         return $this->transform(new RgbToHex(), Hex::class);
     }
@@ -35,7 +35,7 @@ class RGBA extends ColorType
     /**
      * @return HSLA
      */
-    public function toHsl()
+    public function hsl()
     {
         return $this->transform(new RgbToHsl(), HSLA::class);
     }
@@ -43,7 +43,7 @@ class RGBA extends ColorType
     /**
      * @return RGBA
      */
-    public function toRgb()
+    public function rgb()
     {
         return $this;
     }

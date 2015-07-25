@@ -4,6 +4,7 @@ namespace MrColor\Types;
 
 use MrColor\Types\Transformers\HexToHsl;
 use MrColor\Types\Transformers\HexToRgb;
+use MrColor\Types\Transformers\RgbToHsl;
 use ReflectionClass;
 
 class Hex extends ColorType
@@ -19,7 +20,7 @@ class Hex extends ColorType
     /**
      * @return Hex
      */
-    public function toHex()
+    public function hex()
     {
         return $this;
     }
@@ -27,15 +28,15 @@ class Hex extends ColorType
     /**
      * @return HSLA
      */
-    public function toHsl()
+    public function hsl()
     {
-        return $this->transform(new HexToHsl(), HSLA::class);
+        return $this->rgb()->transform(new RgbToHsl(), HSLA::class);
     }
 
     /**
      * @return RGBA
      */
-    public function toRgb()
+    public function rgb()
     {
         return $this->transform(new HexToRgb(), RGBA::class);
     }
@@ -45,6 +46,6 @@ class Hex extends ColorType
      */
     public function __toString()
     {
-        return "#" . strtolower($this->getAttribute('hex'));
+        return "#" . strtoupper($this->getAttribute('hex'));
     }
 }
