@@ -29,10 +29,5 @@
     "psr-4": {
       "MrColor\\": "src/"
     }
-  },
-  "autoload-dev": {
-    "classmap": [
-      "tests/TestCase.php"
-    ]
   }
 }
