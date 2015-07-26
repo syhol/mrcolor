@@ -2,6 +2,7 @@
 
 namespace MrColor;
 
+use MrColor\Pallets\PalletInterface;
 use MrColor\Types\ColorType;
 
 /**
@@ -59,5 +60,14 @@ class Color
     public function __toString()
     {
         return (string) $this->colorType;
+    }
+
+    /**
+     * @param PalletInterface $pallet
+     * @return Pallet
+     */
+    public function makePallet(PalletInterface $pallet)
+    {
+        return $pallet->make($this->colorType);
     }
 }

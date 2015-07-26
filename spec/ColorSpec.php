@@ -2,8 +2,8 @@
 
 namespace spec\MrColor;
 
+use MrColor\Pallets\PalletInterface;
 use MrColor\Types\ColorType;
-use MrColor\Types\Hex;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 
@@ -45,5 +45,10 @@ class ColorSpec extends ObjectBehavior
         $colorType->hsl()->willReturn($colorType);
 
         $this->toHsl()->shouldBe($this);
+    }
+
+    function it_creates_a_pallet(PalletInterface $pallet)
+    {
+        $this->makePallet($pallet);
     }
 }

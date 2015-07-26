@@ -164,7 +164,7 @@ class ColorDictionary
      */
     public static function color($name)
     {
-        return static::$colors[$name];
+        return [$name, static::$colors[$name]];
     }
 
     /**

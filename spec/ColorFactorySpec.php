@@ -37,4 +37,9 @@ class ColorFactorySpec extends ObjectBehavior
     {
         $this->hsl(220, 0.9, 1, 0.5)->shouldHaveType(Color::class);
     }
+
+    function it_creates_a_color_by_name()
+    {
+        $this->name('blue')->shouldHaveType(Color::class);
+    }
 }

@@ -2,6 +2,7 @@
 
 namespace MrColor;
 
+use MrColor\Exceptions\ColorException;
 use MrColor\Types\ColorType;
 use MrColor\Types\Hex;
 use MrColor\Types\HSLA;
@@ -44,6 +45,22 @@ class ColorFactory
     public function hsl($hue, $saturation, $lightness, $alpha = null)
     {
         return $this->color(new HSLA($hue, $saturation, $lightness, $alpha));
+    }
+
+    /**
+     * @param $name
+     * @param string $type
+     * @return mixed
+     * @throws ColorException
+     */
+    public function name($name, $type = 'rgb')
+    {
+        $lookup = ColorDictionary::color($name);
+
+        if ( ! $lookup )
+            throw new ColorException("$name does not exist in the color dictionary.");
+
+        return call_user_func_array([$this, $type], $lookup[1][$type]);
     }
 
     /**
