@@ -53,7 +53,9 @@ class RGBA extends ColorType
      */
     public function __toString()
     {
-        extract($this->getAttributes());
+        list($red, $green, $blue) = $this->getValues();
+
+        $alpha = $this->getAttribute('alpha');
 
         return $alpha ? "rgba($red, $green, $blue, $alpha)" :
             "rgb($red, $green, $blue)";
@@ -65,6 +67,24 @@ class RGBA extends ColorType
      */
     public function toJson()
     {
-        // TODO: Implement toJson() method.
+        $values = $this->getValues();
+
+        $alpha = $this->getAttribute('alpha');
+
+        ! $alpha ? : $values[] = $alpha;
+
+        return json_encode(['rgb' => $values, 'css' => $this->__toString()]);
+    }
+
+    /**
+     * @return array
+     */
+    private function getValues()
+    {
+        return [
+            $this->getAttribute('red'),
+            $this->getAttribute('green'),
+            $this->getAttribute('blue')
+        ];
     }
 }

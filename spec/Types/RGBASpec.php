@@ -11,7 +11,7 @@ class RGBASpec extends ObjectBehavior
 {
     function let()
     {
-        $this->beConstructedWith(0, 0, 0, 1);
+        $this->beConstructedWith(0, 0, 0);
     }
 
     function it_is_initializable()
@@ -34,8 +34,27 @@ class RGBASpec extends ObjectBehavior
         $this->rgb()->shouldHaveType(RGBA::class);
     }
 
-    function it_should_convert_to_string()
+    function it_should_convert_to_rgb_string()
     {
-        $this->__toString()->shouldBe('rgba(0, 0, 0, 1)');
+        $this->__toString()->shouldBe('rgb(0, 0, 0)');
+    }
+
+    function it_should_convert_to_rgba_string()
+    {
+        $this->beConstructedWith(10,20,30,0.5);
+
+        $this->__toString()->shouldBe('rgba(10, 20, 30, 0.5)');
+    }
+
+    function it_should_convert_rgb_to_json()
+    {
+        $this->toJson()->shouldBe(json_encode(['rgb' => [0,0,0], 'css' => 'rgb(0, 0, 0)']));
+    }
+
+    function it_should_convert_rgba_to_json()
+    {
+        $this->beConstructedWith(10,20,30,0.5);
+
+        $this->toJson()->shouldBe(json_encode(['rgb' => [10,20,30,0.5], 'css' => 'rgba(10, 20, 30, 0.5)']));
     }
 }
