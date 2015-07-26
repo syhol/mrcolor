@@ -18,7 +18,8 @@
   ],
   "require": {
     "php": ">=5.4.0",
-    "leafo/scssphp": "^0.1.8"
+    "leafo/scssphp": "^0.1.8",
+    "illuminate/support": "^5.1"
   },
   "require-dev": {
     "phpspec/phpspec": "^2.2",
