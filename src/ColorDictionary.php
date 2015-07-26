@@ -1,4 +1,6 @@
-<?php namespace MrColor;
+<?php
+
+namespace MrColor;
 
 /**
  * Class ColorDictionary

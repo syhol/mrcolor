@@ -1,5 +1,11 @@
-<?php namespace MrColor\Types;
+<?php
 
+namespace MrColor\Types;
+
+/**
+ * Interface TypeInterface
+ * @package MrColor\Types
+ */
 interface TypeInterface {
 
     /**

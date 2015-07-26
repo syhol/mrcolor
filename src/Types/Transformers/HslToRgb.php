@@ -1,4 +1,6 @@
-<?php namespace MrColor\Types\Transformers;
+<?php
+
+namespace MrColor\Types\Transformers;
 
 use MrColor\ColorDictionary;
 use MrColor\Types\ColorType;

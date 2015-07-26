@@ -1,4 +1,6 @@
-<?php namespace MrColor\Types;
+<?php
+
+namespace MrColor\Types;
 
 use MrColor\Contracts\Jsonable;
 use MrColor\Types\Transformers\TransformerInterface;

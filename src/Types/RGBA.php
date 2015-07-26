@@ -1,4 +1,7 @@
-<?php namespace MrColor\Types;
+<?php
+
+namespace MrColor\Types;
+
 use MrColor\Types\Transformers\RgbToHex;
 use MrColor\Types\Transformers\RgbToHsl;
 

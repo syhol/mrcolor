@@ -4,4 +4,5 @@ namespace MrColor;
 
 class ColorFactory
 {
+
 }
