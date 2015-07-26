@@ -154,7 +154,7 @@ Feature: As a developer
 
   Scenario Outline: A RGBA object can be converted to HSLA
     Given I have a RGBA object with values red <red>, green <green> and blue <blue>
-    And I convert it to HSLA
+    And I convert it to HSL
     Then It should have correct hue <hue>, saturation <saturation> and lightness <lightness>
     Examples:
       | red | green | blue | hue | saturation | lightness |
@@ -304,7 +304,7 @@ Feature: As a developer
 
   Scenario Outline: A hex object can be converted to RGBA
     Given I have a hex object with value <hex>
-    And I convert it to RGBA
+    And I convert it to RGB
     Then It should have correct red <red>, green <green> and blue <blue>
     Examples:
       | hex     | red | green | blue |
@@ -454,7 +454,7 @@ Feature: As a developer
 
   Scenario Outline: A hex object can be converted to HSLA
     Given I have a hex object with value <hex>
-    And I convert it to HSLA
+    And I convert it to HSL
     Then It should have correct hue <hue>, saturation <saturation> and lightness <lightness>
     Examples:
       | hex     | hue | saturation | lightness |
@@ -604,7 +604,7 @@ Feature: As a developer
 
   Scenario Outline: A HSLA object can be converted to RGBA
     Given I have a HSLA object with values hue <hue>, saturation <saturation> and lightness <lightness>
-    And I convert it to RGBA
+    And I convert it to RGB
     Then It should have correct red <red>, green <green> and blue <blue>
     Examples:
       | red | green | blue | hue | saturation | lightness |

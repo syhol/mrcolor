@@ -12,7 +12,6 @@ class RgbToHsl implements TransformerInterface
         $red = $type->getAttribute('red');
         $green = $type->getAttribute('green');
         $blue = $type->getAttribute('blue');
-        $alpha = $type->getAttribute('alpha');
 
         /**
          * Lookup the value in the dictionary first

@@ -1,5 +1,6 @@
 <?php namespace MrColor\Types;
 
+use MrColor\Contracts\Jsonable;
 use MrColor\Types\Transformers\TransformerInterface;
 use ReflectionClass;
 
@@ -7,7 +8,7 @@ use ReflectionClass;
  * Class ColorType
  * @package MrColor\Types
  */
-abstract class ColorType implements TypeInterface
+abstract class ColorType implements TypeInterface, Jsonable
 {
     /**
      * @var array

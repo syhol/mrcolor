@@ -55,17 +55,17 @@ class FeatureContext implements Context, SnippetAcceptingContext
     }
 
     /**
-     * @Given /^I convert it to HSLA$/
+     * @Given /^I convert it to HSL$/
      */
-    public function iConvertItToHSLA()
+    public function iConvertItToHSL()
     {
         $this->colorType = $this->colorType->hsl();
     }
 
     /**
-     * @Given /^I convert it to RGBA$/
+     * @Given /^I convert it to RGB$/
      */
-    public function iConvertItToRGBA()
+    public function iConvertItToRGB()
     {
         $this->colorType = $this->colorType->rgb();
     }
@@ -83,8 +83,8 @@ class FeatureContext implements Context, SnippetAcceptingContext
      */
     public function itShouldHaveCorrectHueSaturationAndLightness($hue, $saturation, $lightness)
     {
-        if ( (string) $this->colorType !== "hsla({$hue}, {$saturation}%, {$lightness}%, 1)" )
-            throw new Exception("Expecting hsla({$hue}, {$saturation}%, {$lightness}%, 1)\nReceived {$this->colorType}\n");
+        if ( (string) $this->colorType !== "hsl({$hue}, {$saturation}%, {$lightness}%)" )
+            throw new Exception("Expecting hsl({$hue}, {$saturation}%, {$lightness}%)\nReceived {$this->colorType}\n");
     }
 
     /**
@@ -92,8 +92,8 @@ class FeatureContext implements Context, SnippetAcceptingContext
      */
     public function itShouldHaveCorrectRedGreenAndBlue($red, $green, $blue)
     {
-        if ( (string) $this->colorType !== "rgba({$red}, {$green}, {$blue}, 1)" )
-            throw new Exception("Expecting rgba({$red}, {$green}, {$blue}, 1)\nReceived {$this->colorType}\n");
+        if ( (string) $this->colorType !== "rgb({$red}, {$green}, {$blue})" )
+            throw new Exception("Expecting rgb({$red}, {$green}, {$blue})\nReceived {$this->colorType}\n");
     }
 
     /**

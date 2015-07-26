@@ -14,6 +14,8 @@ class HexToRgb implements TransformerInterface
      */
     public function convert(ColorType $type)
     {
-        return array_map('hexdec', str_split($type->getAttribute('hex'), 2));
+        $hex = ltrim($type->getAttribute('hex'), '#');
+
+        return array_map('hexdec', str_split($hex, 2));
     }
 }

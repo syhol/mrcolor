@@ -1,4 +1,5 @@
 <?php namespace MrColor\Types;
+use MrColor\Contracts\Jsonable;
 use MrColor\Types\Transformers\HslToHex;
 use MrColor\Types\Transformers\HslToRgb;
 use MrColor\Types\Transformers\RgbToHex;
@@ -15,13 +16,13 @@ class HSLA extends ColorType
      * @param $lightness
      * @param $alpha
      */
-    public function __construct($hue, $saturation, $lightness, $alpha = 1)
+    public function __construct($hue, $saturation, $lightness, $alpha = null)
     {
         $this->setAttributes([
-            'hue' => $hue / 360,
+            'hue' => $hue > 1 ? $hue / 360 : $hue,
             'saturation' => $saturation > 1 ? $saturation / 100 : $saturation,
             'lightness' => $lightness > 1 ? $lightness / 100: $lightness,
-            'alpha' => $alpha
+            'alpha' => $alpha > 1 ? $alpha / 100 : $alpha
         ]);
     }
 
@@ -54,9 +55,37 @@ class HSLA extends ColorType
      */
     public function __toString()
     {
-        $saturation = round($this->getAttribute('saturation') * 100);
-        $lightness  = round($this->getAttribute('lightness')  * 100);
-        $hue        = round($this->getAttribute('hue') * 360);
-        return "hsla({$hue}, {$saturation}%, {$lightness}%, {$this->getAttribute('alpha')})";
+        list($hue, $saturation, $lightness) = $this->getValues();
+
+        $alpha = $this->getAttribute('alpha');
+
+        return $alpha ? "hsla({$hue}, {$saturation}%, {$lightness}%, {$this->getAttribute('alpha')})" :
+            "hsl({$hue}, {$saturation}%, {$lightness}%)";
+    }
+
+    /**
+     * @return string
+     */
+    public function toJson()
+    {
+        $values = $this->getValues();
+
+        $alpha = $this->getAttribute('alpha');
+
+        ! $alpha ? : $values[] = $alpha;
+
+        return json_encode(['hsl' => $values, 'css' => $this->__toString()]);
+    }
+
+    /**
+     * @return array
+     */
+    private function getValues()
+    {
+        return [
+            round($this->getAttribute('hue') * 360),
+            round($this->getAttribute('saturation') * 100),
+            round($this->getAttribute('lightness') * 100)
+        ];
     }
 }

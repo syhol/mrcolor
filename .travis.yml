@@ -7,12 +7,8 @@ php:
 
 before_script:
   - composer self-update
-  - composer require satooshi/php-coveralls:dev-master
   - composer install --prefer-source --no-interaction --dev
 
 script:
-  - mkdir -p build/logs
-  - phpunit --coverage-clover build/logs/clover.xml
-
-after_script:
-  - php vendor/bin/coveralls -v
+  - vendor/bin/phpspec run -v
+  - vendor/bin/behat -v

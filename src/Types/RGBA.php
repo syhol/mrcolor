@@ -14,7 +14,7 @@ class RGBA extends ColorType
      * @param $blue
      * @param $alpha
      */
-    public function __construct($red = 255, $green = 255, $blue = 255, $alpha = 1)
+    public function __construct($red = 255, $green = 255, $blue = 255, $alpha = null)
     {
         $this->setAttributes([
             'red' => $red,
@@ -55,6 +55,16 @@ class RGBA extends ColorType
     {
         extract($this->getAttributes());
 
-        return "rgba($red, $green, $blue, $alpha)";
+        return $alpha ? "rgba($red, $green, $blue, $alpha)" :
+            "rgb($red, $green, $blue)";
+    }
+
+    /**
+     * Return JSON represenation of this object
+     * @return mixed
+     */
+    public function toJson()
+    {
+        // TODO: Implement toJson() method.
     }
 }

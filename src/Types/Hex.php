@@ -2,10 +2,10 @@
 
 namespace MrColor\Types;
 
+use MrColor\Contracts\Jsonable;
 use MrColor\Types\Transformers\HexToHsl;
 use MrColor\Types\Transformers\HexToRgb;
 use MrColor\Types\Transformers\RgbToHsl;
-use ReflectionClass;
 
 class Hex extends ColorType
 {
@@ -47,5 +47,13 @@ class Hex extends ColorType
     public function __toString()
     {
         return "#" . strtoupper($this->getAttribute('hex'));
+    }
+
+    /**
+     * @return string
+     */
+    public function toJson()
+    {
+        return json_encode(['hex' => $this->__toString()]);
     }
 }

@@ -12,7 +12,7 @@ class HSLASpec extends ObjectBehavior
 {
     function let()
     {
-        $this->beConstructedWith(10, 20, 30, 1);
+        $this->beConstructedWith(10, 20, 30);
     }
 
     function it_is_initializable()
@@ -36,8 +36,27 @@ class HSLASpec extends ObjectBehavior
         $this->rgb()->shouldHaveType(RGBA::class);
     }
 
-    function it_should_convert_to_string()
+    function it_should_convert_to_hsl_string()
     {
-        $this->__toString()->shouldBe('hsla(10, 20%, 30%, 1)');
+        $this->__toString()->shouldBe('hsl(10, 20%, 30%)');
+    }
+
+    function it_should_convert_to_hsla_string()
+    {
+        $this->beConstructedWith(10,20,30,0.5);
+
+        $this->__toString()->shouldBe('hsla(10, 20%, 30%, 0.5)');
+    }
+
+    function it_should_convert_hsl_to_json()
+    {
+        $this->toJson()->shouldBe(json_encode(['hsl' => [10,20,30], 'css' => 'hsl(10, 20%, 30%)']));
+    }
+
+    function it_should_convert_hsla_to_json()
+    {
+        $this->beConstructedWith(10,20,30,0.5);
+
+        $this->toJson()->shouldBe(json_encode(['hsl' => [10,20,30,0.5], 'css' => 'hsla(10, 20%, 30%, 0.5)']));
     }
 }
