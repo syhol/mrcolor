@@ -47,6 +47,13 @@ class ColorSpec extends ObjectBehavior
         $this->toHsl()->shouldBe($this);
     }
 
+    function it_adds_alpha_levels_to_colortype(ColorType $colorType)
+    {
+        $colorType->alpha(50);
+
+        $this->alpha(50)->shouldBe($this);
+    }
+
     function it_creates_a_pallet(PalletInterface $pallet)
     {
         $this->makePallet($pallet);

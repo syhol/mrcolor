@@ -6,6 +6,10 @@ use MrColor\Types\ColorType;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 
+/**
+ * Class HexToRgbSpec
+ * @package spec\MrColor\Types\Transformers
+ */
 class HexToRgbSpec extends ObjectBehavior
 {
     function it_is_initializable()

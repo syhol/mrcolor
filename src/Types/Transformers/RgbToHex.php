@@ -16,11 +16,26 @@ class RgbToHex implements TransformerInterface
      */
     public function convert(ColorType $type)
     {
-        return [join('', [
+        return $this->applyAlpha($type->getAttribute('alpha'), [join('', [
             '#',
             sprintf("%02X", round($type->getAttribute('red'))),
             sprintf("%02X", round($type->getAttribute('green'))),
             sprintf("%02X", round($type->getAttribute('blue')))
-        ])];
+        ])]);
     }
+
+    /**
+     * @param $alpha
+     * @param $array
+     *
+     * @return mixed
+     *
+     */
+    protected function applyAlpha($alpha, $array)
+    {
+        ! $alpha ? : $array[] = $alpha;
+
+        return $array;
+    }
+
 }

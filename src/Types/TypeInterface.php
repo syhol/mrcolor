@@ -9,17 +9,15 @@ namespace MrColor\Types;
 interface TypeInterface {
 
     /**
-     * @return RGBA
+     * @param int $alpha
+     *
+     * @return $this
      */
-    public function rgb();
+    public function alpha($alpha = 100);
 
     /**
-     * @return HSLA
+     * Convert the type to a string
+     * @return mixed
      */
-    public function hsl();
-
-    /**
-     * @return Hex
-     */
-    public function hex();
+    public function __toString();
 }

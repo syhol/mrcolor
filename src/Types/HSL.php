@@ -2,16 +2,14 @@
 
 namespace MrColor\Types;
 
-use MrColor\Contracts\Jsonable;
-use MrColor\Types\Transformers\HslToHex;
 use MrColor\Types\Transformers\HslToRgb;
 use MrColor\Types\Transformers\RgbToHex;
 
 /**
- * Class HSLA
+ * Class HSL
  * @package MrColor\Types
  */
-class HSLA extends ColorType
+class HSL extends ColorType
 {
     /**
      * @param $hue
@@ -38,7 +36,7 @@ class HSLA extends ColorType
     }
 
     /**
-     * @return HSLA
+     * @return HSL
      */
     public function hsl()
     {
@@ -46,11 +44,35 @@ class HSLA extends ColorType
     }
 
     /**
-     * @return RGBA
+     * @return RGB
      */
     public function rgb()
     {
-        return $this->transform(new HslToRgb(), RGBA::class);
+        return $this->transform(new HslToRgb(), RGB::class);
+    }
+
+    /**
+     * @return RGBA
+     */
+    public function rgba()
+    {
+        // TODO: Implement rgba() method.
+    }
+
+    /**
+     * @return HSLA
+     */
+    public function hsla()
+    {
+        // TODO: Implement hsla() method.
+    }
+
+    /**
+     * @return ARGB
+     */
+    public function argb()
+    {
+        // TODO: Implement argb() method.
     }
 
     /**
@@ -67,9 +89,11 @@ class HSLA extends ColorType
     }
 
     /**
+     * @param int $options
+     *
      * @return string
      */
-    public function toJson()
+    public function toJson($options = 0)
     {
         $values = $this->getValues();
 
@@ -77,7 +101,7 @@ class HSLA extends ColorType
 
         ! $alpha ? : $values[] = $alpha;
 
-        return json_encode(['hsl' => $values, 'css' => $this->__toString()]);
+        return json_encode(['hsl' => $values, 'css' => $this->__toString()], $options);
     }
 
     /**

@@ -2,9 +2,12 @@
 
 namespace MrColor\Pallets;
 
-use MrColor\Pallet;
 use MrColor\Types\ColorType;
 
+/**
+ * Class MaterialDesign
+ * @package MrColor\Pallets
+ */
 class MaterialDesign implements PalletInterface
 {
     /**

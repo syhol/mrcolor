@@ -2,6 +2,10 @@
 
 use Exception;
 
+/**
+ * Class ColorException
+ * @package MrColor\Exceptions
+ */
 class ColorException extends Exception
 {
     /**

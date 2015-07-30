@@ -2,14 +2,17 @@
 
 namespace MrColor\Types;
 
+use MrColor\Types\Decorators\ARGB;
+use MrColor\Types\Decorators\HSLA;
+use MrColor\Types\Decorators\RGBA;
 use MrColor\Types\Transformers\RgbToHex;
 use MrColor\Types\Transformers\RgbToHsl;
 
 /**
- * Class RGBA
+ * Class RGB
  * @package MrColor\Types
  */
-class RGBA extends ColorType
+class RGB extends ColorType
 {
     /**
      * @param $red
@@ -36,19 +39,43 @@ class RGBA extends ColorType
     }
 
     /**
-     * @return HSLA
+     * @return HSL
      */
     public function hsl()
     {
-        return $this->transform(new RgbToHsl(), HSLA::class);
+        return $this->transform(new RgbToHsl(), HSL::class);
+    }
+
+    /**
+     * @return RGB
+     */
+    public function rgb()
+    {
+        return $this;
     }
 
     /**
      * @return RGBA
      */
-    public function rgb()
+    public function rgba()
     {
-        return $this;
+        return new RGBA($this);
+    }
+
+    /**
+     * @return HSLA
+     */
+    public function hsla()
+    {
+        return new HSLA($this->hsl());
+    }
+
+    /**
+     * @return ARGB
+     */
+    public function argb()
+    {
+        return new ARGB($this->hex());
     }
 
     /**
@@ -58,17 +85,17 @@ class RGBA extends ColorType
     {
         list($red, $green, $blue) = $this->getValues();
 
-        $alpha = $this->getAttribute('alpha');
-
-        return $alpha ? "rgba($red, $green, $blue, $alpha)" :
-            "rgb($red, $green, $blue)";
+        return "rgb($red, $green, $blue)";
     }
 
     /**
      * Return JSON represenation of this object
+     *
+     * @param int $options
+     *
      * @return mixed
      */
-    public function toJson()
+    public function toJson($options = 0)
     {
         $values = $this->getValues();
 
@@ -76,13 +103,13 @@ class RGBA extends ColorType
 
         ! $alpha ? : $values[] = $alpha;
 
-        return json_encode(['rgb' => $values, 'css' => $this->__toString()]);
+        return json_encode(['rgb' => $values, 'css' => $this->__toString()], $options);
     }
 
     /**
      * @return array
      */
-    private function getValues()
+    public function getValues()
     {
         return [
             $this->getAttribute('red'),

@@ -2,8 +2,8 @@ Feature: As a developer
   I want to convert a ColorType object to a different format
   So that I can make use of any supported format
 
-  Scenario Outline: A RGBA object can be converted to Hex
-    Given I have a RGBA object with values red <red>, green <green> and blue <blue>
+  Scenario Outline: A RGB object can be converted to Hex
+    Given I have a RGB object with values red <red>, green <green> and blue <blue>
     And I convert it to Hex
     Then it should have hexcode <hex>
     Examples:
@@ -152,8 +152,8 @@ Feature: As a developer
       | #FFFF00 | 255 | 255   | 0    |
       | #9ACD32 | 154 | 205   | 50   |
 
-  Scenario Outline: A RGBA object can be converted to HSLA
-    Given I have a RGBA object with values red <red>, green <green> and blue <blue>
+  Scenario Outline: A RGB object can be converted to HSLA
+    Given I have a RGB object with values red <red>, green <green> and blue <blue>
     And I convert it to HSL
     Then It should have correct hue <hue>, saturation <saturation> and lightness <lightness>
     Examples:
@@ -302,7 +302,17 @@ Feature: As a developer
       | 255 | 255   | 0    | 60  | 100        | 50        |
       | 154 | 205   | 50   | 80  | 61         | 50        |
 
-  Scenario Outline: A hex object can be converted to RGBA
+  Scenario Outline: A RGB object can be decorated by an RGBA object
+    Given I have a RGB object with values red <red>, green <green> and blue <blue>
+    And I decorate it with "MrColor/Types/Decorators/RGBA"
+    And I set the alpha level to <alpha>
+    Then It should have correct string <string>
+    Examples:
+      | red | green | blue | alpha | string                |
+      | 1   | 1     | 1    | 100   | rgba(1, 1, 1, 1)      |
+      | 20  | 20    | 20   | 90    | rgba(20, 20, 20, 0.9) |
+
+  Scenario Outline: A hex object can be converted to RGB
     Given I have a hex object with value <hex>
     And I convert it to RGB
     Then It should have correct red <red>, green <green> and blue <blue>
@@ -602,8 +612,8 @@ Feature: As a developer
       | #FFFF00 | 60  | 100        | 50        |
       | #9ACD32 | 80  | 61         | 50        |
 
-  Scenario Outline: A HSLA object can be converted to RGBA
-    Given I have a HSLA object with values hue <hue>, saturation <saturation> and lightness <lightness>
+  Scenario Outline: A HSL object can be converted to RGBA
+    Given I have a HSL object with values hue <hue>, saturation <saturation> and lightness <lightness>
     And I convert it to RGB
     Then It should have correct red <red>, green <green> and blue <blue>
     Examples:
@@ -752,8 +762,8 @@ Feature: As a developer
       | 255 | 255   | 0    | 60  | 100        | 50        |
       | 154 | 205   | 50   | 80  | 61         | 50        |
 
-  Scenario Outline: A HSLA object can be converted to Hex
-    Given I have a HSLA object with values hue <hue>, saturation <saturation> and lightness <lightness>
+  Scenario Outline: A HSL object can be converted to Hex
+    Given I have a HSL object with values hue <hue>, saturation <saturation> and lightness <lightness>
     And I convert it to Hex
     Then it should have hexcode <hex>
     Examples:

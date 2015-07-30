@@ -3,12 +3,16 @@
 namespace spec\MrColor\Types;
 
 use MrColor\Types\Hex;
-use MrColor\Types\HSLA;
-use MrColor\Types\RGBA;
+use MrColor\Types\HSL;
+use MrColor\Types\RGB;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 
-class HSLASpec extends ObjectBehavior
+/**
+ * Class HSLSpec
+ * @package spec\MrColor\Types
+ */
+class HSLSpec extends ObjectBehavior
 {
     function let()
     {
@@ -17,12 +21,12 @@ class HSLASpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('MrColor\Types\HSLA');
+        $this->shouldHaveType(HSL::class);
     }
 
     function it_should_return_itself_when_converted_to_itself()
     {
-        $this->hsl()->shouldHaveType(HSLA::class);
+        $this->hsl()->shouldHaveType(HSL::class);
         $this->hsl()->shouldBe($this);
     }
 
@@ -33,7 +37,7 @@ class HSLASpec extends ObjectBehavior
 
     function it_should_return_rgba_when_converted()
     {
-        $this->rgb()->shouldHaveType(RGBA::class);
+        $this->rgb()->shouldHaveType(RGB::class);
     }
 
     function it_should_convert_to_hsl_string()
@@ -58,5 +62,10 @@ class HSLASpec extends ObjectBehavior
         $this->beConstructedWith(10,20,30,0.5);
 
         $this->toJson()->shouldBe(json_encode(['hsl' => [10,20,30,0.5], 'css' => 'hsla(10, 20%, 30%, 0.5)']));
+    }
+
+    function it_should_add_an_alpha_level()
+    {
+        $this->alpha(50);
     }
 }

@@ -3,8 +3,8 @@
 namespace spec\MrColor\Types;
 
 use MrColor\Types\Hex;
-use MrColor\Types\HSLA;
-use MrColor\Types\RGBA;
+use MrColor\Types\HSL;
+use MrColor\Types\RGB;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 
@@ -12,7 +12,7 @@ class HexSpec extends ObjectBehavior
 {
     function let()
     {
-        $this->beConstructedWith('#EEEEEE');
+        $this->beConstructedWith('#EEEEEE', null);
     }
 
     function it_is_initializable()
@@ -28,12 +28,12 @@ class HexSpec extends ObjectBehavior
 
     function it_should_return_hsla_when_converted()
     {
-        $this->hsl()->shouldHaveType(HSLA::class);
+        $this->hsl()->shouldHaveType(HSL::class);
     }
 
     function it_should_return_rgba_when_converted()
     {
-        $this->rgb()->shouldHaveType(RGBA::class);
+        $this->rgb()->shouldHaveType(RGB::class);
     }
 
     function it_should_convert_to_string()
@@ -44,5 +44,10 @@ class HexSpec extends ObjectBehavior
     function it_should_convert_to_json()
     {
         $this->toJson()->shouldBe(json_encode(['hex' => '#EEEEEE']));
+    }
+
+    function it_should_add_an_alpha_level()
+    {
+        $this->alpha(50);
     }
 }

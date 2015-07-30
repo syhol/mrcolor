@@ -1,8 +1,14 @@
-<?php namespace MrColor\Pallets;
+<?php
+
+namespace MrColor\Pallets;
 
 use MrColor\Pallet;
 use MrColor\Types\ColorType;
 
+/**
+ * Interface PalletInterface
+ * @package MrColor\Pallets
+ */
 interface PalletInterface
 {
     /**

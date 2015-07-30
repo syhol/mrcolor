@@ -25,6 +25,8 @@ class Color
     }
 
     /**
+     * Convert the color type to Hexadecimal
+     *
      * @return $this
      */
     public function toHex()
@@ -35,6 +37,8 @@ class Color
     }
 
     /**
+     * Convert the color to RGB(A)
+     *
      * @return $this
      */
     public function toRgb()
@@ -45,6 +49,8 @@ class Color
     }
 
     /**
+     * Convert the color to HSL(A)
+     *
      * @return $this
      */
     public function toHsl()
@@ -55,19 +61,31 @@ class Color
     }
 
     /**
-     * @return string
-     */
-    public function __toString()
-    {
-        return (string) $this->colorType;
-    }
-
-    /**
      * @param PalletInterface $pallet
      * @return Pallet
      */
     public function makePallet(PalletInterface $pallet)
     {
         return $pallet->make($this->colorType);
+    }
+
+    /**
+     * @param int $alpha
+     *
+     * @return $this
+     */
+    public function alpha($alpha)
+    {
+        $this->colorType->alpha($alpha);
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function __toString()
+    {
+        return (string) $this->colorType;
     }
 }

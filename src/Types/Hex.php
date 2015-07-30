@@ -2,19 +2,22 @@
 
 namespace MrColor\Types;
 
-use MrColor\Contracts\Jsonable;
-use MrColor\Types\Transformers\HexToHsl;
 use MrColor\Types\Transformers\HexToRgb;
 use MrColor\Types\Transformers\RgbToHsl;
 
+/**
+ * Class Hex
+ * @package MrColor\Types
+ */
 class Hex extends ColorType
 {
     /**
      * @param string $hexCode
      */
-    public function __construct($hexCode = '#000000')
+    public function __construct($hexCode = '#000000', $alpha = null)
     {
         $this->setAttribute('hex', ltrim($hexCode, '#'));
+        $this->setAttribute('alpha', $alpha);
     }
 
     /**
@@ -26,19 +29,43 @@ class Hex extends ColorType
     }
 
     /**
-     * @return HSLA
+     * @return HSL
      */
     public function hsl()
     {
-        return $this->rgb()->transform(new RgbToHsl(), HSLA::class);
+        return $this->rgb()->transform(new RgbToHsl(), HSL::class);
+    }
+
+    /**
+     * @return RGB
+     */
+    public function rgb()
+    {
+        return $this->transform(new HexToRgb(), RGB::class);
     }
 
     /**
      * @return RGBA
      */
-    public function rgb()
+    public function rgba()
     {
-        return $this->transform(new HexToRgb(), RGBA::class);
+        // TODO: Implement rgba() method.
+    }
+
+    /**
+     * @return HSLA
+     */
+    public function hsla()
+    {
+        // TODO: Implement hsla() method.
+    }
+
+    /**
+     * @return ARGB
+     */
+    public function argb()
+    {
+        // TODO: Implement argb() method.
     }
 
     /**
@@ -50,10 +77,12 @@ class Hex extends ColorType
     }
 
     /**
+     * @param int $options
+     *
      * @return string
      */
-    public function toJson()
+    public function toJson($options = 0)
     {
-        return json_encode(['hex' => $this->__toString()]);
+        return json_encode(['hex' => $this->__toString()], $options);
     }
 }

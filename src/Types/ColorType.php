@@ -2,7 +2,7 @@
 
 namespace MrColor\Types;
 
-use MrColor\Contracts\Jsonable;
+use Illuminate\Contracts\Support\Jsonable;
 use MrColor\Types\Transformers\TransformerInterface;
 use ReflectionClass;
 
@@ -10,7 +10,7 @@ use ReflectionClass;
  * Class ColorType
  * @package MrColor\Types
  */
-abstract class ColorType implements TypeInterface, Jsonable
+abstract class ColorType implements TypeInterface, TypeTransformableInterface, Jsonable
 {
     /**
      * @var array
@@ -21,6 +21,17 @@ abstract class ColorType implements TypeInterface, Jsonable
      * @return string
      */
     abstract public function __toString();
+
+    /**
+     * Set the alpha value on the color type
+     *
+     * @param int $alpha
+     * @return double
+     */
+    public function alpha($alpha = 100)
+    {
+        $this->setAttribute('alpha', $alpha > 1 ? $alpha / 100 : $alpha);
+    }
 
     /**
      * @param TransformerInterface $transformer

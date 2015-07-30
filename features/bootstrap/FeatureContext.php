@@ -5,8 +5,8 @@ use Behat\Behat\Context\SnippetAcceptingContext;
 use Behat\Gherkin\Node\PyStringNode;
 use Behat\Gherkin\Node\TableNode;
 use MrColor\Types\Hex;
-use MrColor\Types\HSLA;
-use MrColor\Types\RGBA;
+use MrColor\Types\HSL;
+use MrColor\Types\RGB;
 
 /**
  * Defines application features from the specific context.
@@ -31,11 +31,11 @@ class FeatureContext implements Context, SnippetAcceptingContext
     }
 
     /**
-     * @Given /^I have a RGBA object with values red (.*), green (.*) and blue (.*)$/
+     * @Given /^I have a RGB object with values red (.*), green (.*) and blue (.*)$/
      */
     public function iHaveARGBAObjectWithValuesRedGreenAndBlue($red, $green, $blue)
     {
-        $this->colorType = new RGBA($red, $green, $blue);
+        $this->colorType = new RGB($red, $green, $blue);
     }
 
     /**
@@ -47,11 +47,11 @@ class FeatureContext implements Context, SnippetAcceptingContext
     }
 
     /**
-     * @Given /^I have a HSLA object with values hue (.*), saturation (.*) and lightness (.*)$/
+     * @Given /^I have a HSL object with values hue (.*), saturation (.*) and lightness (.*)$/
      */
-    public function iHaveAHSLAObjectWithValuesHueSaturationAndLightness($hue, $saturation, $lightness)
+    public function iHaveAHSLObjectWithValuesHueSaturationAndLightness($hue, $saturation, $lightness)
     {
-        $this->colorType = new HSLA($hue, $saturation, $lightness);
+        $this->colorType = new HSL($hue, $saturation, $lightness);
     }
 
     /**
@@ -138,5 +138,37 @@ class FeatureContext implements Context, SnippetAcceptingContext
         return array_map(function($part) {
             return hexdec($part);
         }, str_split($hex, 2));
+    }
+
+    /**
+     * @Given /^I decorate it with "([^"]*)"$/
+     */
+    public function iDecorateItWith($class)
+    {
+        $class = str_replace('/', '\\', $class);
+
+        if ( ! class_exists($class) )
+            throw new Exception("Class $class does not exist.");
+
+        $this->colorType = new $class($this->colorType);
+    }
+
+    /**
+     * @Given /^I set the alpha level to (.*)$/
+     */
+    public function iSetTheAlphaLevelTo($alpha)
+    {
+        $this->colorType->alpha($alpha);
+    }
+
+    /**
+     * @Then /^It should have correct string (.*)$/
+     */
+    public function itShouldHaveCorrectString($string)
+    {
+        if ($string != (string) $this->colorType)
+        {
+            throw new Exception("Output strings did not match\nExpected: $string\nReceived: $this->colorType");
+        }
     }
 }

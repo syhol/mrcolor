@@ -3,58 +3,43 @@
 namespace MrColor\Types\Transformers;
 
 use MrColor\ColorDictionary;
+use MrColor\Exceptions\ColorException;
 use MrColor\Types\ColorType;
 
+/**
+ * Class RgbToHsl
+ * @package MrColor\Types\Transformers
+ */
 class RgbToHsl implements TransformerInterface
 {
+    /**
+     * @param ColorType $type
+     *
+     * @return array
+     */
     public function convert(ColorType $type)
     {
-        $red = $type->getAttribute('red');
-        $green = $type->getAttribute('green');
-        $blue = $type->getAttribute('blue');
+        list($red, $green, $blue, $alpha) = $this->getRgbValues($type);
 
         /**
          * Lookup the value in the dictionary first
          */
         if ($lookup = ColorDictionary::rgb($red, $green, $blue))
         {
-            return $lookup[1]['hsl'];
+            return $this->applyAlpha($alpha, $lookup[1]['hsl']);
         }
 
         $red /= 255;
         $green /= 255;
         $blue /= 255;
 
-        $max = max( $red, $green, $blue );
-        $min = min( $red, $green, $blue );
+        list($max, $lightness, $chroma) = $this->getHslValues($red, $green, $blue);
 
-        $l = ( $max + $min ) / 2;
-        $d = $max - $min;
-
-        if( $d == 0 ){
-            $h = $s = 0; // achromatic
-        } else {
-            $s = $d / ( 1 - abs( 2 * $l - 1 ) );
-
-            switch( $max ){
-                case $red:
-                    $h = 60 * fmod( ( ( $green - $blue ) / $d ), 6 );
-                    if ($blue > $green) {
-                        $h += 360;
-                    }
-                    break;
-
-                case $green:
-                    $h = 60 * ( ( $blue - $red ) / $d + 2 );
-                    break;
-
-                case $blue:
-                    $h = 60 * ( ( $red - $green ) / $d + 4 );
-                    break;
-            }
-        }
-
-        return [round( $h, 2 ), round( $s, 2 ), round( $l, 2 )];
+        return $this->applyAlpha($alpha, [
+            round( $this->calculateHue($max, $red, $green, $blue, $chroma), 2 ),
+            round( $this->calculateSaturation($chroma, $lightness), 2 ),
+            round( $lightness, 2 )
+        ]);
     }
 
     /**
@@ -63,36 +48,95 @@ class RgbToHsl implements TransformerInterface
      * @param $green
      * @param $blue
      * @param $chroma
-     * @return float
+     *
+     * @return int
+     * @throws ColorException
      */
-    private function calculateHue($max, $red, $green, $blue, $chroma)
+    protected function calculateHue($max, $red, $green, $blue, $chroma)
     {
-        switch ($max)
-        {
+        $hue = false;
+
+        if ( ! $chroma )
+            return 0;
+
+        switch ($max) {
             case $red:
-                $hue = fmod((($green - $blue) / $chroma), 6);
-                if ($hue < 0) $hue = (6 - fmod(abs($hue), 6));
+                $hue = 60 * fmod((($green - $blue) / $chroma), 6);
+                if ( $blue > $green ) {
+                    $hue += 360;
+                }
                 break;
+
             case $green:
-                $hue = ($blue - $red) / $chroma + 2;
+                $hue = 60 * (($blue - $red) / $chroma + 2);
                 break;
+
             case $blue:
-                $hue = ($red - $green) / $chroma + 4;
+                $hue = 60 * (($red - $green) / $chroma + 4);
                 break;
         }
 
-        return floor(($hue / 6) * 360);
+        if ( ! $hue )
+            throw new ColorException("An error occured translating to HSL.");
+
+        return $hue;
     }
 
     /**
-     * @param $lightness
      * @param $chroma
-     * @param $max
-     * @param $min
+     * @param $lightness
+     *
      * @return float
      */
-    private function calculateSaturation($lightness, $chroma, $max, $min)
+    protected function calculateSaturation($chroma, $lightness)
     {
-        return $lightness < 0.5 ? $chroma / $max + $min : $chroma / (2 - $max - $min);
+        return $chroma == 0 ? 0 : $chroma / (1 - abs(2 * $lightness - 1));
+    }
+
+    /**
+     * @param ColorType $type
+     *
+     * @return array
+     */
+    protected function getRgbValues(ColorType $type)
+    {
+        $red = $type->getAttribute('red');
+        $green = $type->getAttribute('green');
+        $blue = $type->getAttribute('blue');
+        $alpha = $type->getAttribute('alpha');
+
+        return [$red, $green, $blue, $alpha];
+    }
+
+    /**
+     * @param $red
+     * @param $green
+     * @param $blue
+     *
+     * @return array
+     */
+    protected function getHslValues($red, $green, $blue)
+    {
+        $max = max($red, $green, $blue);
+        $min = min($red, $green, $blue);
+
+        $lightness = ($max + $min) / 2;
+        $chroma = $max - $min;
+
+        return [$max, $lightness, $chroma];
+    }
+
+    /**
+     * @param $alpha
+     * @param $array
+     *
+     * @return mixed
+     *
+     */
+    protected function applyAlpha($alpha, $array)
+    {
+        ! $alpha ? : $array[] = $alpha;
+
+        return $array;
     }
 }

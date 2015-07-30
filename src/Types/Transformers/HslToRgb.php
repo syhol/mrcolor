@@ -17,32 +17,41 @@ class HslToRgb implements TransformerInterface
      */
     public function convert(ColorType $type)
     {
-        $h = $type->getAttribute('hue');
-        $s = $type->getAttribute('saturation');
-        $l = $type->getAttribute('lightness');
+        list($hue, $saturation, $lightness, $alpha) = $this->getHslValues($type);
 
         /**
          * Lookup the value in the dictionary first
          */
-        if ($lookup = ColorDictionary::hsl(round($h * 360), round($s * 100), round($l * 100)))
+        if ($lookup = ColorDictionary::hsl(round($hue * 360), round($saturation * 100), round($lightness * 100)))
         {
+            ! $alpha ? : $lookup[1]['rgb'][] = $alpha;
+
             return $lookup[1]['rgb'];
         }
 
-        if ($s == 0) return array_fill(0, 3, $l);
+        if ($saturation == 0) return array_fill(0, 3, $lightness);
         
-        $q = $l < 0.5 ? ($l * (1 + $s)) : ($l + $s - $l * $s);
-        $p = 2 * $l - $q;
+        $q = $lightness < 0.5 ? ($lightness * (1 + $saturation)) : ($lightness + $saturation - $lightness * $saturation);
 
-        return [
-            round($this->hueToRgb($p, $q, $h + 1/3) * 255),
-            round($this->hueToRgb($p, $q, $h) * 255),
-            round($this->hueToRgb($p, $q, $h - 1/3) * 255)
+        $p = 2 * $lightness - $q;
+
+        $rgb = [
+            round($this->hueToRgb($p, $q, $hue + 1/3) * 255),
+            round($this->hueToRgb($p, $q, $hue) * 255),
+            round($this->hueToRgb($p, $q, $hue - 1/3) * 255)
         ];
+
+        ! $alpha ? : $rgb[] = $alpha;
+
+        return $rgb;
     }
 
     /**
-     * @return \Closure
+     * @param $p
+     * @param $q
+     * @param $t
+     *
+     * @return float
      */
     private function hueToRgb($p, $q, $t)
     {
@@ -53,5 +62,20 @@ class HslToRgb implements TransformerInterface
         if ($t < 2 / 3) return $p + ($q - $p) * (2 / 3 - $t) * 6;
 
         return $p;
+    }
+
+    /**
+     * @param ColorType $type
+     *
+     * @return array
+     */
+    protected function getHslValues(ColorType $type)
+    {
+        $hue = $type->getAttribute('hue');
+        $saturation = $type->getAttribute('saturation');
+        $lightness = $type->getAttribute('lightness');
+        $alpha = $type->getAttribute('alpha');
+
+        return array($hue, $saturation, $lightness, $alpha);
     }
 }

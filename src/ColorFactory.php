@@ -5,8 +5,8 @@ namespace MrColor;
 use MrColor\Exceptions\ColorException;
 use MrColor\Types\ColorType;
 use MrColor\Types\Hex;
-use MrColor\Types\HSLA;
-use MrColor\Types\RGBA;
+use MrColor\Types\HSL;
+use MrColor\Types\RGB;
 
 /**
  * Class ColorFactory
@@ -32,7 +32,7 @@ class ColorFactory
      */
     public function rgb($red, $green, $blue, $alpha = null)
     {
-        return $this->color(new RGBA($red, $green, $blue, $alpha));
+        return $this->color(new RGB($red, $green, $blue, $alpha));
     }
 
     /**
@@ -44,7 +44,7 @@ class ColorFactory
      */
     public function hsl($hue, $saturation, $lightness, $alpha = null)
     {
-        return $this->color(new HSLA($hue, $saturation, $lightness, $alpha));
+        return $this->color(new HSL($hue, $saturation, $lightness, $alpha));
     }
 
     /**
