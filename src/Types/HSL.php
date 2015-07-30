@@ -17,7 +17,7 @@ class HSL extends ColorType
      * @param $lightness
      * @param $alpha
      */
-    public function __construct($hue, $saturation, $lightness, $alpha = null)
+    public function __construct($hue, $saturation, $lightness, $alpha = 1)
     {
         $this->setAttributes([
             'hue' => $hue > 1 ? $hue / 360 : $hue,

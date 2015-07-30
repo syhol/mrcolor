@@ -3,10 +3,13 @@
 namespace MrColor;
 
 use MrColor\Exceptions\ColorException;
-use MrColor\Types\ColorType;
+use MrColor\Types\Decorators\ARGB;
+use MrColor\Types\Decorators\HSLA;
+use MrColor\Types\Decorators\RGBA;
 use MrColor\Types\Hex;
 use MrColor\Types\HSL;
 use MrColor\Types\RGB;
+use MrColor\Types\TypeInterface;
 
 /**
  * Class ColorFactory
@@ -20,31 +23,72 @@ class ColorFactory
      */
     public function hex($hex)
     {
-        return $this->color(new Hex($hex));
+        return $this->color($this->hexInstance($hex));
+    }
+
+    /**
+     * @param $hex
+     * @param $alpha
+     *
+     * @return Color
+     */
+    public function argb($hex, $alpha)
+    {
+        $argb = new ARGB($this->hexInstance($hex));
+
+        return $this->color($argb->alpha($alpha));
+    }
+
+    /**
+     * @param int $red
+     * @param int $green
+     * @param int $blue
+     * @return Color
+     */
+    public function rgb($red, $green, $blue)
+    {
+        return $this->color($this->rgbInstance($red, $green, $blue));
     }
 
     /**
      * @param $red
      * @param $green
      * @param $blue
-     * @param null $alpha
+     * @param $alpha
+     *
      * @return Color
      */
-    public function rgb($red, $green, $blue, $alpha = null)
+    public function rgba($red, $green, $blue, $alpha)
     {
-        return $this->color(new RGB($red, $green, $blue, $alpha));
+        $rgba = new RGBA($this->rgbInstance($red, $green, $blue));
+
+        return $this->color($rgba->alpha($alpha));
     }
 
     /**
-     * @param $hue
-     * @param $saturation
-     * @param $lightness
-     * @param null $alpha
+     * @param int $hue
+     * @param int $saturation
+     * @param int $lightness
      * @return Color
      */
-    public function hsl($hue, $saturation, $lightness, $alpha = null)
+    public function hsl($hue, $saturation, $lightness)
     {
-        return $this->color(new HSL($hue, $saturation, $lightness, $alpha));
+        return $this->color($this->hslInstance($hue, $saturation, $lightness));
+    }
+
+    /**
+     * @param int $hue
+     * @param int $saturation
+     * @param int $lightness
+     * @param int $alpha
+     *
+     * @return Color
+     */
+    public function hsla($hue, $saturation, $lightness, $alpha)
+    {
+        $hsla = new HSLA($this->hslInstance($hue, $saturation, $lightness));
+
+        return $this->color($hsla->alpha($alpha));
     }
 
     /**
@@ -64,11 +108,46 @@ class ColorFactory
     }
 
     /**
-     * @param ColorType $colorType
+     * @param TypeInterface $colorType
+     *
      * @return Color
      */
-    private function color(ColorType $colorType)
+    private function color(TypeInterface $colorType)
     {
         return new Color($colorType);
+    }
+
+    /**
+     * @param $hue
+     * @param $saturation
+     * @param $lightness
+     *
+     * @return HSL
+     */
+    private function hslInstance($hue, $saturation, $lightness)
+    {
+        return new HSL($hue, $saturation, $lightness);
+    }
+
+    /**
+     * @param $red
+     * @param $green
+     * @param $blue
+     *
+     * @return RGB
+     */
+    protected function rgbInstance($red, $green, $blue)
+    {
+        return new RGB($red, $green, $blue);
+    }
+
+    /**
+     * @param $hex
+     *
+     * @return Hex
+     */
+    protected function hexInstance($hex)
+    {
+        return new Hex($hex);
     }
 }

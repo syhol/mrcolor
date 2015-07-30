@@ -14,10 +14,10 @@ class Hex extends ColorType
     /**
      * @param string $hexCode
      */
-    public function __construct($hexCode = '#000000', $alpha = null)
+    public function __construct($hexCode = '#000000', $alpha = 1)
     {
         $this->setAttribute('hex', ltrim($hexCode, '#'));
-        $this->setAttribute('alpha', $alpha);
+        $this->setAttribute('alpha', $alpha > 1 ? $alpha / 100 : $alpha);
     }
 
     /**

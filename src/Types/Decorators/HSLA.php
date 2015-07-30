@@ -44,7 +44,7 @@ class HSLA implements TypeInterface, Jsonable
     /**
      * @param int $alpha
      *
-     * @return \MrColor\Types\HSLA
+     * @return \MrColor\Types\Decorators\HSLA
      */
     public function alpha($alpha = 100)
     {

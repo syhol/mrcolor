@@ -20,13 +20,13 @@ class RGB extends ColorType
      * @param $blue
      * @param $alpha
      */
-    public function __construct($red = 255, $green = 255, $blue = 255, $alpha = null)
+    public function __construct($red = 255, $green = 255, $blue = 255, $alpha = 1)
     {
         $this->setAttributes([
             'red' => $red,
             'green' => $green,
             'blue' => $blue,
-            'alpha' => $alpha
+            'alpha' => $alpha > 1 ? $alpha / 100 : $alpha
         ]);
     }
 
@@ -74,10 +74,6 @@ class RGB extends ColorType
     public function toJson($options = 0)
     {
         $values = $this->getValues();
-
-        $alpha = $this->getAttribute('alpha');
-
-        ! $alpha ? : $values[] = $alpha;
 
         return json_encode(['rgb' => $values, 'css' => $this->__toString()], $options);
     }

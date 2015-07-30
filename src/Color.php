@@ -3,7 +3,7 @@
 namespace MrColor;
 
 use MrColor\Pallets\PalletInterface;
-use MrColor\Types\ColorType;
+use MrColor\Types\TypeInterface;
 
 /**
  * Class Color
@@ -12,14 +12,14 @@ use MrColor\Types\ColorType;
 class Color
 {
     /**
-     * @var ColorType
+     * @var TypeInterface
      */
     protected $colorType;
 
     /**
-     * @param ColorType $colorType
+     * @param TypeInterface $colorType
      */
-    public function __construct(ColorType $colorType)
+    public function __construct(TypeInterface $colorType)
     {
         $this->colorType = $colorType;
     }
