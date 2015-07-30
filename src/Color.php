@@ -61,7 +61,38 @@ class Color
     }
 
     /**
+     * @return $this
+     */
+    public function toArgb()
+    {
+        $this->colorType = $this->colorType->argb();
+
+        return $this;
+    }
+
+    /**
+     * @return $this
+     */
+    public function toHsla()
+    {
+        $this->colorType = $this->colorType->hsla();
+
+        return $this;
+    }
+
+    /**
+     * @return $this
+     */
+    public function toRgba()
+    {
+        $this->colorType = $this->colorType->rgba();
+
+        return $this;
+    }
+
+    /**
      * @param PalletInterface $pallet
+     *
      * @return Pallet
      */
     public function makePallet(PalletInterface $pallet)

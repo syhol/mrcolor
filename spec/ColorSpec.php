@@ -47,6 +47,27 @@ class ColorSpec extends ObjectBehavior
         $this->toHsl()->shouldBe($this);
     }
 
+    function it_converts_to_argb(ColorType $colorType)
+    {
+        $colorType->argb()->willReturn($colorType);
+
+        $this->toArgb()->shouldBe($this);
+    }
+
+    function it_converts_to_hsla(ColorType $colorType)
+    {
+        $colorType->hsla()->willReturn($colorType);
+
+        $this->toHsla()->shouldBe($this);
+    }
+
+    function it_converts_to_rgba(ColorType $colorType)
+    {
+        $colorType->rgba()->willReturn($colorType);
+
+        $this->toRgba()->shouldBe($this);
+    }
+
     function it_adds_alpha_levels_to_colortype(ColorType $colorType)
     {
         $colorType->alpha(50);
