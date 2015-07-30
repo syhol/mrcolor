@@ -22,7 +22,6 @@ class HSLA implements TypeInterface, Jsonable
      */
     public function __construct(HSL $HSL)
     {
-        // TODO: write logic here
         $this->HSL = $HSL;
     }
 
@@ -35,7 +34,11 @@ class HSLA implements TypeInterface, Jsonable
      */
     public function toJson($options = 0)
     {
-        // TODO: Implement toJson() method.
+        $values = $this->HSL->getValues();
+
+        $values[] = $this->HSL->getAttribute('alpha');
+
+        return json_encode(['hsla' => $values, 'css' => $this->__toString()], $options);
     }
 
     /**
@@ -45,7 +48,9 @@ class HSLA implements TypeInterface, Jsonable
      */
     public function alpha($alpha = 100)
     {
-        // TODO: Implement alpha() method.
+        $this->HSL->alpha($alpha);
+
+        return $this;
     }
 
     /**
@@ -54,7 +59,9 @@ class HSLA implements TypeInterface, Jsonable
      */
     public function __toString()
     {
-        // TODO: Implement __toString() method.
+        list($hue, $saturation, $lightness) = $this->HSL->getValues();
+
+        return "hsla({$hue}, {$saturation}%, {$lightness}%, {$this->HSL->getAttribute('alpha')})";
     }
 
     /**

@@ -55,30 +55,6 @@ class RGB extends ColorType
     }
 
     /**
-     * @return RGBA
-     */
-    public function rgba()
-    {
-        return new RGBA($this);
-    }
-
-    /**
-     * @return HSLA
-     */
-    public function hsla()
-    {
-        return new HSLA($this->hsl());
-    }
-
-    /**
-     * @return ARGB
-     */
-    public function argb()
-    {
-        return new ARGB($this->hex());
-    }
-
-    /**
      * @return string
      */
     public function __toString()

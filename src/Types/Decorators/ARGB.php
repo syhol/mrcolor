@@ -32,7 +32,9 @@ class ARGB implements TypeInterface, Jsonable
      */
     public function alpha($alpha = 100)
     {
-        // TODO: Implement alpha() method.
+        $this->hex->alpha($alpha);
+
+        return $this;
     }
 
     /**
@@ -44,7 +46,7 @@ class ARGB implements TypeInterface, Jsonable
      */
     public function toJson($options = 0)
     {
-        // TODO: Implement toJson() method.
+        return json_encode(['argb' => $this->__toString(), 'css' => $this->__toString()], $options);
     }
 
     /**
@@ -53,7 +55,10 @@ class ARGB implements TypeInterface, Jsonable
      */
     public function __toString()
     {
-        // TODO: Implement __toString() method.
+        $hex = $this->hex->getAttribute('hex');
+        $alpha = dechex(round($this->hex->getAttribute('alpha') * 255));
+
+        return "#" . strtoupper($alpha) . strtoupper($hex);
     }
 
     /**
@@ -70,6 +75,6 @@ class ARGB implements TypeInterface, Jsonable
             return $this;
         }
 
-        return call_user_func_array([$this->HSL, $method], $args);
+        return call_user_func_array([$this->hex, $method], $args);
     }
 }

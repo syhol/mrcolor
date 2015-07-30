@@ -45,23 +45,9 @@ class HSLSpec extends ObjectBehavior
         $this->__toString()->shouldBe('hsl(10, 20%, 30%)');
     }
 
-    function it_should_convert_to_hsla_string()
-    {
-        $this->beConstructedWith(10,20,30,0.5);
-
-        $this->__toString()->shouldBe('hsla(10, 20%, 30%, 0.5)');
-    }
-
     function it_should_convert_hsl_to_json()
     {
         $this->toJson()->shouldBe(json_encode(['hsl' => [10,20,30], 'css' => 'hsl(10, 20%, 30%)']));
-    }
-
-    function it_should_convert_hsla_to_json()
-    {
-        $this->beConstructedWith(10,20,30,0.5);
-
-        $this->toJson()->shouldBe(json_encode(['hsl' => [10,20,30,0.5], 'css' => 'hsla(10, 20%, 30%, 0.5)']));
     }
 
     function it_should_add_an_alpha_level()

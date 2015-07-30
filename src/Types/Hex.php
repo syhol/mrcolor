@@ -45,30 +45,6 @@ class Hex extends ColorType
     }
 
     /**
-     * @return RGBA
-     */
-    public function rgba()
-    {
-        // TODO: Implement rgba() method.
-    }
-
-    /**
-     * @return HSLA
-     */
-    public function hsla()
-    {
-        // TODO: Implement hsla() method.
-    }
-
-    /**
-     * @return ARGB
-     */
-    public function argb()
-    {
-        // TODO: Implement argb() method.
-    }
-
-    /**
      * @return string
      */
     public function __toString()
@@ -83,6 +59,6 @@ class Hex extends ColorType
      */
     public function toJson($options = 0)
     {
-        return json_encode(['hex' => $this->__toString()], $options);
+        return json_encode(['hex' => $this->__toString(), 'css' => $this->__toString()], $options);
     }
 }

@@ -43,7 +43,7 @@ class HexSpec extends ObjectBehavior
 
     function it_should_convert_to_json()
     {
-        $this->toJson()->shouldBe(json_encode(['hex' => '#EEEEEE']));
+        $this->toJson()->shouldBe(json_encode(['hex' => '#EEEEEE', 'css' => '#EEEEEE']));
     }
 
     function it_should_add_an_alpha_level()

@@ -3,6 +3,9 @@
 namespace MrColor\Types;
 
 use Illuminate\Contracts\Support\Jsonable;
+use MrColor\Types\Decorators\ARGB;
+use MrColor\Types\Decorators\HSLA;
+use MrColor\Types\Decorators\RGBA;
 use MrColor\Types\Transformers\TransformerInterface;
 use ReflectionClass;
 
@@ -10,7 +13,7 @@ use ReflectionClass;
  * Class ColorType
  * @package MrColor\Types
  */
-abstract class ColorType implements TypeInterface, TypeTransformableInterface, Jsonable
+abstract class ColorType implements TypeInterface, TransformableInterface, Jsonable
 {
     /**
      * @var array
@@ -86,5 +89,29 @@ abstract class ColorType implements TypeInterface, TypeTransformableInterface, J
     public function setAttributes(array $attributes)
     {
         $this->attributes = array_merge($this->attributes, $attributes);
+    }
+
+    /**
+     * @return RGBA
+     */
+    public function rgba()
+    {
+        return new RGBA($this->rgb());
+    }
+
+    /**
+     * @return HSLA
+     */
+    public function hsla()
+    {
+        return new HSLA($this->hsl());
+    }
+
+    /**
+     * @return ARGB
+     */
+    public function argb()
+    {
+        return new ARGB($this->hex());
     }
 }

@@ -52,40 +52,13 @@ class HSL extends ColorType
     }
 
     /**
-     * @return RGBA
-     */
-    public function rgba()
-    {
-        // TODO: Implement rgba() method.
-    }
-
-    /**
-     * @return HSLA
-     */
-    public function hsla()
-    {
-        // TODO: Implement hsla() method.
-    }
-
-    /**
-     * @return ARGB
-     */
-    public function argb()
-    {
-        // TODO: Implement argb() method.
-    }
-
-    /**
      * @return string
      */
     public function __toString()
     {
         list($hue, $saturation, $lightness) = $this->getValues();
 
-        $alpha = $this->getAttribute('alpha');
-
-        return $alpha ? "hsla({$hue}, {$saturation}%, {$lightness}%, {$this->getAttribute('alpha')})" :
-            "hsl({$hue}, {$saturation}%, {$lightness}%)";
+        return "hsl({$hue}, {$saturation}%, {$lightness}%)";
     }
 
     /**
@@ -97,17 +70,13 @@ class HSL extends ColorType
     {
         $values = $this->getValues();
 
-        $alpha = $this->getAttribute('alpha');
-
-        ! $alpha ? : $values[] = $alpha;
-
         return json_encode(['hsl' => $values, 'css' => $this->__toString()], $options);
     }
 
     /**
      * @return array
      */
-    private function getValues()
+    public function getValues()
     {
         return [
             round($this->getAttribute('hue') * 360),

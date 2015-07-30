@@ -3,10 +3,10 @@
 namespace MrColor\Types;
 
 /**
- * Interface TypeTransformableInterface
+ * Interface TransformableInterface
  * @package MrColor\Types
  */
-interface TypeTransformableInterface
+interface TransformableInterface
 {
     /**
      * @return RGB
