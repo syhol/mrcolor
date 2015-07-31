@@ -6,6 +6,7 @@ use MrColor\Contracts\ColorToolKit;
 use MrColor\Exceptions\ColorException;
 use MrColor\Pallets\PalletInterface;
 use MrColor\Types\Contracts\Stringable;
+use ReflectionClass;
 
 /**
  * Class Color
@@ -194,7 +195,7 @@ class Color implements ColorToolKit
      */
     public function lighten($percentage)
     {
-        // TODO: Implement lighten() method.
+
     }
 
     /**
@@ -206,7 +207,7 @@ class Color implements ColorToolKit
      */
     public function darken($percentage)
     {
-        // TODO: Implement darken() method.
+
     }
 
     /**
@@ -214,7 +215,7 @@ class Color implements ColorToolKit
      */
     public function isDark()
     {
-        return $this->lightness() <= 0.5;
+        return $this->lightness() <= 50;
     }
 
     /**
@@ -224,7 +225,34 @@ class Color implements ColorToolKit
      */
     public function isLight()
     {
-        return $this->lightness() > 0.5;
+        return $this->lightness() > 50;
+    }
+
+    /**
+     * Is the color grey/gray?
+     *
+     * This is for British people, another cup of tea?
+     *
+     * @return bool
+     */
+    public function isGrey()
+    {
+        $hsl = $this->colorType->toHsl();
+
+        return $hsl->getAttribute('saturation') == 0;
+    }
+
+    /**
+     * Is the color grey/gray?
+     *
+     * This is for American people
+     * @see isGrey
+     *
+     * @return bool
+     */
+    public function isGray()
+    {
+        return $this->isGrey();
     }
 
     /**

@@ -127,6 +127,42 @@ class ColorSpec extends ObjectBehavior
         $this->lightness()->shouldBe(intval(0.7 * 100));
     }
 
+    function it_will_check_if_color_is_light(ColorType $colorType)
+    {
+        $colorType->toHsl()->willReturn($colorType);
+        $colorType->getAttribute('lightness')->willReturn(0.8);
+
+        $this->isLight()->shouldBe(true);
+        $this->isDark()->shouldBe(false);
+    }
+
+    function it_will_check_if_color_is_dark(ColorType $colorType)
+    {
+        $colorType->toHsl()->willReturn($colorType);
+        $colorType->getAttribute('lightness')->willReturn(0.4);
+
+        $this->isDark()->shouldBe(true);
+//        $this->isLight()->shouldBe(false);
+    }
+
+    function it_will_check_if_color_is_grey(ColorType $colorType)
+    {
+        $colorType->toHsl()->willReturn($colorType);
+        $colorType->getAttribute('saturation')->willReturn(0);
+
+        $this->isGrey()->shouldBe(true);
+        $this->isGray()->shouldBe(true);
+    }
+
+    function it_will_lighten_a_color(ColorType $colorType)
+    {
+        /*$colorType->toHsl()->willReturn($colorType);
+        $colorType->getAttribute('lightness')->willReturn(10);
+        $colorType->setAttribute('lightness', (10 / 100 * 10))->shouldBeCalled();
+
+        $this->lighten(10);*/
+    }
+
     function it_creates_a_pallet(PalletInterface $pallet)
     {
         $this->makePallet($pallet);
