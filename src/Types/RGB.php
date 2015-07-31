@@ -2,9 +2,6 @@
 
 namespace MrColor\Types;
 
-use MrColor\Types\Decorators\ARGB;
-use MrColor\Types\Decorators\HSLA;
-use MrColor\Types\Decorators\RGBA;
 use MrColor\Types\Transformers\RgbToHex;
 use MrColor\Types\Transformers\RgbToHsl;
 
@@ -15,12 +12,12 @@ use MrColor\Types\Transformers\RgbToHsl;
 class RGB extends ColorType
 {
     /**
-     * @param $red
-     * @param $green
-     * @param $blue
-     * @param $alpha
+     * @param int    $red
+     * @param int    $green
+     * @param int    $blue
+     * @param double $alpha
      */
-    public function __construct($red = 255, $green = 255, $blue = 255, $alpha = 1)
+    public function __construct($red = 255, $green = 255, $blue = 255, $alpha = 1.0)
     {
         $this->setAttributes([
             'red' => $red,
@@ -33,7 +30,7 @@ class RGB extends ColorType
     /**
      * @return Hex
      */
-    public function hex()
+    public function toHex()
     {
         return $this->transform(new RgbToHex(), Hex::class);
     }
@@ -41,7 +38,7 @@ class RGB extends ColorType
     /**
      * @return HSL
      */
-    public function hsl()
+    public function toHsl()
     {
         return $this->transform(new RgbToHsl(), HSL::class);
     }
@@ -49,7 +46,7 @@ class RGB extends ColorType
     /**
      * @return RGB
      */
-    public function rgb()
+    public function toRgb()
     {
         return $this;
     }

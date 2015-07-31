@@ -2,39 +2,27 @@
 
 namespace MrColor\Types\Decorators;
 
-use Illuminate\Contracts\Support\Jsonable;
+use MrColor\Types\Contracts\AddsAlpha;
+use MrColor\Types\Contracts\Stringable;
 use MrColor\Types\Hex;
-use MrColor\Types\TypeInterface;
 
 /**
  * Class ARGB
  * @package MrColor\Types\Decorators
  */
-class ARGB implements TypeInterface, Jsonable
+class ARGB implements Stringable, AddsAlpha
 {
     /**
      * @var Hex
      */
-    private $hex;
+    private $type;
 
     /**
      * @param Hex $hex
      */
     public function __construct(Hex $hex)
     {
-        $this->hex = $hex;
-    }
-
-    /**
-     * @param int $alpha
-     *
-     * @return $this
-     */
-    public function alpha($alpha = 100)
-    {
-        $this->hex->alpha($alpha);
-
-        return $this;
+        $this->type = $hex;
     }
 
     /**
@@ -55,10 +43,22 @@ class ARGB implements TypeInterface, Jsonable
      */
     public function __toString()
     {
-        $hex = $this->hex->getAttribute('hex');
-        $alpha = dechex(round($this->hex->getAttribute('alpha') * 255));
+        $hex = $this->type->getAttribute('hex');
+        $alpha = dechex(round($this->type->getAttribute('alpha') * 255));
 
         return "#" . strtoupper($alpha) . strtoupper($hex);
+    }
+
+    /**
+     * @param float $alpha
+     *
+     * @return $this
+     */
+    public function alpha($alpha = 1.0)
+    {
+        $this->type->alpha($alpha);
+
+        return $this;
     }
 
     /**
@@ -75,6 +75,6 @@ class ARGB implements TypeInterface, Jsonable
             return $this;
         }
 
-        return call_user_func_array([$this->hex, $method], $args);
+        return call_user_func_array([$this->type, $method], $args);
     }
 }

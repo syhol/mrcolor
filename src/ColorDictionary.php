@@ -160,18 +160,21 @@ class ColorDictionary
 
     /**
      * @param string $name
-     * @return array
+     * @return array|false
      */
     public static function color($name)
     {
-        return [$name, static::$colors[$name]];
+        if (array_key_exists($name, static::$colors))
+            return [$name, static::$colors[$name]];
+
+        return false;
     }
 
     /**
      * Lookup a hex value
      *
      * @param string $hex
-     * @return string
+     * @return array|false
      */
     public static function hex($hex)
     {
@@ -184,7 +187,7 @@ class ColorDictionary
      * @param $red
      * @param $green
      * @param $blue
-     * @return array
+     * @return array|false
      */
     public static function rgb($red, $green, $blue)
     {
@@ -197,7 +200,7 @@ class ColorDictionary
      * @param $hue
      * @param $saturation
      * @param $lightness
-     * @return array mixed
+     * @return array|false
      */
     public static function hsl($hue, $saturation, $lightness)
     {
@@ -209,7 +212,7 @@ class ColorDictionary
      *
      * @param $needle
      * @param string $type
-     * @return bool
+     * @return array|false
      */
     private static function getColorField($needle, $type)
     {

@@ -7,6 +7,10 @@ use MrColor\Types\ColorType;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 
+/**
+ * Class ColorSpec
+ * @package spec\MrColor
+ */
 class ColorSpec extends ObjectBehavior
 {
     function let(ColorType $colorType)
@@ -28,42 +32,42 @@ class ColorSpec extends ObjectBehavior
 
     function it_converts_to_hex(ColorType $colorType)
     {
-        $colorType->hex()->willReturn($colorType);
+        $colorType->toHex()->willReturn($colorType);
 
         $this->toHex()->shouldBe($this);
     }
 
     function it_converts_to_rgb(ColorType $colorType)
     {
-        $colorType->rgb()->willReturn($colorType);
+        $colorType->toRgb()->willReturn($colorType);
 
         $this->toRgb()->shouldBe($this);
     }
 
     function it_converts_to_hsl(ColorType $colorType)
     {
-        $colorType->hsl()->willReturn($colorType);
+        $colorType->toHsl()->willReturn($colorType);
 
         $this->toHsl()->shouldBe($this);
     }
 
     function it_converts_to_argb(ColorType $colorType)
     {
-        $colorType->argb()->willReturn($colorType);
+        $colorType->toArgb()->willReturn($colorType);
 
         $this->toArgb()->shouldBe($this);
     }
 
     function it_converts_to_hsla(ColorType $colorType)
     {
-        $colorType->hsla()->willReturn($colorType);
+        $colorType->toHsla()->willReturn($colorType);
 
         $this->toHsla()->shouldBe($this);
     }
 
     function it_converts_to_rgba(ColorType $colorType)
     {
-        $colorType->rgba()->willReturn($colorType);
+        $colorType->toRgba()->willReturn($colorType);
 
         $this->toRgba()->shouldBe($this);
     }
@@ -74,6 +78,12 @@ class ColorSpec extends ObjectBehavior
 
         $this->alpha(50)->shouldBe($this);
     }
+
+   /* function it_darkens_a_color_by_a_percentage(ColorType $colorType)
+    {
+
+        $this->darken(50);
+    }*/
 
     function it_creates_a_pallet(PalletInterface $pallet)
     {

@@ -2,6 +2,7 @@
 
 namespace spec\MrColor\Types\Decorators;
 
+use MrColor\Types\Decorators\RGBA;
 use MrColor\Types\Hex;
 use MrColor\Types\HSL;
 use MrColor\Types\RGB;
@@ -44,8 +45,12 @@ class RGBASpec extends ObjectBehavior
         $this->toJson()->shouldBe(json_encode(['rgba' => [10,20,30,0.5], 'css' => 'rgba(10, 20, 30, 0.5)']));
     }
 
-    function it_should_add_an_alpha_level()
+    function it_should_add_an_alpha_level(RGB $rgb)
     {
+        $rgb->alpha(50)->willReturn($rgb);
+
+        $this->beConstructedWith($rgb);
+
         $this->alpha(50)->shouldBe($this);
     }
 
@@ -53,14 +58,14 @@ class RGBASpec extends ObjectBehavior
     {
         $rgb->getAttribute('alpha')->willReturn(1);
 
-        $rgb->hsl()->willReturn($hsl);
-        $rgb->rgb()->willReturn($rgb);
-        $rgb->hex()->willReturn($hex);
+        $rgb->toHsl()->willReturn($hsl);
+        $rgb->toRgb()->willReturn($rgb);
+        $rgb->toHex()->willReturn($hex);
 
         $this->beConstructedWith($rgb);
 
-        $this->hsl()->shouldHaveType(HSL::class);
-        $this->rgb()->shouldHaveType(RGB::class);
-        $this->hex()->shouldHaveType(Hex::class);
+        $this->toHsl()->shouldHaveType(HSL::class);
+        $this->toRgb()->shouldHaveType(RGB::class);
+        $this->toHex()->shouldHaveType(Hex::class);
     }
 }

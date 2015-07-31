@@ -2,19 +2,21 @@
 
 namespace MrColor\Types\Transformers;
 
-use MrColor\Types\ColorType;
+use MrColor\Types\Contracts\Attributable;
+use MrColor\Types\Contracts\Transformer;
 
 /**
  * Class RgbToHex
  * @package MrColor\Types\Transformers
  */
-class RgbToHex implements TransformerInterface
+class RgbToHex implements Transformer
 {
     /**
-     * @param ColorType $type
+     * @param Attributable $type
+     *
      * @return array
      */
-    public function convert(ColorType $type)
+    public function convert(Attributable $type)
     {
         return $this->applyAlpha($type->getAttribute('alpha'), [join('', [
             '#',

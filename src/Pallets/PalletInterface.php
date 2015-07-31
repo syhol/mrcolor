@@ -4,6 +4,7 @@ namespace MrColor\Pallets;
 
 use MrColor\Pallet;
 use MrColor\Types\ColorType;
+use MrColor\Types\Contracts\Stringable;
 
 /**
  * Interface PalletInterface
@@ -12,8 +13,9 @@ use MrColor\Types\ColorType;
 interface PalletInterface
 {
     /**
-     * @param ColorType $colorType
+     * @param Stringable $colorType
+     *
      * @return Pallet
      */
-    public function make(ColorType $colorType);
+    public function make(Stringable $colorType);
 }

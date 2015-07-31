@@ -2,27 +2,27 @@
 
 namespace MrColor\Types\Decorators;
 
-use Illuminate\Contracts\Support\Jsonable;
+use MrColor\Types\Contracts\AddsAlpha;
+use MrColor\Types\Contracts\Stringable;
 use MrColor\Types\HSL;
-use MrColor\Types\TypeInterface;
 
 /**
  * Class HSLA
  * @package MrColor\Types\Decorators
  */
-class HSLA implements TypeInterface, Jsonable
+class HSLA implements Stringable, AddsAlpha
 {
     /**
      * @var HSL
      */
-    private $HSL;
+    private $type;
 
     /**
      * @param HSL $HSL
      */
     public function __construct(HSL $HSL)
     {
-        $this->HSL = $HSL;
+        $this->type = $HSL;
     }
 
     /**
@@ -34,23 +34,11 @@ class HSLA implements TypeInterface, Jsonable
      */
     public function toJson($options = 0)
     {
-        $values = $this->HSL->getValues();
+        $values = $this->type->getValues();
 
-        $values[] = $this->HSL->getAttribute('alpha');
+        $values[] = $this->type->getAttribute('alpha');
 
         return json_encode(['hsla' => $values, 'css' => $this->__toString()], $options);
-    }
-
-    /**
-     * @param int $alpha
-     *
-     * @return \MrColor\Types\Decorators\HSLA
-     */
-    public function alpha($alpha = 100)
-    {
-        $this->HSL->alpha($alpha);
-
-        return $this;
     }
 
     /**
@@ -59,9 +47,21 @@ class HSLA implements TypeInterface, Jsonable
      */
     public function __toString()
     {
-        list($hue, $saturation, $lightness) = $this->HSL->getValues();
+        list($hue, $saturation, $lightness) = $this->type->getValues();
 
-        return "hsla({$hue}, {$saturation}%, {$lightness}%, {$this->HSL->getAttribute('alpha')})";
+        return "hsla({$hue}, {$saturation}%, {$lightness}%, {$this->type->getAttribute('alpha')})";
+    }
+
+    /**
+     * @param float $alpha
+     *
+     * @return $this
+     */
+    public function alpha($alpha = 1.0)
+    {
+        $this->type->alpha($alpha);
+
+        return $this;
     }
 
     /**
@@ -78,6 +78,6 @@ class HSLA implements TypeInterface, Jsonable
             return $this;
         }
 
-        return call_user_func_array([$this->HSL, $method], $args);
+        return call_user_func_array([$this->type, $method], $args);
     }
 }

@@ -2,34 +2,27 @@
 
 namespace MrColor\Types\Decorators;
 
-use Illuminate\Contracts\Support\Jsonable;
+use MrColor\Types\Contracts\AddsAlpha;
+use MrColor\Types\Contracts\Stringable;
 use MrColor\Types\RGB;
-use MrColor\Types\TypeInterface;
 
 /**
  * Class RGBA
  * @package MrColor\Types\Decorators
  */
-class RGBA implements TypeInterface, Jsonable
+class RGBA implements Stringable, AddsAlpha
 {
-    /**
-     * @var int
-     */
-    protected $alpha;
-
     /**
      * @var RGB
      */
-    protected $RGB;
+    protected $type;
 
     /**
      * @param RGB $RGB
      */
     public function __construct(RGB $RGB)
     {
-        $this->RGB = $RGB;
-
-        $this->alpha = $RGB->getAttribute('alpha');
+        $this->type = $RGB;
     }
 
     /**
@@ -37,9 +30,9 @@ class RGBA implements TypeInterface, Jsonable
      */
     public function __toString()
     {
-        list($red, $green, $blue) = $this->RGB->getValues();
+        list($red, $green, $blue) = $this->type->getValues();
 
-        $alpha = $this->RGB->getAttribute('alpha');
+        $alpha = $this->type->getAttribute('alpha');
 
         return "rgba($red, $green, $blue, $alpha)";
     }
@@ -51,21 +44,21 @@ class RGBA implements TypeInterface, Jsonable
      */
     public function toJson($options = 0)
     {
-        $values = $this->RGB->getValues();
+        $values = $this->type->getValues();
 
-        $values[] = $this->RGB->getAttribute('alpha');
+        $values[] = $this->type->getAttribute('alpha');
 
         return json_encode(['rgba' => $values, 'css' => $this->__toString()], $options);
     }
 
     /**
-     * @param int $alpha
+     * @param float $alpha
      *
-     * @return $this
+     * @return mixed
      */
-    public function alpha($alpha = 100)
+    public function alpha($alpha = 1.0)
     {
-        $this->RGB->alpha($alpha);
+        $this->type->alpha($alpha);
 
         return $this;
     }
@@ -82,6 +75,6 @@ class RGBA implements TypeInterface, Jsonable
     {
         if ($method === "rgba") return $this;
 
-        return call_user_func_array([$this->RGB, $method], $args);
+        return call_user_func_array([$this->type, $method], $args);
     }
 }

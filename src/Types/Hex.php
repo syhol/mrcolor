@@ -13,6 +13,7 @@ class Hex extends ColorType
 {
     /**
      * @param string $hexCode
+     * @param int    $alpha
      */
     public function __construct($hexCode = '#000000', $alpha = 1)
     {
@@ -23,7 +24,7 @@ class Hex extends ColorType
     /**
      * @return Hex
      */
-    public function hex()
+    public function toHex()
     {
         return $this;
     }
@@ -31,15 +32,15 @@ class Hex extends ColorType
     /**
      * @return HSL
      */
-    public function hsl()
+    public function toHsl()
     {
-        return $this->rgb()->transform(new RgbToHsl(), HSL::class);
+        return $this->toRgb()->transform(new RgbToHsl(), HSL::class);
     }
 
     /**
      * @return RGB
      */
-    public function rgb()
+    public function toRgb()
     {
         return $this->transform(new HexToRgb(), RGB::class);
     }

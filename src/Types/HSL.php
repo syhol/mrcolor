@@ -30,15 +30,15 @@ class HSL extends ColorType
     /**
      * @return Hex
      */
-    public function hex()
+    public function toHex()
     {
-        return $this->rgb()->transform(new RgbToHex(), Hex::class);
+        return $this->toRgb()->transform(new RgbToHex(), Hex::class);
     }
 
     /**
      * @return HSL
      */
-    public function hsl()
+    public function toHsl()
     {
         return $this;
     }
@@ -46,7 +46,7 @@ class HSL extends ColorType
     /**
      * @return RGB
      */
-    public function rgb()
+    public function toRgb()
     {
         return $this->transform(new HslToRgb(), RGB::class);
     }

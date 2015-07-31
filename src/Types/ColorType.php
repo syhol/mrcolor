@@ -2,18 +2,20 @@
 
 namespace MrColor\Types;
 
-use Illuminate\Contracts\Support\Jsonable;
+use MrColor\Types\Contracts\Attributable;
+use MrColor\Types\Contracts\Stringable;
+use MrColor\Types\Contracts\Transformable;
+use MrColor\Types\Contracts\Transformer;
 use MrColor\Types\Decorators\ARGB;
 use MrColor\Types\Decorators\HSLA;
 use MrColor\Types\Decorators\RGBA;
-use MrColor\Types\Transformers\TransformerInterface;
 use ReflectionClass;
 
 /**
  * Class ColorType
  * @package MrColor\Types
  */
-abstract class ColorType implements TypeInterface, TransformableInterface, Jsonable
+abstract class ColorType implements Stringable, Transformable, Attributable
 {
     /**
      * @var array
@@ -21,27 +23,60 @@ abstract class ColorType implements TypeInterface, TransformableInterface, Jsona
     protected $attributes = [];
 
     /**
-     * @return string
-     */
-    abstract public function __toString();
-
-    /**
      * Set the alpha value on the color type
      *
-     * @param int $alpha
+     * @param double $alpha
      * @return double
      */
-    public function alpha($alpha = 100)
+    public function alpha($alpha = 1.0)
     {
-        $this->setAttribute('alpha', $alpha > 1 ? $alpha / 100 : $alpha);
+        $this->setAttribute('alpha', $alpha > 1 ?
+            round($alpha / 100, 2) :
+            round($alpha, 2));
+
+        return $this;
     }
 
     /**
-     * @param TransformerInterface $transformer
-     * @param $class
+     * Return an RGBA decorator
+     *
+     * @return RGBA
+     */
+    public function toRgba()
+    {
+        return new RGBA($this->toRgb());
+    }
+
+    /**
+     * Return an HSLA decorator
+     *
+     * @return HSLA
+     */
+    public function toHsla()
+    {
+        return new HSLA($this->toHsl());
+    }
+
+    /**
+     * Return an ARGB decorator
+     *
+     * @return ARGB
+     */
+    public function toArgb()
+    {
+        return new ARGB($this->toHex());
+    }
+
+    /**
+     * Run a color type through a transformer and return a new
+     * color type.
+     *
+     * @param Transformer $transformer
+     * @param                                        $class
+     *
      * @return object
      */
-    public function transform(TransformerInterface $transformer, $class)
+    public function transform(Transformer $transformer, $class)
     {
         $reflection = new ReflectionClass($class);
 
@@ -60,17 +95,6 @@ abstract class ColorType implements TypeInterface, TransformableInterface, Jsona
     }
 
     /**
-     * Retrieve type attributes
-     *
-     * @param bool $keyed
-     * @return array
-     */
-    public function getAttributes($keyed = true)
-    {
-        return $keyed ? $this->attributes : array_values($this->attributes);
-    }
-
-    /**
      * Set an attribute
      *
      * @param $key
@@ -82,6 +106,17 @@ abstract class ColorType implements TypeInterface, TransformableInterface, Jsona
     }
 
     /**
+     * Retrieve type attributes
+     *
+     * @param bool $keyed
+     * @return array
+     */
+    public function getAttributes($keyed = true)
+    {
+        return $keyed ? $this->attributes : array_values($this->attributes);
+    }
+
+    /**
      * Merge an array of attributes into this object
      *
      * @param array $attributes
@@ -89,29 +124,5 @@ abstract class ColorType implements TypeInterface, TransformableInterface, Jsona
     public function setAttributes(array $attributes)
     {
         $this->attributes = array_merge($this->attributes, $attributes);
-    }
-
-    /**
-     * @return RGBA
-     */
-    public function rgba()
-    {
-        return new RGBA($this->rgb());
-    }
-
-    /**
-     * @return HSLA
-     */
-    public function hsla()
-    {
-        return new HSLA($this->hsl());
-    }
-
-    /**
-     * @return ARGB
-     */
-    public function argb()
-    {
-        return new ARGB($this->hex());
     }
 }

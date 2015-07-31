@@ -2,19 +2,21 @@
 
 namespace MrColor\Types\Transformers;
 
-use MrColor\Types\ColorType;
+use MrColor\Types\Contracts\Attributable;
+use MrColor\Types\Contracts\Transformer;
 
 /**
  * Class HexToRgb
  * @package MrColor\Types\Transformers
  */
-class HexToRgb implements TransformerInterface
+class HexToRgb implements Transformer
 {
     /**
-     * @param ColorType $type
+     * @param Attributable $type
+     *
      * @return array
      */
-    public function convert(ColorType $type)
+    public function convert(Attributable $type)
     {
         $hex = ltrim($type->getAttribute('hex'), '#');
 

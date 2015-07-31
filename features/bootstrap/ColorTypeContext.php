@@ -11,7 +11,7 @@ use MrColor\Types\RGB;
 /**
  * Defines application features from the specific context.
  */
-class FeatureContext implements Context, SnippetAcceptingContext
+class ColorTypeContext implements Context, SnippetAcceptingContext
 {
     /**
      * @var \MrColor\Types\ColorType
@@ -59,7 +59,7 @@ class FeatureContext implements Context, SnippetAcceptingContext
      */
     public function iConvertItToHSL()
     {
-        $this->colorType = $this->colorType->hsl();
+        $this->colorType = $this->colorType->toHsl();
     }
 
     /**
@@ -67,7 +67,7 @@ class FeatureContext implements Context, SnippetAcceptingContext
      */
     public function iConvertItToRGB()
     {
-        $this->colorType = $this->colorType->rgb();
+        $this->colorType = $this->colorType->toRgb();
     }
 
     /**
@@ -75,7 +75,7 @@ class FeatureContext implements Context, SnippetAcceptingContext
      */
     public function iConvertItToHex()
     {
-        $this->colorType = $this->colorType->hex();
+        $this->colorType = $this->colorType->toHex();
     }
 
     /**

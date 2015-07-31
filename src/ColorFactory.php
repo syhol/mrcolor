@@ -3,13 +3,13 @@
 namespace MrColor;
 
 use MrColor\Exceptions\ColorException;
+use MrColor\Types\Contracts\Stringable;
 use MrColor\Types\Decorators\ARGB;
 use MrColor\Types\Decorators\HSLA;
 use MrColor\Types\Decorators\RGBA;
 use MrColor\Types\Hex;
 use MrColor\Types\HSL;
 use MrColor\Types\RGB;
-use MrColor\Types\TypeInterface;
 
 /**
  * Class ColorFactory
@@ -108,11 +108,11 @@ class ColorFactory
     }
 
     /**
-     * @param TypeInterface $colorType
+     * @param Stringable $colorType
      *
      * @return Color
      */
-    private function color(TypeInterface $colorType)
+    private function color(Stringable $colorType)
     {
         return new Color($colorType);
     }
@@ -136,7 +136,7 @@ class ColorFactory
      *
      * @return RGB
      */
-    protected function rgbInstance($red, $green, $blue)
+    private function rgbInstance($red, $green, $blue)
     {
         return new RGB($red, $green, $blue);
     }
@@ -146,7 +146,7 @@ class ColorFactory
      *
      * @return Hex
      */
-    protected function hexInstance($hex)
+    private function hexInstance($hex)
     {
         return new Hex($hex);
     }

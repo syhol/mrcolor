@@ -2,7 +2,8 @@
 
 namespace MrColor\Pallets;
 
-use MrColor\Types\ColorType;
+use MrColor\Pallet;
+use MrColor\Types\Contracts\Stringable;
 
 /**
  * Class MaterialDesign
@@ -11,11 +12,12 @@ use MrColor\Types\ColorType;
 class MaterialDesign implements PalletInterface
 {
     /**
-     * @param ColorType $colorType
-     * @return mixed
+     * @param Stringable $colorType
+     *
+     * @return Pallet
      */
-    public function make(ColorType $colorType)
+    public function make(Stringable $colorType)
     {
-        //TODO Material design pallet
+        // TODO: Implement make() method.
     }
 }

@@ -1,1 +1,10 @@
+# behat.yml
+
 default:
+    suites:
+        color_type_features:
+            paths:    [ %paths.base%/features/types ]
+            contexts: [ ColorTypeContext ]
+        color_features:
+            paths:    [ %paths.base%/features/color ]
+            contexts: [ ColorContext ]

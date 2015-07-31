@@ -44,8 +44,12 @@ class HSLASpec extends ObjectBehavior
         $this->toJson()->shouldBe(json_encode(['hsla' => [10,20,30,0.5], 'css' => 'hsla(10, 20%, 30%, 0.5)']));
     }
 
-    function it_should_add_an_alpha_level()
+    function it_should_add_an_alpha_level(HSL $hsl)
     {
+        $hsl->alpha(50)->willReturn($this);
+
+        $this->beConstructedWith($hsl);
+
         $this->alpha(50)->shouldBe($this);
     }
 
@@ -53,14 +57,14 @@ class HSLASpec extends ObjectBehavior
     {
         $hsl->getAttribute('alpha')->willReturn(1);
 
-        $hsl->hsl()->willReturn($hsl);
-        $hsl->rgb()->willReturn($rgb);
-        $hsl->hex()->willReturn($hex);
+        $hsl->toHsl()->willReturn($hsl);
+        $hsl->toRgb()->willReturn($rgb);
+        $hsl->toHex()->willReturn($hex);
 
         $this->beConstructedWith($hsl);
 
-        $this->hsl()->shouldHaveType(HSL::class);
-        $this->rgb()->shouldHaveType(RGB::class);
-        $this->hex()->shouldHaveType(Hex::class);
+        $this->toHsl()->shouldHaveType(HSL::class);
+        $this->toRgb()->shouldHaveType(RGB::class);
+        $this->toHex()->shouldHaveType(Hex::class);
     }
 }

@@ -4,18 +4,22 @@ namespace MrColor\Types\Transformers;
 
 use MrColor\ColorDictionary;
 use MrColor\Types\ColorType;
+use MrColor\Types\Contracts\Attributable;
+use MrColor\Types\Contracts\Stringable;
+use MrColor\Types\Contracts\Transformer;
 
 /**
  * Class HslToRgb
  * @package MrColor\Types\Transformers
  */
-class HslToRgb implements TransformerInterface
+class HslToRgb implements Transformer
 {
     /**
-     * @param ColorType $type
+     * @param Attributable $type
+     *
      * @return array
      */
-    public function convert(ColorType $type)
+    public function convert(Attributable $type)
     {
         list($hue, $saturation, $lightness, $alpha) = $this->getHslValues($type);
 
@@ -65,17 +69,17 @@ class HslToRgb implements TransformerInterface
     }
 
     /**
-     * @param ColorType $type
+     * @param Attributable $type
      *
      * @return array
      */
-    protected function getHslValues(ColorType $type)
+    protected function getHslValues(Attributable $type)
     {
         $hue = $type->getAttribute('hue');
         $saturation = $type->getAttribute('saturation');
         $lightness = $type->getAttribute('lightness');
         $alpha = $type->getAttribute('alpha');
 
-        return array($hue, $saturation, $lightness, $alpha);
+        return [$hue, $saturation, $lightness, $alpha];
     }
 }

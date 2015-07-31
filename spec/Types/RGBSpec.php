@@ -25,17 +25,17 @@ class RGBSpec extends ObjectBehavior
 
     function it_should_return_itself_when_converted_to_itself()
     {
-        $this->rgb()->shouldHaveType(RGB::class);
+        $this->toRgb()->shouldHaveType(RGB::class);
     }
 
     function it_should_return_hex_when_converted()
     {
-        $this->hex()->shouldHaveType(Hex::class);
+        $this->toHex()->shouldHaveType(Hex::class);
     }
 
     function it_should_return_rgba_when_converted()
     {
-        $this->rgb()->shouldHaveType(RGB::class);
+        $this->toRgb()->shouldHaveType(RGB::class);
     }
 
     function it_should_convert_to_rgb_string()

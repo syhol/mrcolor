@@ -40,8 +40,12 @@ class ARGBSpec extends ObjectBehavior
         $this->toJson()->shouldBe(json_encode(['argb' => '#80FFFFFF', 'css' => '#80FFFFFF']));
     }
 
-    function it_should_add_an_alpha_level()
+    function it_should_add_an_alpha_level(Hex $hex)
     {
+        $hex->alpha(50)->willReturn($this);
+
+        $this->beConstructedWith($hex);
+
         $this->alpha(50)->shouldBe($this);
     }
 
@@ -49,14 +53,14 @@ class ARGBSpec extends ObjectBehavior
     {
         $hex->getAttribute('alpha')->willReturn(1);
 
-        $hex->hsl()->willReturn($hsl);
-        $hex->rgb()->willReturn($rgb);
-        $hex->hex()->willReturn($hex);
+        $hex->toHsl()->willReturn($hsl);
+        $hex->toRgb()->willReturn($rgb);
+        $hex->toHex()->willReturn($hex);
 
         $this->beConstructedWith($hex);
 
-        $this->hsl()->shouldHaveType(HSL::class);
-        $this->rgb()->shouldHaveType(RGB::class);
-        $this->hex()->shouldHaveType(Hex::class);
+        $this->toHsl()->shouldHaveType(HSL::class);
+        $this->toRgb()->shouldHaveType(RGB::class);
+        $this->toHex()->shouldHaveType(Hex::class);
     }
 }

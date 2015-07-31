@@ -3,7 +3,7 @@
 namespace MrColor;
 
 use MrColor\Pallets\PalletInterface;
-use MrColor\Types\TypeInterface;
+use MrColor\Types\Contracts\Stringable;
 
 /**
  * Class Color
@@ -12,14 +12,14 @@ use MrColor\Types\TypeInterface;
 class Color
 {
     /**
-     * @var TypeInterface
+     * @var Stringable
      */
     protected $colorType;
 
     /**
-     * @param TypeInterface $colorType
+     * @param Stringable $colorType
      */
-    public function __construct(TypeInterface $colorType)
+    public function __construct(Stringable $colorType)
     {
         $this->colorType = $colorType;
     }
@@ -31,7 +31,7 @@ class Color
      */
     public function toHex()
     {
-        $this->colorType = $this->colorType->hex();
+        $this->colorType = $this->colorType->toHex();
 
         return $this;
     }
@@ -43,7 +43,7 @@ class Color
      */
     public function toRgb()
     {
-        $this->colorType = $this->colorType->rgb();
+        $this->colorType = $this->colorType->toRgb();
 
         return $this;
     }
@@ -55,7 +55,7 @@ class Color
      */
     public function toHsl()
     {
-        $this->colorType = $this->colorType->hsl();
+        $this->colorType = $this->colorType->toHsl();
 
         return $this;
     }
@@ -65,7 +65,7 @@ class Color
      */
     public function toArgb()
     {
-        $this->colorType = $this->colorType->argb();
+        $this->colorType = $this->colorType->toArgb();
 
         return $this;
     }
@@ -75,7 +75,7 @@ class Color
      */
     public function toHsla()
     {
-        $this->colorType = $this->colorType->hsla();
+        $this->colorType = $this->colorType->toHsla();
 
         return $this;
     }
@@ -85,7 +85,7 @@ class Color
      */
     public function toRgba()
     {
-        $this->colorType = $this->colorType->rgba();
+        $this->colorType = $this->colorType->toRgba();
 
         return $this;
     }
@@ -110,6 +110,76 @@ class Color
         $this->colorType->alpha($alpha);
 
         return $this;
+    }
+
+    /**
+     * @return int
+     */
+    public function red()
+    {
+        $type = $this->colorType->toRgb();
+
+        return intval($type->getAttribute('red'));
+    }
+
+    /**
+     * @return int
+     */
+    public function green()
+    {
+        $type = $this->colorType->toRgb();
+
+        return intval($type->getAttribute('green'));
+    }
+
+    /**
+     * @return int
+     */
+    public function blue()
+    {
+        $type = $this->colorType->toRgb();
+
+        return intval($type->getAttribute('blue'));
+    }
+
+    /**
+     * @return int
+     */
+    public function hue()
+    {
+        $type = $this->colorType->toHsl();
+
+        return intval(round($type->getAttribute('hue') * 360));
+    }
+
+    /**
+     * @return int
+     */
+    public function saturation()
+    {
+        $type = $this->colorType->toHsl();
+
+        return intval(round($type->getAttribute('saturation') * 100));
+    }
+
+    /**
+     * @return int
+     */
+    public function lightness()
+    {
+        $type = $this->colorType->toHsl();
+
+        return intval(round($type->getAttribute('lightness') * 100));
+    }
+
+    /**
+     * @return string
+     */
+    public function hex()
+    {
+        $type = $this->colorType->toHex();
+
+        return (string) $type;
     }
 
     /**

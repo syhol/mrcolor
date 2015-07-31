@@ -4,20 +4,22 @@ namespace MrColor\Types\Transformers;
 
 use MrColor\ColorDictionary;
 use MrColor\Exceptions\ColorException;
-use MrColor\Types\ColorType;
+use MrColor\Types\Contracts\Attributable;
+use MrColor\Types\Contracts\Transformer;
 
 /**
  * Class RgbToHsl
  * @package MrColor\Types\Transformers
  */
-class RgbToHsl implements TransformerInterface
+class RgbToHsl implements Transformer
 {
     /**
-     * @param ColorType $type
+     * @param Attributable $type
      *
      * @return array
+     * @throws ColorException
      */
-    public function convert(ColorType $type)
+    public function convert(Attributable $type)
     {
         list($red, $green, $blue, $alpha) = $this->getRgbValues($type);
 
@@ -94,11 +96,11 @@ class RgbToHsl implements TransformerInterface
     }
 
     /**
-     * @param ColorType $type
+     * @param Attributable $type
      *
      * @return array
      */
-    protected function getRgbValues(ColorType $type)
+    protected function getRgbValues(Attributable $type)
     {
         $red = $type->getAttribute('red');
         $green = $type->getAttribute('green');
