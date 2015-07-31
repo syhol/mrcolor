@@ -2,6 +2,8 @@
 
 namespace MrColor;
 
+use MrColor\Contracts\ColorToolKit;
+use MrColor\Exceptions\ColorException;
 use MrColor\Pallets\PalletInterface;
 use MrColor\Types\Contracts\Stringable;
 
@@ -9,7 +11,7 @@ use MrColor\Types\Contracts\Stringable;
  * Class Color
  * @package MrColor
  */
-class Color
+class Color implements ColorToolKit
 {
     /**
      * @var Stringable
@@ -180,6 +182,58 @@ class Color
         $type = $this->colorType->toHex();
 
         return (string) $type;
+    }
+
+    /**
+     * Lightens the color by a percentage value
+     *
+     * @param $percentage
+     *
+     * @return $this
+     * @throws ColorException
+     */
+    public function lighten($percentage)
+    {
+        // TODO: Implement lighten() method.
+    }
+
+    /**
+     * Darkens the color by a percentage value
+     *
+     * @param $percentage
+     *
+     * @return $this
+     */
+    public function darken($percentage)
+    {
+        // TODO: Implement darken() method.
+    }
+
+    /**
+     * Returns true if this is a dark color
+     */
+    public function isDark()
+    {
+        return $this->lightness() <= 0.5;
+    }
+
+    /**
+     * Returns true if this is a light color
+     *
+     * @return bool
+     */
+    public function isLight()
+    {
+        return $this->lightness() > 0.5;
+    }
+
+    /**
+     * We need a new instance of the color type
+     * when we clone the color object
+     */
+    public function __clone()
+    {
+        $this->colorType = clone $this->colorType;
     }
 
     /**

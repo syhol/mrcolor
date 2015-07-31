@@ -35,43 +35,10 @@ class HslToRgb implements Transformer
 
         if ($saturation == 0)
         {
-            $lightness *= 100;
-            $lightness *= (255 / 100);
-
-            return array_fill(0, 3, $lightness);
+            return $this->noChroma($lightness);
         }
-        
-        $q = $lightness < 0.5 ? ($lightness * (1 + $saturation)) : ($lightness + $saturation - $lightness * $saturation);
 
-        $p = 2 * $lightness - $q;
-
-        $rgb = [
-            round($this->hueToRgb($p, $q, $hue + 1/3) * 255),
-            round($this->hueToRgb($p, $q, $hue) * 255),
-            round($this->hueToRgb($p, $q, $hue - 1/3) * 255)
-        ];
-
-        ! $alpha ? : $rgb[] = $alpha;
-
-        return $rgb;
-    }
-
-    /**
-     * @param $p
-     * @param $q
-     * @param $t
-     *
-     * @return float
-     */
-    private function hueToRgb($p, $q, $t)
-    {
-        if ($t < 0) $t += 1;
-        if ($t > 1) $t -= 1;
-        if ($t < 1 / 6) return $p + ($q - $p) * 6 * $t;
-        if ($t < 1 / 2) return $q;
-        if ($t < 2 / 3) return $p + ($q - $p) * (2 / 3 - $t) * 6;
-
-        return $p;
+        return $this->toRgb($lightness, $saturation, $hue, $alpha);
     }
 
     /**
@@ -87,5 +54,61 @@ class HslToRgb implements Transformer
         $alpha = $type->getAttribute('alpha');
 
         return [$hue, $saturation, $lightness, $alpha];
+    }
+
+    /**
+     * @param $lightness
+     *
+     * @return array
+     */
+    protected function noChroma($lightness)
+    {
+        $lightness *= 100;
+        $lightness *= (255 / 100);
+
+        return array_fill(0, 3, $lightness);
+    }
+
+    /**
+     * @param $lightness
+     * @param $saturation
+     * @param $hue
+     * @param $alpha
+     *
+     * @return array
+     */
+    protected function toRgb($lightness, $saturation, $hue, $alpha)
+    {
+        $q = $lightness < 0.5 ? ($lightness * (1 + $saturation)) : ($lightness + $saturation - $lightness * $saturation);
+
+        $p = 2 * $lightness - $q;
+
+        $rgb = [
+            round($this->hueToRgb($p, $q, $hue + 1 / 3) * 255),
+            round($this->hueToRgb($p, $q, $hue) * 255),
+            round($this->hueToRgb($p, $q, $hue - 1 / 3) * 255)
+        ];
+
+        ! $alpha ? : $rgb[] = $alpha;
+
+        return $rgb;
+    }
+
+    /**
+     * @param $p
+     * @param $q
+     * @param $t
+     *
+     * @return float
+     */
+    protected function hueToRgb($p, $q, $t)
+    {
+        if ($t < 0) $t += 1;
+        if ($t > 1) $t -= 1;
+        if ($t < 1 / 6) return $p + ($q - $p) * 6 * $t;
+        if ($t < 1 / 2) return $q;
+        if ($t < 2 / 3) return $p + ($q - $p) * (2 / 3 - $t) * 6;
+
+        return $p;
     }
 }
