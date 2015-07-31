@@ -2,6 +2,7 @@
 
 namespace spec\MrColor;
 
+use MrColor\ColorFactory;
 use MrColor\Pallets\PalletInterface;
 use MrColor\Types\ColorType;
 use PhpSpec\ObjectBehavior;
@@ -79,11 +80,53 @@ class ColorSpec extends ObjectBehavior
         $this->alpha(50)->shouldBe($this);
     }
 
-   /* function it_darkens_a_color_by_a_percentage(ColorType $colorType)
+    function it_gets_a_red_value(ColorType $colorType)
     {
+        $colorType->getAttribute('red')->willReturn(255);
+        $colorType->toRgb()->willReturn($colorType);
 
-        $this->darken(50);
-    }*/
+        $this->red()->shouldBe(255);
+    }
+
+    function it_gets_a_green_value(ColorType $colorType)
+    {
+        $colorType->getAttribute('green')->willReturn(200);
+        $colorType->toRgb()->willReturn($colorType);
+
+        $this->green()->shouldBe(200);
+    }
+
+    function it_gets_a_blue_value(ColorType $colorType)
+    {
+        $colorType->getAttribute('blue')->willReturn(100);
+        $colorType->toRgb()->willReturn($colorType);
+
+        $this->blue()->shouldBe(100);
+    }
+
+    function it_gets_the_hue(ColorType $colorType)
+    {
+        $colorType->getAttribute('hue')->willReturn(0.3);
+        $colorType->toHsl()->willReturn($colorType);
+
+        $this->hue()->shouldBe(intval(0.3 * 360));
+    }
+
+    function it_gets_the_saturation(ColorType $colorType)
+    {
+        $colorType->getAttribute('saturation')->willReturn(0.2);
+        $colorType->toHsl()->willReturn($colorType);
+
+        $this->saturation()->shouldBe(intval(0.2 * 100));
+    }
+
+    function it_gets_the_lightness(ColorType $colorType)
+    {
+        $colorType->getAttribute('lightness')->willReturn(0.7);
+        $colorType->toHsl()->willReturn($colorType);
+
+        $this->lightness()->shouldBe(intval(0.7 * 100));
+    }
 
     function it_creates_a_pallet(PalletInterface $pallet)
     {
