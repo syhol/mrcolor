@@ -2,7 +2,6 @@
 
 namespace spec\MrColor;
 
-use MrColor\ColorFactory;
 use MrColor\Pallets\PalletInterface;
 use MrColor\Types\ColorType;
 use PhpSpec\ObjectBehavior;
@@ -75,9 +74,9 @@ class ColorSpec extends ObjectBehavior
 
     function it_adds_alpha_levels_to_colortype(ColorType $colorType)
     {
-        $colorType->alpha(50);
+        $colorType->setAlpha(50);
 
-        $this->alpha(50)->shouldBe($this);
+        $this->setAlpha(50)->shouldBe($this);
     }
 
     function it_gets_a_red_value(ColorType $colorType)

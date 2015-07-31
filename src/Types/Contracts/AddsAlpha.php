@@ -13,5 +13,5 @@ interface AddsAlpha
      *
      * @return $this
      */
-    public function alpha($alpha = 1.0);
+    public function setAlpha($alpha = 1.0);
 }

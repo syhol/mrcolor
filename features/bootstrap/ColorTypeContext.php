@@ -104,7 +104,7 @@ class ColorTypeContext implements Context, SnippetAcceptingContext
         /**
          * Hexcode generation from HSL is not perfect. This is because HSL needs to have
          * higher precision floats than the current CSS spec allows. This means there is
-         * always variation between stated HSL values and true HEX. We need to take this
+         * always variation between stated HSL and HEX values. We need to take this
          * into account when testing. As this is the case we will convert the hex to a number
          * and make sure that number is within an acceptable range.
          */
@@ -158,7 +158,7 @@ class ColorTypeContext implements Context, SnippetAcceptingContext
      */
     public function iSetTheAlphaLevelTo($alpha)
     {
-        $this->colorType->alpha($alpha);
+        $this->colorType->setAlpha($alpha);
     }
 
     /**

@@ -47,11 +47,11 @@ class RGBASpec extends ObjectBehavior
 
     function it_should_add_an_alpha_level(RGB $rgb)
     {
-        $rgb->alpha(50)->willReturn($rgb);
+        $rgb->setAlpha(50)->willReturn($rgb);
 
         $this->beConstructedWith($rgb);
 
-        $this->alpha(50)->shouldBe($this);
+        $this->setAlpha(50)->shouldBe($this);
     }
 
     function it_should_keep_chain_of_responsibility(RGB $rgb, HSL $hsl, Hex $hex)

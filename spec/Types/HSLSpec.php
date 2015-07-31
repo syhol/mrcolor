@@ -52,6 +52,6 @@ class HSLSpec extends ObjectBehavior
 
     function it_should_add_an_alpha_level()
     {
-        $this->alpha(50);
+        $this->setAlpha(50);
     }
 }

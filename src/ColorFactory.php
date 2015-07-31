@@ -36,7 +36,7 @@ class ColorFactory
     {
         $argb = new ARGB($this->hexInstance($hex));
 
-        return $this->color($argb->alpha($alpha));
+        return $this->color($argb->setAlpha($alpha));
     }
 
     /**
@@ -62,7 +62,7 @@ class ColorFactory
     {
         $rgba = new RGBA($this->rgbInstance($red, $green, $blue));
 
-        return $this->color($rgba->alpha($alpha));
+        return $this->color($rgba->setAlpha($alpha));
     }
 
     /**
@@ -88,7 +88,7 @@ class ColorFactory
     {
         $hsla = new HSLA($this->hslInstance($hue, $saturation, $lightness));
 
-        return $this->color($hsla->alpha($alpha));
+        return $this->color($hsla->setAlpha($alpha));
     }
 
     /**

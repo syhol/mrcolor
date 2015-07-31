@@ -105,9 +105,9 @@ class Color
      *
      * @return $this
      */
-    public function alpha($alpha)
+    public function setAlpha($alpha)
     {
-        $this->colorType->alpha($alpha);
+        $this->colorType->setAlpha($alpha);
 
         return $this;
     }

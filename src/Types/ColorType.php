@@ -2,6 +2,7 @@
 
 namespace MrColor\Types;
 
+use MrColor\Types\Contracts\AddsAlpha;
 use MrColor\Types\Contracts\Attributable;
 use MrColor\Types\Contracts\Stringable;
 use MrColor\Types\Contracts\Transformable;
@@ -28,7 +29,7 @@ abstract class ColorType implements Stringable, Transformable, Attributable
      * @param double $alpha
      * @return double
      */
-    public function alpha($alpha = 1.0)
+    public function setAlpha($alpha = 1.0)
     {
         $this->setAttribute('alpha', $alpha > 1 ?
             round($alpha / 100, 2) :

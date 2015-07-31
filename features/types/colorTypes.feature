@@ -462,7 +462,7 @@ Feature: As a developer
       | #FFFF00 | 255 | 255   | 0    |
       | #9ACD32 | 154 | 205   | 50   |
 
-  Scenario Outline: A hex object can be converted to HSLA
+  Scenario Outline: A hex object can be converted to HSL
     Given I have a hex object with value <hex>
     And I convert it to HSL
     Then It should have correct hue <hue>, saturation <saturation> and lightness <lightness>
@@ -611,6 +611,21 @@ Feature: As a developer
       | #F5F5F5 | 0   | 0          | 96        |
       | #FFFF00 | 60  | 100        | 50        |
       | #9ACD32 | 80  | 61         | 50        |
+      | #111111 | 0   | 0          | 7         |
+      | #222222 | 0   | 0          | 13        |
+      | #333333 | 0   | 0          | 20        |
+      | #444444 | 0   | 0          | 27        |
+      | #555555 | 0   | 0          | 33        |
+      | #666666 | 0   | 0          | 40        |
+      | #777777 | 0   | 0          | 47        |
+      | #888888 | 0   | 0          | 53        |
+      | #999999 | 0   | 0          | 60        |
+      | #AAAAAA | 0   | 0          | 67        |
+      | #BBBBBB | 0   | 0          | 73        |
+      | #CCCCCC | 0   | 0          | 80        |
+      | #DDDDDD | 0   | 0          | 87        |
+      | #EEEEEE | 0   | 0          | 93        |
+      | #005DAA | 207 | 100        | 33        |
 
   Scenario Outline: A HSL object can be converted to RGBA
     Given I have a HSL object with values hue <hue>, saturation <saturation> and lightness <lightness>
@@ -911,3 +926,18 @@ Feature: As a developer
       | #F5F5F5 | 0   | 0          | 96        |
       | #FFFF00 | 60  | 100        | 50        |
       | #9ACD32 | 80  | 61         | 50        |
+      | #111111 | 0   | 0          | 7         |
+      | #222222 | 0   | 0          | 13        |
+      | #333333 | 0   | 0          | 20        |
+      | #444444 | 0   | 0          | 27        |
+      | #555555 | 0   | 0          | 33        |
+      | #666666 | 0   | 0          | 40        |
+      | #777777 | 0   | 0          | 47        |
+      | #888888 | 0   | 0          | 53        |
+      | #999999 | 0   | 0          | 60        |
+      | #AAAAAA | 0   | 0          | 67        |
+      | #BBBBBB | 0   | 0          | 73        |
+      | #CCCCCC | 0   | 0          | 80        |
+      | #DDDDDD | 0   | 0          | 87        |
+      | #EEEEEE | 0   | 0          | 93        |
+      | #005DAA | 207 | 100        | 33        |

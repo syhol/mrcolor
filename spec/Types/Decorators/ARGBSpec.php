@@ -42,11 +42,11 @@ class ARGBSpec extends ObjectBehavior
 
     function it_should_add_an_alpha_level(Hex $hex)
     {
-        $hex->alpha(50)->willReturn($this);
+        $hex->setAlpha(50)->willReturn($this);
 
         $this->beConstructedWith($hex);
 
-        $this->alpha(50)->shouldBe($this);
+        $this->setAlpha(50)->shouldBe($this);
     }
 
     function it_should_keep_chain_of_responsibility(RGB $rgb, HSL $hsl, Hex $hex)

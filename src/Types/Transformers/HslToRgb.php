@@ -33,7 +33,13 @@ class HslToRgb implements Transformer
             return $lookup[1]['rgb'];
         }
 
-        if ($saturation == 0) return array_fill(0, 3, $lightness);
+        if ($saturation == 0)
+        {
+            $lightness *= 100;
+            $lightness *= (255 / 100);
+
+            return array_fill(0, 3, $lightness);
+        }
         
         $q = $lightness < 0.5 ? ($lightness * (1 + $saturation)) : ($lightness + $saturation - $lightness * $saturation);
 

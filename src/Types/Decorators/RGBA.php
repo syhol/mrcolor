@@ -56,9 +56,9 @@ class RGBA implements Stringable, AddsAlpha
      *
      * @return mixed
      */
-    public function alpha($alpha = 1.0)
+    public function setAlpha($alpha = 1.0)
     {
-        $this->type->alpha($alpha);
+        $this->type->setAlpha($alpha);
 
         return $this;
     }
